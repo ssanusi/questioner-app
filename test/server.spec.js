@@ -12,7 +12,7 @@ describe('Root directory Test', () => {
       .request(app)
       .get('/')
       .end((err, res) => {
-        expect(res.error).to.be.false();
+        expect(res.error).to.be.false;
         done();
       });
   });
