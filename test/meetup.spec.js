@@ -1,10 +1,32 @@
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../src';
+import meetupModel from '../src/api/resourses/meetup/meetup.model';
 
 chai.use(chaiHttp);
 
 describe('/Meetups Resources', () => {
+  beforeEach(done => {
+    meetupModel.meetups = [
+      {
+        id: 1,
+        createdOn: '2019-01-01T22:48:05.633',
+        location: '235 adeola adeku VI lagos',
+        topic: 'Introduction to Javascript',
+        happeningOn: '2019-01-022T22:48:05.633',
+        tags: ['programming', 'web', 'front-end']
+      },
+      {
+        id: 2,
+        createdOn: '2019-01-01T22:48:05.633',
+        location: '235 adeola adeku VI lagos',
+        topic: 'Introduction to CSS3',
+        happeningOn: '2019-01-022T22:48:05.633',
+        tags: ['programming', 'web', 'front-end']
+      }
+    ];
+    done();
+  });
   describe('GET /meetups', () => {
     it('should get all meetups', done => {
       chai
@@ -12,9 +34,17 @@ describe('/Meetups Resources', () => {
         .get('/api/V1/meetups')
         .end((err, res) => {
           expect(res).to.have.status(200);
-          expect(res).to.be.json;
+          expect(res.type).to.eql('application/json');
           expect(res.body.status).to.equal(200);
           expect(res.body.data).to.be.a('array');
+          expect(res.body.data.length).to.eq(2);
+          expect(res.body.data[0]).to.include.keys([
+            'id',
+            'location',
+            'topic',
+            'happeningOn',
+            'tags'
+          ]);
           done();
         });
     });
