@@ -3,6 +3,9 @@ import meetupController from './meetup.controller';
 
 const meetupRouter = express.Router();
 
-meetupRouter.route('/').get(meetupController.getAll);
+meetupRouter
+  .route('/')
+  .get(meetupController.getAll)
+  .post(meetupController.createOne);
 
 export default meetupRouter;

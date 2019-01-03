@@ -16,6 +16,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var meetupRouter = _express2.default.Router();
 
-meetupRouter.route('/').get(_meetup2.default.getAll);
+meetupRouter.route('/').get(_meetup2.default.getAll).post(_meetup2.default.createOne);
 
 exports.default = meetupRouter;
