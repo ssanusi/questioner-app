@@ -25,6 +25,13 @@ var meetupController = {
   getAllupcoming: function getAllupcoming(req, res) {
     var upcomingMeetups = _meetup2.default.getUpcomingMeetup();
     return res.status(200).json({ status: 200, data: upcomingMeetups });
+  },
+  getMeetupsById: function getMeetupsById(req, res, next, id) {
+    var meetup = _meetup2.default.getMeetupById(Number(id));
+    if (!meetup) {
+      return res.status(404).json({ message: "meetup not found" });
+    }
+    return res.status(200).json({ status: 200, data: [meetup] });
   }
 };
 

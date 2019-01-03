@@ -20,6 +20,10 @@ class MeetupModel {
     const today = moment();
     return this.meetups.filter(meetup => moment(meetup.happeningOn) - today > 0);
   }
+
+  getMeetupById(id) {
+    return this.meetups.find(meetup => meetup.id === id);
+  }
 }
 
 export default new MeetupModel();

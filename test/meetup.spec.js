@@ -117,4 +117,40 @@ describe("/Meetups Resources", () => {
         });
     });
   });
+  describe("GET /meetups/<id>", () => {
+    it("should get single meetup by Id", done => {
+      chai
+        .request(app)
+        .get("/api/v1/meetups/1")
+        .end((err, res) => {
+          expect(res).to.have.status(200);
+          expect(res.type).to.eql("application/json");
+          expect(res.body.status).to.equal(200);
+          expect(res.body.data).to.be.a("array");
+          expect(res.body.data.length).to.eq(1);
+          expect(res.body.data[0].id).to.eq(1);
+          expect(res.body.data[0]).to.include.keys([
+            "id",
+            "location",
+            "topic",
+            "happeningOn",
+            "tags"
+          ]);
+          done();
+        });
+    });
+  });
+  describe("GET /meetups/<id>", () => {
+    it("should get single meetup by Id", done => {
+      chai
+        .request(app)
+        .get("/api/v1/meetups/4")
+        .end((err, res) => {
+          expect(res).to.have.status(404);
+          expect(res.type).to.eql("application/json");
+          expect(res.body.message).to.equal("meetup not found");
+          done();
+        });
+    });
+  });
 });

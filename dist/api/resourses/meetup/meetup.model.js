@@ -40,6 +40,13 @@ var MeetupModel = function () {
         return (0, _moment2.default)(meetup.happeningOn) - today > 0;
       });
     }
+  }, {
+    key: "getMeetupById",
+    value: function getMeetupById(id) {
+      return this.meetups.find(function (meetup) {
+        return meetup.id === id;
+      });
+    }
   }]);
 
   return MeetupModel;

@@ -16,6 +16,13 @@ const meetupController = {
   getAllupcoming(req, res) {
     const upcomingMeetups = meetupModel.getUpcomingMeetup();
     return res.status(200).json({ status: 200, data: upcomingMeetups });
+  },
+  getMeetupsById(req, res, next, id) {
+    const meetup = meetupModel.getMeetupById(Number(id));
+    if (!meetup) {
+      return res.status(404).json({ message: "meetup not found" });
+    }
+    return res.status(200).json({ status: 200, data: [meetup] });
   }
 };
 
