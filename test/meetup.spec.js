@@ -13,7 +13,7 @@ describe("/Meetups Resources", () => {
         createdOn: "2019-01-01T22:48:05.633",
         location: "235 adeola adeku VI lagos",
         topic: "Introduction to Javascript",
-        happeningOn: "2019-01-022T22:48:05.633",
+        happeningOn: "2019-01-22T18:25:44.913Z",
         tags: ["programming", "web", "front-end"]
       },
       {
@@ -21,7 +21,15 @@ describe("/Meetups Resources", () => {
         createdOn: "2019-01-01T22:48:05.633",
         location: "235 adeola adeku VI lagos",
         topic: "Introduction to CSS3",
-        happeningOn: "2019-01-022T22:48:05.633",
+        happeningOn: "2019-01-22T18:25:44.913Z",
+        tags: ["programming", "web", "front-end"]
+      },
+      {
+        id: 3,
+        createdOn: "2019-01-01T22:48:05.633",
+        location: "235 adeola adeku VI lagos",
+        topic: "Introduction to CSS3",
+        happeningOn: "2019-01-02T18:25:44.913Z",
         tags: ["programming", "web", "front-end"]
       }
     ];
@@ -37,7 +45,7 @@ describe("/Meetups Resources", () => {
           expect(res.type).to.eql("application/json");
           expect(res.body.status).to.equal(200);
           expect(res.body.data).to.be.a("array");
-          expect(res.body.data.length).to.eq(2);
+          expect(res.body.data.length).to.eq(3);
           expect(res.body.data[0]).to.include.keys([
             "id",
             "location",
@@ -83,6 +91,28 @@ describe("/Meetups Resources", () => {
           expect(res).to.have.status(400);
           expect(res.type).to.eql("application/json");
           expect(res.body.message).to.equal("All fields are required");
+          done();
+        });
+    });
+  });
+  describe("GET /meetups/upcoming", () => {
+    it("should get all upcoming meetups", done => {
+      chai
+        .request(app)
+        .get("/api/v1/meetups/upcoming")
+        .end((err, res) => {
+          expect(res).to.have.status(200);
+          expect(res.type).to.eql("application/json");
+          expect(res.body.status).to.equal(200);
+          expect(res.body.data).to.be.a("array");
+          expect(res.body.data.length).to.eq(2);
+          expect(res.body.data[0]).to.include.keys([
+            "id",
+            "location",
+            "topic",
+            "happeningOn",
+            "tags"
+          ]);
           done();
         });
     });

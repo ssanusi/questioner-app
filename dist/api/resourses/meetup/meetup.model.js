@@ -32,6 +32,14 @@ var MeetupModel = function () {
       this.meetups.push(Object.assign({ id: this.meetups.length + 1, createdOn: (0, _moment2.default)() }, newMeetup));
       return true;
     }
+  }, {
+    key: "getUpcomingMeetup",
+    value: function getUpcomingMeetup() {
+      var today = (0, _moment2.default)();
+      return this.meetups.filter(function (meetup) {
+        return (0, _moment2.default)(meetup.happeningOn) - today > 0;
+      });
+    }
   }]);
 
   return MeetupModel;
