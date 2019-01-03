@@ -12,6 +12,10 @@ const meetupController = {
     }
     meetupModel.addMeetup(req.body);
     return res.status(201).json({ status: 201, data: [req.body] });
+  },
+  getAllupcoming(req, res) {
+    const upcomingMeetups = meetupModel.getUpcomingMeetup();
+    return res.status(200).json({ status: 200, data: upcomingMeetups });
   }
 };
 

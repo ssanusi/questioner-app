@@ -21,6 +21,10 @@ var meetupController = {
     }
     _meetup2.default.addMeetup(req.body);
     return res.status(201).json({ status: 201, data: [req.body] });
+  },
+  getAllupcoming: function getAllupcoming(req, res) {
+    var upcomingMeetups = _meetup2.default.getUpcomingMeetup();
+    return res.status(200).json({ status: 200, data: upcomingMeetups });
   }
 };
 
