@@ -10,7 +10,7 @@ describe("/Meetups Resources", () => {
     meetupModel.meetups = [
       {
         id: 1,
-        createdOn: "2019-01-01T22:48:05.633",
+        createdOn: "2019-01-01T22:48:05.633Z",
         location: "235 adeola adeku VI lagos",
         topic: "Introduction to Javascript",
         happeningOn: "2019-01-22T18:25:44.913Z",
@@ -18,7 +18,7 @@ describe("/Meetups Resources", () => {
       },
       {
         id: 2,
-        createdOn: "2019-01-01T22:48:05.633",
+        createdOn: "2019-01-01T22:48:05.633Z",
         location: "235 adeola adeku VI lagos",
         topic: "Introduction to CSS3",
         happeningOn: "2019-01-22T18:25:44.913Z",
@@ -26,7 +26,7 @@ describe("/Meetups Resources", () => {
       },
       {
         id: 3,
-        createdOn: "2019-01-01T22:48:05.633",
+        createdOn: "2019-01-01T22:48:05.633Z",
         location: "235 adeola adeku VI lagos",
         topic: "Introduction to CSS3",
         happeningOn: "2019-01-02T18:25:44.913Z",
