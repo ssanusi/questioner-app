@@ -101,4 +101,41 @@ describe("/Question Resources", () => {
         });
     });
   });
+  describe("GET /questions/<id>", () => {
+    it("should get single question by Id", done => {
+      chai
+        .request(app)
+        .get("/api/v1/questions/1")
+        .end((err, res) => {
+          expect(res).to.have.status(200);
+          expect(res.type).to.eql("application/json");
+          expect(res.body.status).to.equal(200);
+          expect(res.body.data).to.be.a("array");
+          expect(res.body.data.length).to.eq(1);
+          expect(res.body.data[0].id).to.eq(1);
+          expect(res.body.data[0]).to.include.keys([
+            "id",
+            "createdOn",
+            "meetup",
+            "title",
+            "body",
+            "votes"
+          ]);
+          done();
+        });
+    });
+  });
+  describe("GET /questions/<id>", () => {
+    it("should return error", done => {
+      chai
+        .request(app)
+        .get("/api/v1/questions/4")
+        .end((err, res) => {
+          expect(res).to.have.status(404);
+          expect(res.type).to.eql("application/json");
+          expect(res.body.message).to.equal("question not found");
+          done();
+        });
+    });
+  });
 });

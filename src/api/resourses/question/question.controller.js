@@ -12,6 +12,14 @@ const questionController = {
     }
     questionModel.addQuestion(req.body);
     return res.status(201).json({ status: 201, data: [req.body] });
+  },
+
+  getQuestionById(req,res, next, id) {
+    const question = questionModel.getQuestionById(Number(id));
+    if (!question) {
+      return res.status(404).json({ message: "question not found" });
+    }
+    return res.status(200).json({ status: 200, data: [question] });
   }
 };
 
