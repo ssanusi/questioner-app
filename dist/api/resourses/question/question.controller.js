@@ -21,6 +21,41 @@ var questionController = {
     }
     _question2.default.addQuestion(req.body);
     return res.status(201).json({ status: 201, data: [req.body] });
+  },
+  getQuestionById: function getQuestionById(req, res) {
+    var question = _question2.default.getQuestionById(Number(req.params.id));
+    if (!question) {
+      return res.status(404).json({ message: "question not found" });
+    }
+    return res.status(200).json({ status: 200, data: [question] });
+  },
+  upvote: function upvote(req, res) {
+    var question = _question2.default.getQuestionById(Number(req.params.id));
+    if (question) {
+      var updateQuestion = _question2.default.upvote(Number(req.params.id));
+      var meetup = updateQuestion.meetup,
+          title = updateQuestion.title,
+          body = updateQuestion.body,
+          votes = updateQuestion.votes;
+
+      var output = { meetup: meetup, title: title, body: body, votes: votes };
+      return res.status(200).json({ status: 200, data: [output] });
+    }
+    return res.status(400).json({ message: "question not found" });
+  },
+  downvote: function downvote(req, res) {
+    var question = _question2.default.getQuestionById(Number(req.params.id));
+    if (question) {
+      var updatedQuestion = _question2.default.downvote(Number(req.params.id));
+      var meetup = updatedQuestion.meetup,
+          title = updatedQuestion.title,
+          body = updatedQuestion.body,
+          votes = updatedQuestion.votes;
+
+      var output = { meetup: meetup, title: title, body: body, votes: votes };
+      return res.status(200).json({ status: 200, data: [output] });
+    }
+    return res.status(400).json({ message: "question not found" });
   }
 };
 

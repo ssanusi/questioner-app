@@ -35,7 +35,7 @@ describe("/Question Resources", () => {
         meetup: 1,
         title: "what is closure?",
         body: "what is closure and in what way can we implement it in Javascript",
-        votes: 0
+        votes: 3
       }
     ];
     done();
@@ -134,6 +134,85 @@ describe("/Question Resources", () => {
           expect(res).to.have.status(404);
           expect(res.type).to.eql("application/json");
           expect(res.body.message).to.equal("question not found");
+          done();
+        });
+    });
+  });
+  describe("PATCH /questions/<id>/upvote", () => {
+    it("should upvote a question", done => {
+      chai
+        .request(app)
+        .patch("/api/v1/questions/1/upvote")
+        .end((err, res) => {
+          expect(res).to.have.status(200);
+          expect(res.type).to.eql("application/json");
+          expect(res.body.status).to.equal(200);
+          expect(res.body.data).to.be.a("array");
+          expect(res.body.data.length).to.eq(1);
+          expect(res.body.data[0].votes).to.eq(2);
+          expect(res.body.data[0]).to.include.keys(["meetup", "title", "body", "votes"]);
+          done();
+        });
+    });
+  });
+  describe("PATCH /questions/<id>/upvote", () => {
+    it("should return error ", done => {
+      chai
+        .request(app)
+        .patch("/api/v1/questions/4/upvote")
+        .end((err, res) => {
+          expect(res).to.have.status(400);
+          expect(res.type).to.eql("application/json");
+          expect(res.body.data).to.be.a("undefined");
+          expect(res.body.message).to.eql("question not found");
+          done();
+        });
+    });
+  });
+  describe("PATCH /questions/<id>/downvote", () => {
+    it("should downvote a question", done => {
+      chai
+        .request(app)
+        .patch("/api/v1/questions/1/downvote")
+        .end((err, res) => {
+          expect(res).to.have.status(200);
+          expect(res.type).to.eql("application/json");
+          expect(res.body.status).to.equal(200);
+          expect(res.body.data).to.be.a("array");
+          expect(res.body.data.length).to.eq(1);
+          expect(res.body.data[0].votes).to.eq(0);
+          expect(res.body.data[0]).to.include.keys(["meetup", "title", "body", "votes"]);
+          done();
+        });
+    });
+  });
+  describe("PATCH /questions/<id>/downvote", () => {
+    it("should downvote a question", done => {
+      chai
+        .request(app)
+        .patch("/api/v1/questions/3/downvote")
+        .end((err, res) => {
+          expect(res).to.have.status(200);
+          expect(res.type).to.eql("application/json");
+          expect(res.body.status).to.equal(200);
+          expect(res.body.data).to.be.a("array");
+          expect(res.body.data.length).to.eq(1);
+          expect(res.body.data[0].votes).to.eq(0);
+          expect(res.body.data[0]).to.include.keys(["meetup", "title", "body", "votes"]);
+          done();
+        });
+    });
+  });
+  describe("PATCH /questions/<id>/upvote", () => {
+    it("should return error", done => {
+      chai
+        .request(app)
+        .patch("/api/v1/questions/4/downvote")
+        .end((err, res) => {
+          expect(res).to.have.status(400);
+          expect(res.type).to.eql("application/json");
+          expect(res.body.data).to.be.a("undefined");
+          expect(res.body.message).to.eql("question not found");
           done();
         });
     });
