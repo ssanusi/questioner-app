@@ -32,6 +32,19 @@ var meetupController = {
       return res.status(404).json({ message: "meetup not found" });
     }
     return res.status(200).json({ status: 200, data: [meetup] });
+  },
+  addRsvp: function addRsvp(req, res) {
+    if (!req.body.user || !req.body.topic || !req.body.status || !req.params.id) {
+      return res.status(400).json({ message: "all fields are required " });
+    }
+    var _req$body = req.body,
+        user = _req$body.user,
+        topic = _req$body.topic,
+        status = _req$body.status;
+
+    var newRsvp = { user: user, response: status, meetup: req.params.id };
+    _meetup2.default.addRsvp(newRsvp);
+    return res.status(201).json({ status: 201, data: [{ user: user, topic: topic, status: status }] });
   }
 };
 
