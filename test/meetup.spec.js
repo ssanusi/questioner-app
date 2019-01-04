@@ -141,7 +141,7 @@ describe("/Meetups Resources", () => {
     });
   });
   describe("GET /meetups/<id>", () => {
-    it("should get single meetup by Id", done => {
+    it("should return error", done => {
       chai
         .request(app)
         .get("/api/v1/meetups/4")
