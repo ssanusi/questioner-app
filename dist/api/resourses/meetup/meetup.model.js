@@ -19,6 +19,7 @@ var MeetupModel = function () {
     _classCallCheck(this, MeetupModel);
 
     this.meetups = [];
+    this.rsvps = [];
   }
 
   _createClass(MeetupModel, [{
@@ -46,6 +47,12 @@ var MeetupModel = function () {
       return this.meetups.find(function (meetup) {
         return meetup.id === id;
       });
+    }
+  }, {
+    key: "addRsvp",
+    value: function addRsvp(newRsvp) {
+      this.rsvps.push(Object.assign({ id: this.rsvps.length + 1 }, newRsvp));
+      return true;
     }
   }]);
 
