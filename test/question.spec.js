@@ -149,7 +149,7 @@ describe("/Question Resources", () => {
           expect(res.body.status).to.equal(200);
           expect(res.body.data).to.be.a("array");
           expect(res.body.data.length).to.eq(1);
-          expect(res.body.data[0].votes).to.eq(2);
+          expect(res.body.data[0].votes).to.eq(1);
           expect(res.body.data[0]).to.include.keys(["meetup", "title", "body", "votes"]);
           done();
         });
@@ -170,7 +170,7 @@ describe("/Question Resources", () => {
     });
   });
   describe("PATCH /questions/<id>/downvote", () => {
-    it("should downvote a question", done => {
+    it("should return vote non-negetive after downvote a question", done => {
       chai
         .request(app)
         .patch("/api/v1/questions/1/downvote")
@@ -197,13 +197,13 @@ describe("/Question Resources", () => {
           expect(res.body.status).to.equal(200);
           expect(res.body.data).to.be.a("array");
           expect(res.body.data.length).to.eq(1);
-          expect(res.body.data[0].votes).to.eq(0);
+          expect(res.body.data[0].votes).to.eq(2);
           expect(res.body.data[0]).to.include.keys(["meetup", "title", "body", "votes"]);
           done();
         });
     });
   });
-  describe("PATCH /questions/<id>/upvote", () => {
+  describe("PATCH /questions/<id>/downvote", () => {
     it("should return error", done => {
       chai
         .request(app)
