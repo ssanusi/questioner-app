@@ -29,8 +29,33 @@ var QuestionModel = function () {
   }, {
     key: "addQuestion",
     value: function addQuestion(newQuestion) {
-      this.questions.push(Object.assign({ id: this.questions.length + 1, createdOn: (0, _moment2.default)() }, newQuestion));
+      this.questions.push(Object.assign({ id: this.questions.length + 1, createdOn: (0, _moment2.default)(), votes: 0 }, newQuestion));
       return true;
+    }
+  }, {
+    key: "getQuestionById",
+    value: function getQuestionById(id) {
+      return this.questions.find(function (question) {
+        return question.id === id;
+      });
+    }
+  }, {
+    key: "upvote",
+    value: function upvote(id) {
+      var question = this.getQuestionById(id);
+      var index = this.questions.indexOf(question);
+      this.questions[index].votes = this.questions[index].votes + 1;
+      return this.questions[index];
+    }
+  }, {
+    key: "downvote",
+    value: function downvote(id) {
+      var question = this.getQuestionById(id);
+      var index = this.questions.indexOf(question);
+      if (this.questions[index].votes !== 0) {
+        this.questions[index].votes = this.questions[index].votes - 1;
+      }
+      return this.questions[index];
     }
   }]);
 

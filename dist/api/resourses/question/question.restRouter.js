@@ -16,6 +16,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var questionRouter = _express2.default.Router();
 
+// questionRouter.param("id", questionController.getQuestionById);
+
+
 questionRouter.route("/").get(_question2.default.getAllQuestions).post(_question2.default.addQuestion);
+
+questionRouter.route("/:id").get(_question2.default.getQuestionById);
+questionRouter.patch("/:id/upvote", _question2.default.upvote);
+questionRouter.patch("/:id/downvote", _question2.default.downvote);
 
 exports.default = questionRouter;

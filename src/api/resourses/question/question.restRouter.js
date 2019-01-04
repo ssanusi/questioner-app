@@ -3,7 +3,8 @@ import questionController from "./question.controller";
 
 const questionRouter = express.Router();
 
-questionRouter.param("id", questionController.getQuestionById);
+// questionRouter.param("id", questionController.getQuestionById);
+
 
 questionRouter
   .route("/")
@@ -11,5 +12,7 @@ questionRouter
   .post(questionController.addQuestion);
 
 questionRouter.route("/:id").get(questionController.getQuestionById);
+questionRouter.patch("/:id/upvote", questionController.upvote);
+questionRouter.patch("/:id/downvote", questionController.downvote);
 
 export default questionRouter;
