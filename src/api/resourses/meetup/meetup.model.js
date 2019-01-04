@@ -3,6 +3,7 @@ import moment from "moment";
 class MeetupModel {
   constructor() {
     this.meetups = [];
+    this.rsvps = [];
   }
 
   getAllMeetups() {
@@ -23,6 +24,11 @@ class MeetupModel {
 
   getMeetupById(id) {
     return this.meetups.find(meetup => meetup.id === id);
+  }
+
+  addRsvp(newRsvp) {
+    this.rsvps.push(Object.assign({ id: this.rsvps.length + 1 }, newRsvp));
+    return true;
   }
 }
 

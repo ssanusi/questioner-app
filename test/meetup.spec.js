@@ -1,5 +1,6 @@
 import chai, { expect } from "chai";
 import chaiHttp from "chai-http";
+import { normalize } from "path";
 import app from "../src";
 import meetupModel from "../src/api/resourses/meetup/meetup.model";
 
@@ -31,6 +32,26 @@ describe("/Meetups Resources", () => {
         topic: "Introduction to CSS3",
         happeningOn: "2019-01-02T18:25:44.913Z",
         tags: ["programming", "web", "front-end"]
+      }
+    ];
+    meetupModel.rsvps = [
+      {
+        id: 1,
+        meetup: 1,
+        user: 1,
+        response: "yes"
+      },
+      {
+        id: 2,
+        meetup: 1,
+        user: 1,
+        response: "no"
+      },
+      {
+        id: 3,
+        meetup: 1,
+        user: 1,
+        response: "maybe"
       }
     ];
     done();
@@ -141,7 +162,7 @@ describe("/Meetups Resources", () => {
     });
   });
   describe("GET /meetups/<id>", () => {
-    it("should get single meetup by Id", done => {
+    it("should return error", done => {
       chai
         .request(app)
         .get("/api/v1/meetups/4")
@@ -149,6 +170,44 @@ describe("/Meetups Resources", () => {
           expect(res).to.have.status(404);
           expect(res.type).to.eql("application/json");
           expect(res.body.message).to.equal("meetup not found");
+          done();
+        });
+    });
+  });
+  describe("GET /meetups/<id>/rsvps", () => {
+    it("should rsvp a meetup by Id", done => {
+      chai
+        .request(app)
+        .post("/api/v1/meetups/1/rsvps")
+        .send({
+          user: 1,
+          topic: "Introduction to javascript",
+          status: "no"
+        })
+        .end((err, res) => {
+          expect(res).to.have.status(201);
+          expect(res.type).to.eql("application/json");
+          expect(res.body.status).to.equal(201);
+          expect(res.body.data).to.be.a("array");
+          expect(res.body.data.length).to.eq(1);
+          expect(res.body.data[0]).to.include.keys(["meetup", "topic", "status"]);
+          done();
+        });
+    });
+  });
+  describe("GET /meetups/<id>/rsvps", () => {
+    it("should reply error due to incomplete details", done => {
+      chai
+        .request(app)
+        .post("/api/v1/meetups/1/rsvps")
+        .send({
+          topic: "Introduction to javascript",
+          status: "no"
+        })
+        .end((err, res) => {
+          expect(res).to.have.status(400);
+          expect(res.type).to.eql("application/json");
+          expect(res.body.message).to.eql("All fields are required")
           done();
         });
     });

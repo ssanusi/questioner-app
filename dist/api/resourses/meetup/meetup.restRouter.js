@@ -16,12 +16,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var meetupRouter = _express2.default.Router();
 
-meetupRouter.param("id", _meetup2.default.getMeetupsById);
+// meetupRouter.param("id", meetupController.getMeetupsById);
 
 meetupRouter.route("/").get(_meetup2.default.getAll).post(_meetup2.default.createOne);
 
 meetupRouter.route("/upcoming").get(_meetup2.default.getAllupcoming);
 
 meetupRouter.route("/:id").get(_meetup2.default.getMeetupsById);
+meetupRouter.route("/:id/rsvps").post(_meetup2.default.addRsvp);
 
 exports.default = meetupRouter;
