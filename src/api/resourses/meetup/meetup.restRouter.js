@@ -1,5 +1,6 @@
 import express from "express";
-import meetupController from "./meetup.controller";
+import meetupController from "./MeetupController";
+import MeetupController from "./MeetupController";
 
 const meetupRouter = express.Router();
 
@@ -7,12 +8,12 @@ const meetupRouter = express.Router();
 
 meetupRouter
   .route("/")
-  .get(meetupController.getAll)
-  .post(meetupController.createOne);
+  .get(MeetupController.getAllMeetups)
+  .post(MeetupController.createMeetup);
 
-meetupRouter.route("/upcoming").get(meetupController.getAllupcoming);
+meetupRouter.route("/upcoming").get(MeetupController.getAllupcoming);
 
-meetupRouter.route("/:id").get(meetupController.getMeetupsById);
-meetupRouter.route("/:id/rsvps").post(meetupController.addRsvp);
+meetupRouter.route("/:id").get(MeetupController.getMeetupsById);
+meetupRouter.route("/:id/rsvps").post(MeetupController.addRsvp);
 
 export default meetupRouter;
