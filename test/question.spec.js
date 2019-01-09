@@ -1,7 +1,7 @@
 import chai from "chai";
 import chaiHttp from "chai-http";
 import app from "../src/index";
-import questionModel from "../src/api/resourses/question/question.model";
+import questionModel from "../src/api/resourses/question/QuestionModel";
 
 const { expect } = chai;
 

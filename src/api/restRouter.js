@@ -1,6 +1,7 @@
 import express from "express";
-import meetupRouter from "./resourses/meetup/meetup.restRouter";
-import questionRouter from "./resourses/question/question.restRouter";
+import meetupRouter from "./resourses/meetup/MeetupRestRouter";
+import questionRouter from "./resourses/question/QuestionRestRouter";
+
 
 const restRouter = express.Router();
 
