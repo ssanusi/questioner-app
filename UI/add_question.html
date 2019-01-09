@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Questioner | Sign Up </title>
+  <link href="https://fonts.googleapis.com/css?family=Varela+Round"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="css/main.css" />
+</head>
+
+<body>
+  <main class="flex-container">
+
+    <!-- Aside -->
+    <section id="signUp" class="col-1-4 aside">
+                    <form action="" class="cta-signup">
+                            <label for="topic"><b>Topic</b></label>
+                            <input type="text" placeholder="Topic" name="topic" required>
+                            <label for="location"><b>Location</b></label>
+                            <input type="text" placeholder="Location" name="Location">
+                            <label for="lastName"><b>Meetup Date</b></label>
+                            <input type="date" name="meetup" id="" placeholder="1/1/2018">
+                            <label for="tags"><b>Tags(multiple tags with # in between)</b></label>
+                            <input type="text" placeholder="Tags" name="tags" required>
+                            <div class="clearfix">
+                                <button type="submit">submit</button>
+                                <button onclick="location.href='./meetups.html';">Cancel</button>
+                            </div>
+                    </form>
+      <!-- Footer -->
+      <footer class="text-center">
+        <p>&copy; questioner <span id="year"></span>.
+        </p>
+      </footer>
+
+    </section>
+
+  </main>
+  <script src="js/main.js"></script>
+</body>
+
+</html>
