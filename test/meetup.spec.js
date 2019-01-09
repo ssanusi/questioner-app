@@ -2,7 +2,7 @@ import chai, { expect } from "chai";
 import chaiHttp from "chai-http";
 import { normalize } from "path";
 import app from "../src";
-import meetupModel from "../src/api/resourses/meetup/meetup.model";
+import meetupModel from "../src/api/resourses/meetup/MeetupModel";
 
 chai.use(chaiHttp);
 

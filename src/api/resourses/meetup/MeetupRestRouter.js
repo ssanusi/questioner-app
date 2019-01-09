@@ -1,10 +1,8 @@
 import express from "express";
-import meetupController from "./MeetupController";
 import MeetupController from "./MeetupController";
 
 const meetupRouter = express.Router();
 
-// meetupRouter.param("id", meetupController.getMeetupsById);
 
 meetupRouter
   .route("/")
