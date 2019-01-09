@@ -511,6 +511,7 @@ td[title] {
     flex-direction: column;
     background: #fff;
     color: #2c2c2c;
+    display: flex;
 }
 
 .dash-main,
@@ -838,7 +839,7 @@ hr {
     }
 
     .user-menu-item {
-        margin-right: 0;
+        margin-right: auto;
     }
 
     .user-menu-item:nth-of-type(2n) {
@@ -883,7 +884,7 @@ hr {
 
 
     .user-menu-item:nth-of-type(2n) {
-        margin-right: 0;
+        margin-right: auto;
     }
 
     .user-menu-item:nth-of-type(3n) {
