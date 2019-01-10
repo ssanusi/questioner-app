@@ -13,7 +13,7 @@ app.use("/api/v1", restRouter);
 app.get("/", (req, res) => {
   res.status(200).json({ message: "Welcome to REST API for Questioner App" });
 });
-const port = process.env.PORT || 600;
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`APi Listerning on Port ${port}`);
 });
