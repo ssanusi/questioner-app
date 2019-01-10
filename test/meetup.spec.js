@@ -1,8 +1,7 @@
 import chai, { expect } from "chai";
 import chaiHttp from "chai-http";
-import { normalize } from "path";
 import app from "../src";
-import meetupModel from "../src/api/resourses/meetup/meetup.model";
+import meetupModel from "../src/api/resourses/meetup/MeetupModel";
 
 chai.use(chaiHttp);
 
@@ -207,7 +206,7 @@ describe("/Meetups Resources", () => {
         .end((err, res) => {
           expect(res).to.have.status(400);
           expect(res.type).to.eql("application/json");
-          expect(res.body.message).to.eql("All fields are required")
+          expect(res.body.message).to.eql("All fields are required");
           done();
         });
     });
