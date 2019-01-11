@@ -7,8 +7,8 @@ RESTful API for Questioner-App
 
 API is deployed at [here](https://questioner-app-api.herokuapp.com) on heroku.
 
-[![Build Status](https://travis-ci.org/ssanusi/questioner-api.svg?branch=master)](https://travis-ci.org/ssanusi/questioner-api)
-[![Coverage Status](https://coveralls.io/repos/github/ssanusi/questioner-api/badge.svg?branch=master)](https://coveralls.io/github/ssanusi/questioner-api?branch=master)
+[![Build Status](https://travis-ci.org/ssanusi/questioner-app.svg?branch=master)](https://travis-ci.org/ssanusi/questioner-api)
+[![Coverage Status](https://coveralls.io/repos/github/ssanusi/questioner-app/badge.svg?branch=master)](https://coveralls.io/github/ssanusi/questioner-app?branch=master)
 
 
 ## Technologies
