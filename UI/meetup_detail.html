@@ -36,21 +36,22 @@
     </header>
 
     <main class="bg-light user-menu-main">
-      <h1 class="amount">
+      <h1 class="meetup">
         <i class="fab fa-meetup"></i>Introduction to Javacript
       </h1>
-      <p class="amount">
+      <p class="meetup">
         <i class="fas fa-map-marker-alt"></i> 235 ikorodu road ilupeju lagos
       </p>
-      <p class="amount">
+      <p class="meetup">
         <i class="fas fa-calendar-alt"></i> 20th January 2019
       </p>
-      <button
+      <button class="btn btn-default btn-default-medium font-weight-bold" id="askQuestion"> <i class="fas fa-bullhorn"></i>ask question</button>
+      <!-- <button
         type="submit"
         class="btn btn-default btn-default-medium font-weight-bold"
       >
         <i class="fas fa-bullhorn"></i> ask question
-      </button>
+      </button> -->
       <!-- Menu -->
       <!-- <section class="card user-menu "> -->
       <section class="questions-container">
@@ -124,13 +125,6 @@
               </div>
             </div>
           </div>
-          <!-- <div class="comment-container" >
-                        <input type="text" name="" id="" placeholder="comments">
-                        <div class="question-comments">
-                            <div class="comment">closure is when function remember its variabe outside of its execution</div>
-                            <i class="fas fa-user-circle"> ssanusi</i>
-                        </div>
-                   </div> -->
         </div>
         <div class="question-wrapper">
           <h2>closure</h2>
@@ -202,6 +196,32 @@
           </div>
         </div>
       </section>
+      <!-- modal -->
+      <div id="questionModal" class="modal">
+
+        <!-- Modal content -->
+            <form class="modal-content form card" action="#">
+                <h2 class="text-dark text-center">Add Question</h2>
+                <div>
+                  <label class="label" for="meetup">
+                    Title:
+                  </label>
+                  <input type="text" id="meetup" placeholder="Enter title"
+                    required />
+                </div>
+                <div>
+                  <label for="description" class="label">
+                   Body:
+                    <textarea name="description" id="description" placeholder="Enter question">
+                    </textarea>
+                  </label>
+                </div>
+                <button type="submit" class="btn btn-default font-weight-bold">
+                  submit
+                </button>
+              </form>
+          <span class="close">&times;</span>
+        </div>
     </main>
 
     <!-- Footer -->
