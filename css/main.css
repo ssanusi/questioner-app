@@ -40,7 +40,7 @@ img {
     height: 400px;
 }
 
-.user-menu img {
+.meetup-menu img {
     height: 260px;
 
 }
@@ -445,7 +445,7 @@ td[title] {
 }
 
 .menu h2,
-.user-menu-main h2 {
+.meetup-menu-main h2 {
     margin: 0;
     font-family: 'Varela Round', sans-serif;
 }
@@ -502,8 +502,7 @@ td[title] {
 */
 
 .dashbord,
-.user-menu,
-.order-history {
+.meetup-menu {
     margin: 2rem auto;
     width: 950px;
     max-width: 100%;
@@ -516,7 +515,7 @@ td[title] {
 }
 
 .dash-main,
-.user-menu-main,
+.meetup-menu-main,
 .order-history-main,
 .landing-main,
 .order-details-main {
@@ -607,11 +606,11 @@ input[type="date"] {
  ==================================
 */
 
-.user-menu-main section.card {
+.meetup-menu-main section.card {
     box-shadow: 2px 2px 2px 4px#ccc;
 }
 
-.user-menu-item {
+.meetup-menu-item {
     min-width: 0;
     margin: 2rem auto;
     width: 25rem;
@@ -623,11 +622,11 @@ input[type="date"] {
     padding: 0.5rem;
 }
 
-.user-menu-item .meetup {
+.meetup-menu-item .meetup {
     color: #333;
 }
 
-.user-menu-item p {
+.meetup-menu-item p {
     margin: 0;
     margin-top: .5rem;
     /* font-size: .875rem; */
@@ -636,11 +635,11 @@ input[type="date"] {
     text-align: center;
     font-weight: 700;
 }
-.user-menu-item p:last-of-type {
+.meetup-menu-item p:last-of-type {
     font-size: 1rem;
 }
 
-.user-menu-item .btn {
+.meetup-menu-item .btn {
     position: relative;
     left: 35%;
 }
@@ -692,12 +691,12 @@ li.user {
 }
 
 .landing-main a,
-.user-menu-main a {
+.meetup-menu-main a {
     color: #fff;
 }
 
 .landing-main .btn,
-.user-menu-main .btn {
+.meetup-menu-main .btn {
     margin: 1rem auto;
 }
 
@@ -816,7 +815,7 @@ hr {
         flex-wrap: wrap;
         justify-content: space-evenly;
     }
-    .user-menu{
+    .meetup-menu{
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: space-evenly;
@@ -839,15 +838,15 @@ hr {
         margin-top: 1.5rem;
     }
 
-    .user-menu-item {
+    .meetup-menu-item {
         margin-right: auto;
     }
 
-    .user-menu-item:nth-of-type(2n) {
+    .meetup-menu-item:nth-of-type(2n) {
         margin-right: auto;
     }
 
-    .user-menu-item:last-of-type:not(even) {
+    .meetup-menu-item:last-of-type:not(even) {
         margin-right: auto;
     }
 
@@ -884,11 +883,11 @@ hr {
     }
 
 
-    .user-menu-item:nth-of-type(2n) {
+    .meetup-menu-item:nth-of-type(2n) {
         margin-right: auto;
     }
 
-    .user-menu-item:nth-of-type(3n) {
+    .meetup-menu-item:nth-of-type(3n) {
         margin-right: auto;
     }
 }
@@ -1045,7 +1044,7 @@ input[type="comment"]  {
     width: 60%;
   }
 
-  
+
   .close {
     color: #aaa;
     float: right;
