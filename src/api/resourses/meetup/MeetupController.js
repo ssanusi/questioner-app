@@ -7,9 +7,6 @@ class MeetupController {
   }
 
   static createMeetup(req, res) {
-    if (!req.body.topic || !req.body.location || !req.body.happeningOn || !req.body.tags) {
-      return res.status(400).send({ message: "All fields are required" });
-    }
     meetupModel.addMeetup(req.body);
     return res.status(201).json({ status: 201, data: [req.body] });
   }
@@ -28,14 +25,9 @@ class MeetupController {
   }
 
   static addRsvp(req, res) {
-    if (!req.body.user || !req.body.topic || !req.body.status || !req.params.id) {
-      return res.status(400).json({ message: "All fields are required" });
-    }
-    const { user, topic, status } = req.body;
-    const meetup = req.params.id;
-    const newRsvp = { user, response: status, meetup };
-    meetupModel.addRsvp(newRsvp);
-    return res.status(201).json({ status: 201, data: [{ meetup, topic, status }] });
+    const { validatedMeetup } = req.body;
+    meetupModel.addRsvp(validatedMeetup);
+    return res.status(201).json({ status: 201, data: [validatedMeetup] });
   }
 }
 
