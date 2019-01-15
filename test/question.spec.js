@@ -2,6 +2,7 @@ import chai from "chai";
 import chaiHttp from "chai-http";
 import app from "../src/index";
 import questionModel from "../src/api/resourses/question/QuestionModel";
+import MeetupModel from "../src/api/resourses/meetup/MeetupModel";
 
 const { expect } = chai;
 
@@ -38,6 +39,16 @@ describe("/Question Resources", () => {
         votes: 3
       }
     ];
+    MeetupModel.meetups =  [
+      {
+        id: 1,
+        createdOn: "2019-01-01T22:48:05.633Z",
+        location: "235 adeola adeku VI lagos",
+        topic: "Introduction to Javascript",
+        happeningOn: "2019-01-22T18:25:44.913Z",
+        tags: ["programming", "web", "front-end"]
+      }
+    ];
     done();
   });
   describe("GET /questions", () => {
@@ -69,8 +80,8 @@ describe("/Question Resources", () => {
         .request(app)
         .post("/api/v1/questions")
         .send({
-          user: 1,
-          meetup: 1,
+          user: "1",
+          meetup: "1",
           title: "what is execution context",
           body: "How can we implement execution cotext"
         })
@@ -84,19 +95,153 @@ describe("/Question Resources", () => {
           done();
         });
     });
-    it("should return error for incomplete meetups", done => {
+    it("should return error Meetup not found", done => {
       chai
         .request(app)
         .post("/api/v1/questions")
         .send({
-          user: 1,
-          topic: "what is execution context",
+          user: "1",
+          meetup: "2",
+          title: "what is execution context",
           body: "How can we implement execution cotext"
         })
         .end((err, res) => {
           expect(res).to.have.status(404);
           expect(res.type).to.eql("application/json");
-          expect(res.body.message).to.equal("All fields are required");
+          expect(res.body.error).to.be.a("object");
+          expect(res.body.error.meetup).to.eq("Meetup does not exist");
+          done();
+        });
+    });
+    it("should return error for missing title field", done => {
+      chai
+        .request(app)
+        .post("/api/v1/questions")
+        .send({
+          user: "1",
+          meetup: "1",
+          body: "How can we implement execution cotext"
+        })
+        .end((err, res) => {
+          expect(res).to.have.status(400);
+          expect(res.type).to.eql("application/json");
+          expect(res.body.error.title).to.equal("title field is required");
+          done();
+        });
+    });
+    it("should return error for empty title field", done => {
+      chai
+        .request(app)
+        .post("/api/v1/questions")
+        .send({
+          user: "1",
+          meetup: "1",
+          body: "How can we implement execution cotext",
+          title: ""
+        })
+        .end((err, res) => {
+          expect(res).to.have.status(400);
+          expect(res.type).to.eql("application/json");
+          expect(res.body.error.title).to.equal("title field is required");
+          done();
+        });
+    });
+    it("should return error for missing user field", done => {
+      chai
+        .request(app)
+        .post("/api/v1/questions")
+        .send({
+          title: "what is closure",
+          topic: "what is execution context",
+          body: "How can we implement execution cotext"
+        })
+        .end((err, res) => {
+          expect(res).to.have.status(400);
+          expect(res.type).to.eql("application/json");
+          expect(res.body.error.user).to.equal("user field is required");
+          done();
+        });
+    });
+    it("should return error for empty user field", done => {
+      chai
+        .request(app)
+        .post("/api/v1/questions")
+        .send({
+          user: "",
+          title: "what is closure",
+          topic: "what is execution context",
+          body: "How can we implement execution cotext"
+        })
+        .end((err, res) => {
+          expect(res).to.have.status(400);
+          expect(res.type).to.eql("application/json");
+          expect(res.body.error.user).to.equal("user field is required");
+          done();
+        });
+    });
+    it("should return error for missing meetup field", done => {
+      chai
+        .request(app)
+        .post("/api/v1/questions")
+        .send({
+          user: "1",
+          title: "what is closure",
+          body: "How can we implement execution cotext"
+        })
+        .end((err, res) => {
+          expect(res).to.have.status(400);
+          expect(res.type).to.eql("application/json");
+          expect(res.body.error.meetup).to.equal("meetup field is required");
+          done();
+        });
+    });
+    it("should return error for empty meetup field", done => {
+      chai
+        .request(app)
+        .post("/api/v1/questions")
+        .send({
+          user: "1",
+          title: "what is closure",
+          meetup: "",
+          body: "How can we implement execution cotext"
+        })
+        .end((err, res) => {
+          expect(res).to.have.status(400);
+          expect(res.type).to.eql("application/json");
+          expect(res.body.error.meetup).to.equal("meetup field is required");
+          done();
+        });
+    });
+    it("should return error for missing body field", done => {
+      chai
+        .request(app)
+        .post("/api/v1/questions")
+        .send({
+          user: "1",
+          title: "what is closure",
+          meetup: "1"
+        })
+        .end((err, res) => {
+          expect(res).to.have.status(400);
+          expect(res.type).to.eql("application/json");
+          expect(res.body.error.body).to.equal("body field is required");
+          done();
+        });
+    });
+    it("should return error for empty body field", done => {
+      chai
+        .request(app)
+        .post("/api/v1/questions")
+        .send({
+          user: "1",
+          title: "what is closure",
+          meetup: "1",
+          body: ""
+        })
+        .end((err, res) => {
+          expect(res).to.have.status(400);
+          expect(res.type).to.eql("application/json");
+          expect(res.body.error.body).to.equal("body field is required");
           done();
         });
     });
