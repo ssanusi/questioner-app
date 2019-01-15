@@ -114,6 +114,23 @@ describe("/Meetups Resources", () => {
           done();
         });
     });
+    it("should return Location field is Required if Location is empty", done => {
+      chai
+        .request(app)
+        .post("/api/v1/meetups")
+        .send({
+          location: "",
+          topic: "Introduction to CSS3",
+          happeningOn: "2019-01-022T22:48:05.633",
+          tags: ["programming", "web", "front-end"]
+        })
+        .end((err, res) => {
+          expect(res).to.have.status(400);
+          expect(res.type).to.eql("application/json");
+          expect(res.body.error.location).to.equal("Location field is Required");
+          done();
+        });
+    });
     it("should return topic field is Required", done => {
       chai
         .request(app)
@@ -196,23 +213,23 @@ describe("/Meetups Resources", () => {
           done();
         });
     });
-  });
-  it("should return tags field is Required for empty tags", done => {
-    chai
-      .request(app)
-      .post("/api/v1/meetups")
-      .send({
-        topic: "Introduction to CSS3",
-        location: "235 adeola adeku VI lagos",
-        happeningOn: "2019-01-022T22:48:05.633",
-        tags: []
-      })
-      .end((err, res) => {
-        expect(res).to.have.status(400);
-        expect(res.type).to.eql("application/json");
-        expect(res.body.error.tags).to.equal("tags field is Required");
-        done();
-      });
+    it("should return tags field is Required for empty tags", done => {
+      chai
+        .request(app)
+        .post("/api/v1/meetups")
+        .send({
+          topic: "Introduction to CSS3",
+          location: "235 adeola adeku VI lagos",
+          happeningOn: "2019-01-022T22:48:05.633",
+          tags: []
+        })
+        .end((err, res) => {
+          expect(res).to.have.status(400);
+          expect(res.type).to.eql("application/json");
+          expect(res.body.error.tags).to.equal("tags field is Required");
+          done();
+        });
+    });
   });
 });
 describe("GET /meetups/upcoming", () => {
@@ -315,8 +332,8 @@ describe("GET /meetups/<id>/rsvps", () => {
       .request(app)
       .post("/api/v1/meetups/1/rsvps")
       .send({
-        topic: "",
         user: "1",
+        topic: "",
         status: "no"
       })
       .end((err, res) => {

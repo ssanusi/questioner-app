@@ -2,6 +2,7 @@ import chai from "chai";
 import chaiHttp from "chai-http";
 import app from "../src/index";
 import questionModel from "../src/api/resourses/question/QuestionModel";
+import MeetupModel from "../src/api/resourses/meetup/MeetupModel";
 
 const { expect } = chai;
 
@@ -36,6 +37,16 @@ describe("/Question Resources", () => {
         title: "what is closure?",
         body: "what is closure and in what way can we implement it in Javascript",
         votes: 3
+      }
+    ];
+    MeetupModel.meetups =  [
+      {
+        id: 1,
+        createdOn: "2019-01-01T22:48:05.633Z",
+        location: "235 adeola adeku VI lagos",
+        topic: "Introduction to Javascript",
+        happeningOn: "2019-01-22T18:25:44.913Z",
+        tags: ["programming", "web", "front-end"]
       }
     ];
     done();
@@ -81,6 +92,24 @@ describe("/Question Resources", () => {
           expect(res.body.data).to.be.a("array");
           expect(res.body.data.length).to.eq(1);
           expect(res.body.data[0]).to.include.keys(["user", "meetup", "title", "body"]);
+          done();
+        });
+    });
+    it("should return error Meetup not found", done => {
+      chai
+        .request(app)
+        .post("/api/v1/questions")
+        .send({
+          user: "1",
+          meetup: "2",
+          title: "what is execution context",
+          body: "How can we implement execution cotext"
+        })
+        .end((err, res) => {
+          expect(res).to.have.status(404);
+          expect(res.type).to.eql("application/json");
+          expect(res.body.error).to.be.a("object");
+          expect(res.body.error.meetup).to.eq("Meetup does not exist");
           done();
         });
     });
@@ -155,7 +184,7 @@ describe("/Question Resources", () => {
         .request(app)
         .post("/api/v1/questions")
         .send({
-          user : "1",
+          user: "1",
           title: "what is closure",
           body: "How can we implement execution cotext"
         })
@@ -171,7 +200,7 @@ describe("/Question Resources", () => {
         .request(app)
         .post("/api/v1/questions")
         .send({
-          user:"1",
+          user: "1",
           title: "what is closure",
           meetup: "",
           body: "How can we implement execution cotext"
@@ -204,7 +233,7 @@ describe("/Question Resources", () => {
         .request(app)
         .post("/api/v1/questions")
         .send({
-          user:"1",
+          user: "1",
           title: "what is closure",
           meetup: "1",
           body: ""
