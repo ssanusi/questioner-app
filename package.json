@@ -4,6 +4,8 @@
   "description": "Restful api for questioner app",
   "main": "index.js",
   "scripts": {
+    "db:create:dev" : "createdb questionerdb_dev",
+    "db:init:dev" : "psql -d questionerdb_dev -f src/db/schema.sql",
     "build": "babel src -d dist",
     "start": "npm run build && nodemon dist/index.js",
     "serve": "node dist/index.js",
@@ -23,6 +25,7 @@
     "lodash.isempty": "^4.4.0",
     "moment": "^2.23.0",
     "morgan": "^1.9.1",
+    "pg-promise": "^8.5.4",
     "validator": "^10.10.0"
   },
   "devDependencies": {
