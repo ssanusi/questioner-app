@@ -5,8 +5,8 @@ services:
   - postgresql
 
 before_script:
-   - psql -c 'create database travis_ci_test;' -U postgres
-   - psql -d travis_ci_test -f src/db/schema.sql
+   - psql -c 'create database questionerdb;' -U postgres
+   - psql -d questionerdb -f src/db/schema.sql
 
 script:
 - npm test
