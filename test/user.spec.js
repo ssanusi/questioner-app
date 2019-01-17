@@ -15,7 +15,7 @@ describe("/User Resources", () => {
       "sulaiman@icloud.com",
       "08073372043",
       "ssanusi",
-      bcrypt.hashSync("password", 14),
+      "password",
       true
     ];
     const queryText =
