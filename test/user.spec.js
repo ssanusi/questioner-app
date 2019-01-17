@@ -7,14 +7,14 @@ import pool from "../src/db/connection";
 chai.use(chaiHttp);
 
 describe("/User Resources", () => {
-  beforeEach(done => {
+  before(done => {
     const users = [
-      "sanusi",
-      "sulaiman",
-      "muhammad",
-      "sulaiman@icloud.com",
+      "bashir",
+      "musa",
+      "ahmed",
+      "bashir@icloud.com",
       "08073372043",
-      "ssanusi",
+      "bbashir",
       "password",
       true
     ];
@@ -24,7 +24,7 @@ describe("/User Resources", () => {
     pool.query(queryText, users);
     done();
   });
-  afterEach(done => {
+  after(done => {
     pool.query("TRUNCATE TABLE users CASCADE");
     done();
   });
@@ -244,29 +244,29 @@ describe("/User Resources", () => {
           done();
         });
     });
-    // it("user can create account", done => {
-    //   const testUser = {
-    //     firstName: "sanusi",
-    //     lastName: "sulaiman",
-    //     othername: "muhammad",
-    //     email: "sulaiman@icloud.com",
-    //     phoneNumber: "08073372043",
-    //     username: "ssanusi",
-    //     password: "password",
-    //     confirmPassword: "password",
-    //     isadmin: true
-    //   };
-    //   chai
-    //     .request(app)
-    //     .post("/api/v1/auth/signup")
-    //     .send(testUser)
-    //     .end((err, res) => {
-    //       expect(res).to.have.status(409);
-    //       expect(res.type).to.eql("application/json");
-    //       expect(res.body).to.be.an("object");
-    //       expect(res.body.error).eql("username or email exist");
-    //       done();
-    //     });
-    // });
+    it("user can create account", done => {
+      const testUser = {
+        firstName: "bashir",
+        lastName: "musa",
+        othername: "ahmed",
+        email: "bashir@icloud.com",
+        phoneNumber: "08073372043",
+        username: "bbashir",
+        password: "password",
+        confirmPassword: "password",
+        isadmin: true
+      };
+      chai
+        .request(app)
+        .post("/api/v1/auth/signup")
+        .send(testUser)
+        .end((err, res) => {
+          expect(res).to.have.status(409);
+          expect(res.type).to.eql("application/json");
+          expect(res.body).to.be.an("object");
+          expect(res.body.error).eql("username or email exist");
+          done();
+        });
+    });
   });
 });
