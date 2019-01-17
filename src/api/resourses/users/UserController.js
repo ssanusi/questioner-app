@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
 import createToken from "../../module/createToken";
-import pool from "../../../db/connection";
+import pool from "../../../db";
 
 class UserController {
   static signUp(req, res) {
