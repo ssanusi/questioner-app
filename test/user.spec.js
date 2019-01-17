@@ -2,7 +2,7 @@ import chai, { expect } from "chai";
 import chaiHttp from "chai-http";
 import bcrypt from "bcryptjs";
 import app from "../src";
-import pool from "../src/db/connection";
+import db from "../src/db";
 
 chai.use(chaiHttp);
 
@@ -20,12 +20,12 @@ describe("/User Resources", () => {
     ];
     const queryText =
       "INSERT INTO users(firstName,lastName,otherName,email,phoneNumber,username,password,isAdmin) VALUES($1,$2,$3,$4,$5,$6,$7,$8)";
-    pool.query("TRUNCATE TABLE users CASCADE");
-    pool.query(queryText, users);
+    db.query("TRUNCATE TABLE users CASCADE");
+    db.query(queryText, users);
     done();
   });
   after(done => {
-    pool.query("TRUNCATE TABLE users CASCADE");
+    db.query("TRUNCATE TABLE users CASCADE");
     done();
   });
   describe("POST User can create account", () => {
@@ -244,7 +244,7 @@ describe("/User Resources", () => {
           done();
         });
     });
-    it("user can create account", done => {
+    it("user should get error duplicate", done => {
       const testUser = {
         firstName: "bashir",
         lastName: "musa",
