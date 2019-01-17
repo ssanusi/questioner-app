@@ -1,6 +1,12 @@
 language: node_js
 node_js:
-- stable
+  - stable
+services:
+  - postgresql
+before_script:
+   - psql -c 'create database questionerdb_test;' -U postgres
+   - psql -d questionerdb_test -f src/db/schema.sql
+
 script:
 - npm test
 after_success: npm run coverage

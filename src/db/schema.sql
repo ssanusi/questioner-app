@@ -19,12 +19,13 @@ CREATE TABLE IF NOT EXISTS users(
         firstname VARCHAR(128) NOT NULL,
         lastname VARCHAR(128) NOT NULL,
         othername VARCHAR(128),
-        email VARCHAR(128)  NOT NULL,
+        email VARCHAR(128) UNIQUE NOT NULL,
         phoneNumber VARCHAR(128) NOT NULL,
-        username VARCHAR(128) NOT NULL,
+        username VARCHAR(128) UNIQUE NOT NULL,
         password VARCHAR(128) NOT NULL,
         registered TIMESTAMPTZ DEFAULT NOW(),
-        isAdmin BOOL NOT NULL
+        isAdmin BOOL NOT NULL,
+        UNIQUE(email,userName)
 );
 
 CREATE TABLE IF NOT EXISTS questions(
