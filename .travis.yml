@@ -3,7 +3,7 @@ node_js:
   - stable
 services:
   -postgresql
-before_scrip:
+before_script:
   npm run db:create
   npm run db:init
 script:
