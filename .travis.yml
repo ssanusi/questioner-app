@@ -5,8 +5,7 @@ services:
   - postgresql
 
 before_script:
-  - psql -c 'create database questionerdb;' -U postgres
-  - psql -d questionerdb -f src/db/schema.sql
+  - npm run db:init
 
 script:
 - npm test
