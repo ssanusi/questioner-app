@@ -24,10 +24,10 @@ describe("/User Resources", () => {
     pool.query(queryText, users);
     done();
   });
-  //   after(done => {
-  //     pool.query("TRUNCATE TABLE users CASCADE");
-  //     done();
-  //   });
+  after(done => {
+    pool.query("TRUNCATE TABLE users CASCADE");
+    done();
+  });
   describe("POST User can create account", () => {
     it("user can create account", done => {
       const testUser = {
