@@ -7,7 +7,7 @@
     "db:create:dev": "createdb questionerdb_dev",
     "db:create": "createdb questionerdb -U postgres",
     "db:init:dev": "psql -d questionerdb_dev -f src/db/schema.sql",
-    "db:init": " npm run db:create && psql -d questionerdb -f src/db/schema.sql",
+    "db:init": "psql -d questionerdb -f src/db/schema.sql",
     "db:query" : "babel-node src/db/query",
     "build": "babel src -d dist",
     "start": "npm run build && nodemon dist/index.js",
