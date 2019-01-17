@@ -1,6 +1,11 @@
 language: node_js
 node_js:
-- stable
+  - stable
+services:
+  -postgresql
+before_scrip:
+  npm run db:create
+  npm run db:init
 script:
 - npm test
 after_success: npm run coverage
