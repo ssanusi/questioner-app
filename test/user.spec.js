@@ -7,7 +7,7 @@ import pool from "../src/db/connection";
 chai.use(chaiHttp);
 
 describe("/User Resources", () => {
-  before(done => {
+  beforeEach(done => {
     const users = [
       "sanusi",
       "sulaiman",
@@ -24,7 +24,7 @@ describe("/User Resources", () => {
     pool.query(queryText, users);
     done();
   });
-  after(done => {
+  afterEach(done => {
     pool.query("TRUNCATE TABLE users CASCADE");
     done();
   });
@@ -244,29 +244,29 @@ describe("/User Resources", () => {
           done();
         });
     });
-    it("user can create account", done => {
-      const testUser = {
-        firstName: "sanusi",
-        lastName: "sulaiman",
-        othername: "muhammad",
-        email: "sulaiman@icloud.com",
-        phoneNumber: "08073372043",
-        username: "ssanusi",
-        password: "password",
-        confirmPassword: "password",
-        isadmin: true
-      };
-      chai
-        .request(app)
-        .post("/api/v1/auth/signup")
-        .send(testUser)
-        .end((err, res) => {
-          expect(res).to.have.status(409);
-          expect(res.type).to.eql("application/json");
-          expect(res.body).to.be.an("object");
-          expect(res.body.error).eql("username or email exist");
-          done();
-        });
-    });
+    // it("user can create account", done => {
+    //   const testUser = {
+    //     firstName: "sanusi",
+    //     lastName: "sulaiman",
+    //     othername: "muhammad",
+    //     email: "sulaiman@icloud.com",
+    //     phoneNumber: "08073372043",
+    //     username: "ssanusi",
+    //     password: "password",
+    //     confirmPassword: "password",
+    //     isadmin: true
+    //   };
+    //   chai
+    //     .request(app)
+    //     .post("/api/v1/auth/signup")
+    //     .send(testUser)
+    //     .end((err, res) => {
+    //       expect(res).to.have.status(409);
+    //       expect(res.type).to.eql("application/json");
+    //       expect(res.body).to.be.an("object");
+    //       expect(res.body.error).eql("username or email exist");
+    //       done();
+    //     });
+    // });
   });
 });
