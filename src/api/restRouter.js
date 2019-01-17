@@ -7,6 +7,6 @@ const restRouter = express.Router();
 
 restRouter.use("/meetups", meetupRouter);
 restRouter.use("/questions", questionRouter);
-restRouter.use("/auth/signup", userRouter);
+restRouter.use("/auth", userRouter);
 
 export default restRouter;

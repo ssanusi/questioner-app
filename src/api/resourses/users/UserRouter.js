@@ -4,6 +4,7 @@ import userValidator from "../../middleware/userValidator";
 
 const userRouter = express.Router();
 
-userRouter.get("/", userValidator, UserController.signUp);
+userRouter.post("/signup", userValidator, UserController.signUp);
+
 
 export default userRouter;

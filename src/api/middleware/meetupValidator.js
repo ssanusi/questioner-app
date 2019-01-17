@@ -7,21 +7,15 @@ export const validateAddMeetup = (req, res, next) => {
   if (!topic) {
     error.topic = "Topic field is Required";
   }
-  if (topic && validator.isEmpty(topic.trim())) {
-    error.topic = "Topic field is Required";
-  }
+
   if (!location) {
     error.location = "Location field is Required";
   }
-  if (location && validator.isEmpty(location.trim())) {
-    error.location = "Location field are required";
-  }
+
   if (!happeningOn) {
     error.happeningOn = "happeningOn field is Required";
   }
-  if (happeningOn && validator.isEmpty(happeningOn.trim())) {
-    error.happeningOn = "happeningOn field is Required";
-  }
+
   if (!tags) {
     error.tags = "tags field is Required";
   }
@@ -56,19 +50,12 @@ export const validateAddRsvp = (req, res, next) => {
   if (!user) {
     error.user = "User field is Required";
   }
-  if (user && validator.isEmpty(user.trim())) {
-    error.user = "User field is Required";
-  }
+
   if (!topic) {
     error.topic = "Topic field is Required";
   }
-  if (topic && validator.isEmpty(topic.trim())) {
-    error.topic = "Topic field is Required";
-  }
+
   if (!status) {
-    error.status = "Status field is Required";
-  }
-  if (status && validator.isEmpty(status.trim())) {
     error.status = "Status field is Required";
   }
 

@@ -25,14 +25,7 @@ export const validateAddQuestion = (req, res, next) => {
     error.title = "title field is required";
   }
 
-  if (title && validator.isEmpty(title.trim())) {
-    error.title = "title field is required";
-  }
-
   if (!body) {
-    error.body = "body field is required";
-  }
-  if (body && validator.isEmpty(body.trim())) {
     error.body = "body field is required";
   }
 

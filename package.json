@@ -5,12 +5,13 @@
   "main": "index.js",
   "scripts": {
     "db:create:dev": "createdb questionerdb_dev",
+    "db:create:test": "createdb questionerdb_test",
     "db:init:dev": "psql -d questionerdb_dev -f src/db/schema.sql",
-    "query": "babel-node src/db/query",
+    "db:query" : "babel-node src/db/query",
     "build": "babel src -d dist",
     "start": "npm run build && nodemon dist/index.js",
     "serve": "node dist/index.js",
-    "test": "nyc mocha --require babel-register --exit",
+    "test": "nyc mocha --require babel-register --timeout 5000 --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
@@ -20,6 +21,7 @@
   "author": "Sulaiman Sanusi",
   "license": "MIT",
   "dependencies": {
+    "babel-plugin-transform-runtime": "^6.23.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "dotenv": "^6.2.0",

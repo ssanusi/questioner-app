@@ -21,7 +21,7 @@ class UserController {
       })
       .catch(e => {
         if (e.code === "23505") {
-          return res.status(409).json({ error: "username or email exist " });
+          return res.status(409).json({ error: "username or email exist" });
         }
       });
   }
