@@ -33,7 +33,7 @@ export const validateAddQuestion = (req, res, next) => {
     error.body = "body field is required";
   }
   if (body && validator.isEmpty(body.trim())) {
-    error.body = body;
+    error.body = "body field is required";
   }
 
   if (isEmpty(error)) {
