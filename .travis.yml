@@ -3,7 +3,6 @@ node_js:
   - stable
 services:
   - postgresql
-
 before_script:
    - psql -c 'create database questionerdb_test;' -U postgres
    - psql -d questionerdb_test -f src/db/schema.sql
