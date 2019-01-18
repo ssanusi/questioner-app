@@ -1,6 +1,5 @@
 import validator from "validator";
 import isEmpty from "lodash.isempty";
-import MeetupModel from "../resourses/meetup/MeetupModel";
 
 export const validateAddQuestion = (req, res, next) => {
   const { user, meetup, title, body } = req.body;
