@@ -1,13 +1,13 @@
 import express from "express";
 import QuestionController from "./QuestionController";
-import { validateAddQuestion, verifyMeetup } from "../../middleware/questionValidator";
+import validateAddQuestion from "../../middleware/questionValidator";
 
 const questionRouter = express.Router();
 
 questionRouter
   .route("/")
   .get(QuestionController.getAllQuestions)
-  .post(validateAddQuestion, verifyMeetup, QuestionController.addQuestion);
+  .post(validateAddQuestion, QuestionController.addQuestion);
 
 questionRouter.route("/:id").get(QuestionController.getQuestionById);
 questionRouter.patch("/:id/upvote", QuestionController.upvote);

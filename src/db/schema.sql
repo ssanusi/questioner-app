@@ -30,14 +30,14 @@ CREATE TABLE IF NOT EXISTS users(
 
 CREATE TABLE IF NOT EXISTS questions(
         id SERIAL PRIMARY KEY,
-        createdOn VARCHAR(128) NOT NULL,
-        createdBy INTEGER NOT NULL,
+        createdOn TIMESTAMPTZ DEFAULT NOW(),
+        userId INTEGER NOT NULL,
         meetup INTEGER NOT NULL,
         title VARCHAR(128)  NOT NULL,
         body VARCHAR(255)  NOT NULL,
         votes INTEGER DEFAULT 0,
         FOREIGN KEY (meetup) REFERENCES meetups(id) ON DELETE CASCADE,
-        FOREIGN KEY (createdBy) REFERENCES users(id) ON DELETE CASCADE
+        FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS rsvp(

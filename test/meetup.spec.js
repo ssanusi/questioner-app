@@ -1,71 +1,60 @@
 import chai, { expect } from "chai";
 import chaiHttp from "chai-http";
 import app from "../src";
-import meetupModel from "../src/api/resourses/meetup/MeetupModel";
+import db from "../src/db";
 
 chai.use(chaiHttp);
 
 describe("/Meetups Resources", () => {
-  beforeEach(done => {
-    meetupModel.meetups = [
-      {
-        id: 1,
-        createdOn: "2019-01-01T22:48:05.633Z",
-        location: "235 adeola adeku VI lagos",
-        topic: "Introduction to Javascript",
-        happeningOn: "2019-01-22T18:25:44.913Z",
-        tags: ["programming", "web", "front-end"]
-      },
-      {
-        id: 2,
-        createdOn: "2019-01-01T22:48:05.633Z",
-        location: "235 adeola adeku VI lagos",
-        topic: "Introduction to CSS3",
-        happeningOn: "2019-01-22T18:25:44.913Z",
-        tags: ["programming", "web", "front-end"]
-      },
-      {
-        id: 3,
-        createdOn: "2019-01-01T22:48:05.633Z",
-        location: "235 adeola adeku VI lagos",
-        topic: "Introduction to CSS3",
-        happeningOn: "2019-01-02T18:25:44.913Z",
-        tags: ["programming", "web", "front-end"]
-      }
+  before(done => {
+    const meetup = [
+      "2019-01-01T22:48:05.633Z",
+      "235 adeola adeku VI lagos",
+      "Introduction to Javascript",
+      "2019-01-22T18:25:44.913Z"
     ];
-    meetupModel.rsvps = [
-      {
-        id: 1,
-        meetup: 1,
-        user: 1,
-        response: "yes"
-      },
-      {
-        id: 2,
-        meetup: 1,
-        user: 1,
-        response: "no"
-      },
-      {
-        id: 3,
-        meetup: 1,
-        user: 1,
-        response: "maybe"
-      }
-    ];
+    const queryText =
+      "INSERT INTO meetups(createdOn,location,topic,happeningOn,tags) VALUES($1,$2,$3,$4,$5)";
+    db.query("TRUNCATE TABLE meetups CASCADE");
+    db.query(queryText, meetup);
+    // meetupModel.rsvps = [
+    //   {
+    //     id: 1,
+    //     meetup: 1,
+    //     user: 1,
+    //     response: "yes"
+    //   },
+    //   {
+    //     id: 2,
+    //     meetup: 1,
+    //     user: 1,
+    //     response: "no"
+    //   },
+    //   {
+    //     id: 3,
+    //     meetup: 1,
+    //     user: 1,
+    //     response: "maybe"
+    //   }
+    // ];
     done();
   });
+  // after(done => {
+  //   db.query("TRUNCATE TABLE meetups CASCADE");
+  //   done();
+  // });
   describe("GET /meetups", () => {
     it("should get all meetups", done => {
       chai
         .request(app)
         .get("/api/v1/meetups")
         .end((err, res) => {
+          console.log(res.body);
           expect(res).to.have.status(200);
           expect(res.type).to.eql("application/json");
           expect(res.body.status).to.equal(200);
           expect(res.body.data).to.be.a("array");
-          expect(res.body.data.length).to.eq(3);
+          expect(res.body.data.length).to.eq(1);
           expect(res.body.data[0]).to.include.keys([
             "id",
             "location",
