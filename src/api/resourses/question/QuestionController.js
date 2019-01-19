@@ -26,7 +26,6 @@ class QuestionController {
       req.body.title,
       req.body.body
     ];
-    console.log(values);
     db.query(queryString, values)
       .then(data => res.status(201).json({ status: 201, data: data.rows[0] }))
       .catch(err => {
