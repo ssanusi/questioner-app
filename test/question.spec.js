@@ -55,8 +55,8 @@ describe("/Question Resources", () => {
           expect(res).to.have.status(400);
           expect(res.type).to.eql("application/json");
           expect(res.body).to.be.a("object");
-          done();
         });
+      done();
     });
     it("should return error for missing title field", done => {
       chai
@@ -203,8 +203,8 @@ describe("/Question Resources", () => {
         .end((err, res) => {
           expect(res).to.have.status(400);
           expect(res.type).to.eql("application/json");
-          done();
         });
+      done();
     });
     it("should return error meetup does not exit ", done => {
       chai
@@ -219,8 +219,8 @@ describe("/Question Resources", () => {
         .end((err, res) => {
           expect(res).to.have.status(400);
           expect(res.type).to.eql("application/json");
-          done();
         });
+      done();
     });
     it("should return error user should be a number  ", done => {
       chai
