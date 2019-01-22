@@ -36,7 +36,7 @@ class MeetupController {
 
   static getAllupcoming(req, res) {
     const today = moment();
-    const queryString = "SELECT * FROM meetups WHERE happerningon > $1";
+    const queryString = "SELECT * FROM meetups WHERE happeningon > $1";
     db.query(queryString, [today])
       .then(data => {
         // if (data.rows === 0) {

@@ -129,6 +129,29 @@ describe("/User Resources", () => {
           done();
         });
     });
+    it("user should get error for missing First Name", done => {
+      const testUser = {
+        lastName: "sulaiman",
+        othername: "muhammad",
+        email: "sulaiman@icloud.com",
+        phoneNumber: "08073372043",
+        username: "ssanusi",
+        password: "password",
+        confirmPassword: "password",
+        isadmin: true
+      };
+      chai
+        .request(app)
+        .post("/api/v1/auth/signup")
+        .send(testUser)
+        .end((err, res) => {
+          expect(res).to.have.status(400);
+          expect(res.type).to.eql("application/json");
+          expect(res.body).to.be.an("object");
+          expect(res.body.error.firstName).eql("FirstName is Required");
+          done();
+        });
+    });
     it("user should get error for missing phone Number", done => {
       const testUser = {
         firstName: "sanusi",
