@@ -1,7 +1,6 @@
 import validator from "validator";
 import isEmpty from "lodash.isempty";
 
-
 const validateAddQuestion = (req, res, next) => {
   const { user, meetup, title, body } = req.body;
   const error = {};

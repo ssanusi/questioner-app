@@ -4,14 +4,13 @@ import db from "../../../db";
 class MeetupController {
   static getAllMeetups(req, res) {
     const queryString = "SELECT * FROM meetups";
-    db.query(queryString)
-      .then(data => {
-        // if (data.rows.length === 0) {
-        //   return res.status(404).json({ message: "no meetups" });
-        // }
-        res.status(200).json({ status: 200, data: data.rows });
-      })
-      // .catch(err => res.status(400).json({ err }));
+    db.query(queryString).then(data => {
+      // if (data.rows.length === 0) {
+      //   return res.status(404).json({ message: "no meetups" });
+      // }
+      res.status(200).json({ status: 200, data: data.rows });
+    });
+    // .catch(err => res.status(400).json({ err }));
   }
 
   static createMeetup(req, res) {
@@ -38,12 +37,12 @@ class MeetupController {
     const today = moment();
     const queryString = "SELECT * FROM meetups WHERE happeningon > $1";
     db.query(queryString, [today])
-      .then(data => {
+      .then(data =>
         // if (data.rows === 0) {
         //   return res.status(404).json({ message: "no meetups" });
         // }
-        return res.status(200).json({ status: 200, data: data.rows });
-      })
+        res.status(200).json({ status: 200, data: data.rows })
+      )
       .catch(err => res.status(400).json({ err }));
   }
 

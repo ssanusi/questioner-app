@@ -1,7 +1,6 @@
 import chai, { expect } from "chai";
 import chaiHttp from "chai-http";
 import app from "../src";
-import db from "../src/db";
 
 chai.use(chaiHttp);
 describe("/Meetups Resources", () => {
