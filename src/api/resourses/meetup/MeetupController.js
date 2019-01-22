@@ -62,7 +62,7 @@ class MeetupController {
 
   static addRsvp(req, res) {
     const queryString = `INSERT INTO
-    rsvps(meetup, userId, response)
+    rsvps(meetupId, userId, response)
     VALUES($1, $2, $3)
     returning *`;
     const { validatedMeetup } = req.body;

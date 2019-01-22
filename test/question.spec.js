@@ -29,7 +29,7 @@ describe("/Question Resources", () => {
         .post("/api/v1/questions")
         .send({
           user: "1",
-          meetup: "1",
+          meetupId: "1",
           title: "what is execution context",
           body: "How can we implement execution cotext"
         })
@@ -38,16 +38,16 @@ describe("/Question Resources", () => {
           expect(res.type).to.eql("application/json");
           expect(res.body.status).to.equal(201);
           expect(res.body.data).to.be.a("object");
-          done();
         });
+      done();
     });
-    it("should return error Meetup not found", done => {
+    it("should return error meetupId not found", done => {
       chai
         .request(app)
         .post("/api/v1/questions")
         .send({
           user: "1",
-          meetup: "5",
+          meetupId: "5",
           title: "what is execution context",
           body: "How can we implement execution cotext"
         })
@@ -64,7 +64,7 @@ describe("/Question Resources", () => {
         .post("/api/v1/questions")
         .send({
           user: "1",
-          meetup: "1",
+          meetupId: "1",
           body: "How can we implement execution cotext"
         })
         .end((err, res) => {
@@ -80,7 +80,7 @@ describe("/Question Resources", () => {
         .post("/api/v1/questions")
         .send({
           user: "1",
-          meetup: "1",
+          meetupId: "1",
           body: "How can we implement execution cotext",
           title: ""
         })
@@ -124,7 +124,7 @@ describe("/Question Resources", () => {
           done();
         });
     });
-    it("should return error for missing meetup field", done => {
+    it("should return error for missing meetupId field", done => {
       chai
         .request(app)
         .post("/api/v1/questions")
@@ -136,24 +136,24 @@ describe("/Question Resources", () => {
         .end((err, res) => {
           expect(res).to.have.status(400);
           expect(res.type).to.eql("application/json");
-          expect(res.body.error.meetup).to.equal("meetup field is required");
+          expect(res.body.error.meetupId).to.equal("meetupId field is required");
           done();
         });
     });
-    it("should return error for empty meetup field", done => {
+    it("should return error for empty meetupId field", done => {
       chai
         .request(app)
         .post("/api/v1/questions")
         .send({
           user: "1",
           title: "what is closure",
-          meetup: "",
+          meetupId: "",
           body: "How can we implement execution cotext"
         })
         .end((err, res) => {
           expect(res).to.have.status(400);
           expect(res.type).to.eql("application/json");
-          expect(res.body.error.meetup).to.equal("meetup field is required");
+          expect(res.body.error.meetupId).to.equal("meetupId field is required");
           done();
         });
     });
@@ -164,7 +164,7 @@ describe("/Question Resources", () => {
         .send({
           user: "1",
           title: "what is closure",
-          meetup: "1"
+          meetupId: "1"
         })
         .end((err, res) => {
           expect(res).to.have.status(400);
@@ -180,7 +180,7 @@ describe("/Question Resources", () => {
         .send({
           user: "1",
           title: "what is closure",
-          meetup: "1",
+          meetupId: "1",
           body: ""
         })
         .end((err, res) => {
@@ -197,7 +197,7 @@ describe("/Question Resources", () => {
         .send({
           user: "10",
           title: "what is closure",
-          meetup: "1",
+          meetupId: "1",
           body: "nkdsfbdsfjnsdaknsnfsdnfknakdnkldsnaknfsd"
         })
         .end((err, res) => {
@@ -206,14 +206,14 @@ describe("/Question Resources", () => {
         });
       done();
     });
-    it("should return error meetup does not exit ", done => {
+    it("should return error meetupId does not exit ", done => {
       chai
         .request(app)
         .post("/api/v1/questions")
         .send({
           user: "1",
           title: "what is closure",
-          meetup: "10",
+          meetupId: "10",
           body: "nkdsfbdsfjnsdaknsnfsdnfknakdnkldsnaknfsd"
         })
         .end((err, res) => {
@@ -229,7 +229,7 @@ describe("/Question Resources", () => {
         .send({
           user: "me",
           title: "what is closure",
-          meetup: "10",
+          meetupId: "10",
           body: "nkdsfbdsfjnsdaknsnfsdnfknakdnkldsnaknfsd"
         })
         .end((err, res) => {
@@ -238,14 +238,14 @@ describe("/Question Resources", () => {
           done();
         });
     });
-    it("should return error meetup should be a number  ", done => {
+    it("should return error meetupId should be a number  ", done => {
       chai
         .request(app)
         .post("/api/v1/questions")
         .send({
           user: "1",
           title: "what is closure",
-          meetup: "me",
+          meetupId: "me",
           body: "nkdsfbdsfjnsdaknsnfsdnfknakdnkldsnaknfsd"
         })
         .end((err, res) => {
