@@ -184,7 +184,6 @@ describe("/Meetups Resources", () => {
         .request(app)
         .get("/api/v1/meetups/upcoming")
         .end((err, res) => {
-          console.log(res.body);
           expect(res).to.have.status(200);
           expect(res.type).to.eql("application/json");
           expect(res.body.status).to.equal(200);
@@ -403,13 +402,23 @@ describe("/Meetups Resources", () => {
         });
     });
   });
-  describe("DELETE Meetup /meetup/<id>", () => {
-    it("its should delete a meetup", done => {
+
+  describe("DELETE /meetup/<id>", () => {
+    it("its should delete spesific meetup ", done => {
       chai
         .request(app)
-        .del("/api/v1/meetups/1")
+        .del("/api/v1/meetups/3")
         .end((err, res) => {
-          console.log(res.body);
+          expect(res.status).to.be.eql(200);
+        });
+      done();
+    });
+    it("its should send error deleting spesific meetup ", done => {
+      chai
+        .request(app)
+        .del("/api/v1/meetups/8")
+        .end((err, res) => {
+          expect(res.status).to.be.equal(404)
         });
       done();
     });

@@ -5,6 +5,8 @@ VALUES
     ('2019-01-01T22:48:05.633Z', '235 adeola adeku VI lagos', '{"googgle.com","msn.com"}', 'Introduction to Javascript', '2019-01-22T18:25:44.913Z', '{"programming", "web", "front-end"}'),
     ('2019-01-01T22:48:05.633Z', '235 adeola adeku VI lagos', '{"googgle.com","msn.com"}', 'Introduction to Javascript', '2019-01-22T18:25:44.913Z', '{"programming", "web", "front-end"}'),
     ('2019-01-01T22:48:05.633Z', '235 adeola adeku VI lagos', '{"googgle.com","msn.com"}', 'Introduction to Javascript', '2019-01-22T18:25:44.913Z', '{"programming", "web", "front-end"}');
+
+
 INSERT INTO "users"
     ("firstname","lastname","othername","email","phonenumber","username","password","isadmin")
 VALUES
