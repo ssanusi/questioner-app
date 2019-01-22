@@ -6,7 +6,7 @@
   "scripts": {
     "db:create:dev": "createdb questionerdb_dev",
     "db:init:dev": "psql -d questionerdb_dev -f src/db/schema.sql",
-    "db:init:test": "psql -d test -f src/db/schema.sql",
+    "db:init:test": "psql -d questionerdb_test -f src/db/schema.sql",
     "db:migrate": "psql -d questionerdb_dev -f src/db/seed.sql",
     "db:migrate:test": "psql -d questionerdb_test -f src/db/seed.sql",
     "build": "babel src -d dist",
