@@ -16,7 +16,7 @@ class QuestionController {
 
   static addQuestion(req, res) {
     const queryString = `INSERT INTO
-    questions(createdon,userId, meetup, title, body)
+    questions(created_on,user_Id, meetup, title, body)
       VALUES($1, $2, $3, $4, $5)
       returning *`;
     const values = [
@@ -54,7 +54,7 @@ class QuestionController {
   }
 
   static upvote(req, res) {
-    const queryString = "UPDATE questions SET votes = votes + 1 WHERE id = $1 returning *";
+    const queryString = "UPDATE questions SET up_votes = votes + 1 WHERE id = $1 returning *";
     const question = parseInt(req.params.id, 10);
     db.query(queryString, [question])
       .then(data => {
@@ -67,7 +67,7 @@ class QuestionController {
   }
 
   static downvote(req, res) {
-    const queryString = "UPDATE questions SET votes = votes - 1 WHERE id = $1 returning *";
+    const queryString = "UPDATE questions SET down_votes = down_votes - 1 WHERE id = $1 returning *";
     const question = parseInt(req.params.id, 10);
     db.query(queryString, [question])
       .then(data => {

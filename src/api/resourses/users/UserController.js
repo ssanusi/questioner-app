@@ -4,12 +4,10 @@ import db from "../../../db";
 
 class UserController {
   static signUp(req, res) {
-    // Password Hashing
     const hash = bcrypt.hashSync(req.body.password, 14);
     req.body.password = hash;
-    //  Database query
     const queryString =
-      "INSERT INTO users(firstName,lastName,otherName,email,phoneNumber,username,password,isAdmin) VALUES($1,$2,$3,$4,$5,$6,$7,$8) returning id, firstname, lastname, email, phonenumber, username, isadmin";
+      "INSERT INTO users(firstname,lastname,othername,email,phonenumber,username,password,isadmin) VALUES($1,$2,$3,$4,$5,$6,$7,$8) returning id, firstname, lastname, email, phonenumber, username, isadmin";
     db.query(queryString, Object.values(req.body))
       .then(data => {
         const user = data.rows[0];

@@ -6,17 +6,17 @@ class MeetupController {
     const queryString = "SELECT * FROM meetups";
     db.query(queryString)
       .then(data => {
-        if (data.rows.length === 0) {
-          return res.status(404).json({ message: "no meetups" });
-        }
+        // if (data.rows.length === 0) {
+        //   return res.status(404).json({ message: "no meetups" });
+        // }
         res.status(200).json({ status: 200, data: data.rows });
       })
-      .catch(err => res.status(400).json({ err }));
+      // .catch(err => res.status(400).json({ err }));
   }
 
   static createMeetup(req, res) {
     const queryString = `INSERT INTO
-      meetups(createdOn, location, images, topic, happeningOn, tags)
+      meetups(createdon, location, images, topic, happeningon, tags)
       VALUES($1, $2, $3, $4,$5,$6)
       returning *`;
 
@@ -28,19 +28,20 @@ class MeetupController {
       req.body.happeningOn,
       req.body.tags
     ];
-    db.query(queryString, values)
-      .then(data => res.status(201).json({ status: 201, data: data.rows[0] }))
-      .catch(err => res.status(400).json({ error: err }));
+    db.query(queryString, values).then(data =>
+      res.status(201).json({ status: 201, data: data.rows[0] })
+    );
+    // .catch(err => res.status(400).json({ error: err }));
   }
 
   static getAllupcoming(req, res) {
     const today = moment();
-    const queryString = "SELECT * FROM meetups WHERE happerningOn > $1";
+    const queryString = "SELECT * FROM meetups WHERE happerningon > $1";
     db.query(queryString, [today])
       .then(data => {
-        if (data.rows === 0) {
-          return res.status(404).json({ message: "no meetups" });
-        }
+        // if (data.rows === 0) {
+        //   return res.status(404).json({ message: "no meetups" });
+        // }
         return res.status(200).json({ status: 200, data: data.rows });
       })
       .catch(err => res.status(400).json({ err }));
@@ -62,7 +63,7 @@ class MeetupController {
 
   static addRsvp(req, res) {
     const queryString = `INSERT INTO
-    rsvps(meetupId, userId, response)
+    rsvps(meetup, userId, response)
     VALUES($1, $2, $3)
     returning *`;
     const { validatedMeetup } = req.body;

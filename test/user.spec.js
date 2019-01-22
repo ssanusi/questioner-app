@@ -1,33 +1,10 @@
 import chai, { expect } from "chai";
 import chaiHttp from "chai-http";
-import bcrypt from "bcryptjs";
 import app from "../src";
-import db from "../src/db";
 
 chai.use(chaiHttp);
 
 describe("/User Resources", () => {
-  before(done => {
-    const users = [
-      "bashir",
-      "musa",
-      "ahmed",
-      "bashir@icloud.com",
-      "08073372043",
-      "bbashir",
-      "password",
-      true
-    ];
-    const queryText =
-      "INSERT INTO users(firstName,lastName,otherName,email,phoneNumber,username,password,isAdmin) VALUES($1,$2,$3,$4,$5,$6,$7,$8)";
-    db.query("TRUNCATE TABLE users CASCADE");
-    db.query(queryText, users);
-    done();
-  });
-  after(done => {
-    db.query("TRUNCATE TABLE users CASCADE");
-    done();
-  });
   describe("POST User can create account", () => {
     it("user can create account", done => {
       const testUser = {
@@ -56,58 +33,12 @@ describe("/User Resources", () => {
             "lastname",
             "email",
             "phonenumber",
-            "username",
+            "username"
           ]);
           expect(res.body.data[0].user.username).eq(testUser.username);
           expect(res.body.data[0].user.email).to.eq(testUser.email);
-          done();
         });
-    });
-    it("user should get error for missing Firstname", done => {
-      const testUser = {
-        lastName: "sulaiman",
-        othername: "muhammad",
-        email: "sulaiman@icloud.com",
-        phoneNumber: "08073372043",
-        username: "ssanusi",
-        password: "password",
-        confirmPassword: "password",
-        isadmin: true
-      };
-      chai
-        .request(app)
-        .post("/api/v1/auth/signup")
-        .send(testUser)
-        .end((err, res) => {
-          expect(res).to.have.status(400);
-          expect(res.type).to.eql("application/json");
-          expect(res.body).to.be.an("object");
-          expect(res.body.error.firstName).eql("FirstName is Required");
-          done();
-        });
-    });
-    it("user should get error for missing lastName", done => {
-      const testUser = {
-        firstName: "sanusi",
-        othername: "muhammad",
-        email: "sulaiman@icloud.com",
-        phoneNumber: "08073372043",
-        username: "ssanusi",
-        password: "password",
-        confirmPassword: "password",
-        isadmin: true
-      };
-      chai
-        .request(app)
-        .post("/api/v1/auth/signup")
-        .send(testUser)
-        .end((err, res) => {
-          expect(res).to.have.status(400);
-          expect(res.type).to.eql("application/json");
-          expect(res.body).to.be.an("object");
-          expect(res.body.error.lastName).eql("LastName is Required");
-          done();
-        });
+      done();
     });
     it("user should get error for missing email", done => {
       const testUser = {
@@ -243,37 +174,36 @@ describe("/User Resources", () => {
           done();
         });
     });
-    // it("user should get error duplicate", done => {
-    //   const testUser = {
-    //     firstName: "bashir",
-    //     lastName: "musa",
-    //     othername: "ahmed",
-    //     email: "bashir@icloud.com",
-    //     phoneNumber: "08073372043",
-    //     username: "bbashir",
-    //     password: "password",
-    //     confirmPassword: "password",
-    //     isadmin: true
-    //   };
-    //   chai
-    //     .request(app)
-    //     .post("/api/v1/auth/signup")
-    //     .send(testUser)
-    //     .end((err, res) => {
-    //       expect(res).to.have.status(409);
-    //       expect(res.type).to.eql("application/json");
-    //       expect(res.body).to.be.an("object");
-    //       expect(res.body.error).eql("username or email exist");
-    //       done();
-    //     });
-    // });
+    it("user should get error duplicate", done => {
+      const testUser = {
+        firstName: "bashir",
+        lastName: "musa",
+        othername: "ahmed",
+        email: "bashir@icloud.com",
+        phoneNumber: "08073372043",
+        username: "bbashir",
+        password: "password",
+        confirmPassword: "password",
+        isadmin: true
+      };
+      chai
+        .request(app)
+        .post("/api/v1/auth/signup")
+        .send(testUser)
+        .end((err, res) => {
+          expect(res).to.have.status(409);
+          expect(res.type).to.eql("application/json");
+          expect(res.body).to.be.an("object");
+          expect(res.body.error).eql("username or email exist");
+          done();
+        });
+    });
   });
-
   describe("POST User signin", () => {
     it("user can login", done => {
       const testUser = {
-        email: "sulaiman@icloud.com",
-        password: "password"
+        email: "bashir@yahoo.com",
+        password: "football"
       };
       chai
         .request(app)
@@ -302,7 +232,7 @@ describe("/User Resources", () => {
           expect(res.type).to.eql("application/json");
           expect(res.body.status).to.equal(404);
           expect(res.body).to.be.an("object");
-          expect(res.body.error).to.equal("invalid credentials")
+          expect(res.body.error).to.equal("invalid credentials");
           done();
         });
     });
@@ -320,7 +250,7 @@ describe("/User Resources", () => {
           expect(res.type).to.eql("application/json");
           expect(res.body.status).to.equal(404);
           expect(res.body).to.be.an("object");
-          expect(res.body.error).to.equal("User not Found")
+          expect(res.body.error).to.equal("User not Found");
           done();
         });
     });
