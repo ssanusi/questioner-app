@@ -1,56 +1,12 @@
 import chai from "chai";
 import chaiHttp from "chai-http";
 import app from "../src/index";
-import questionModel from "../src/api/resourses/question/QuestionModel";
-import MeetupModel from "../src/api/resourses/meetup/MeetupModel";
 
 const { expect } = chai;
 
 chai.use(chaiHttp);
 
 describe("/Question Resources", () => {
-  beforeEach(done => {
-    questionModel.questions = [
-      {
-        id: 1,
-        createdOn: "2019-01-01T22:48:05.633",
-        createdBy: 1,
-        meetup: 1,
-        title: "what is polymorphism?",
-        body: "what is polymophism and in what way can we implement it in Javascript",
-        votes: 0
-      },
-      {
-        id: 2,
-        createdOn: "2019-01-01T22:48:05.633",
-        createdBy: 1,
-        meetup: 1,
-        title: "what is closure?",
-        body: "what is closure and in what way can we implement it in Javascript",
-        votes: 0
-      },
-      {
-        id: 3,
-        createdOn: "2019-01-01T22:48:05.633",
-        createdBy: 1,
-        meetup: 1,
-        title: "what is closure?",
-        body: "what is closure and in what way can we implement it in Javascript",
-        votes: 3
-      }
-    ];
-    MeetupModel.meetups =  [
-      {
-        id: 1,
-        createdOn: "2019-01-01T22:48:05.633Z",
-        location: "235 adeola adeku VI lagos",
-        topic: "Introduction to Javascript",
-        happeningOn: "2019-01-22T18:25:44.913Z",
-        tags: ["programming", "web", "front-end"]
-      }
-    ];
-    done();
-  });
   describe("GET /questions", () => {
     it("should get all questions", done => {
       chai
@@ -61,15 +17,7 @@ describe("/Question Resources", () => {
           expect(res.type).to.eql("application/json");
           expect(res.body.status).to.equal(200);
           expect(res.body.data).to.be.a("array");
-          expect(res.body.data.length).to.eq(3);
-          expect(res.body.data[0]).to.include.keys([
-            "id",
-            "createdOn",
-            "meetup",
-            "title",
-            "body",
-            "votes"
-          ]);
+          expect(res.body.data.length).to.eq(5);
           done();
         });
     });
@@ -89,9 +37,7 @@ describe("/Question Resources", () => {
           expect(res).to.have.status(201);
           expect(res.type).to.eql("application/json");
           expect(res.body.status).to.equal(201);
-          expect(res.body.data).to.be.a("array");
-          expect(res.body.data.length).to.eq(1);
-          expect(res.body.data[0]).to.include.keys(["user", "meetup", "title", "body"]);
+          expect(res.body.data).to.be.a("object");
           done();
         });
     });
@@ -101,17 +47,16 @@ describe("/Question Resources", () => {
         .post("/api/v1/questions")
         .send({
           user: "1",
-          meetup: "2",
+          meetup: "5",
           title: "what is execution context",
           body: "How can we implement execution cotext"
         })
         .end((err, res) => {
-          expect(res).to.have.status(404);
+          expect(res).to.have.status(400);
           expect(res.type).to.eql("application/json");
-          expect(res.body.error).to.be.a("object");
-          expect(res.body.error.meetup).to.eq("Meetup does not exist");
-          done();
+          expect(res.body).to.be.a("object");
         });
+      done();
     });
     it("should return error for missing title field", done => {
       chai
@@ -245,6 +190,70 @@ describe("/Question Resources", () => {
           done();
         });
     });
+    it("should return error user does not exit ", done => {
+      chai
+        .request(app)
+        .post("/api/v1/questions")
+        .send({
+          user: "10",
+          title: "what is closure",
+          meetup: "1",
+          body: "nkdsfbdsfjnsdaknsnfsdnfknakdnkldsnaknfsd"
+        })
+        .end((err, res) => {
+          expect(res).to.have.status(400);
+          expect(res.type).to.eql("application/json");
+        });
+      done();
+    });
+    it("should return error meetup does not exit ", done => {
+      chai
+        .request(app)
+        .post("/api/v1/questions")
+        .send({
+          user: "1",
+          title: "what is closure",
+          meetup: "10",
+          body: "nkdsfbdsfjnsdaknsnfsdnfknakdnkldsnaknfsd"
+        })
+        .end((err, res) => {
+          expect(res).to.have.status(400);
+          expect(res.type).to.eql("application/json");
+        });
+      done();
+    });
+    it("should return error user should be a number  ", done => {
+      chai
+        .request(app)
+        .post("/api/v1/questions")
+        .send({
+          user: "me",
+          title: "what is closure",
+          meetup: "10",
+          body: "nkdsfbdsfjnsdaknsnfsdnfknakdnkldsnaknfsd"
+        })
+        .end((err, res) => {
+          expect(res).to.have.status(400);
+          expect(res.type).to.eql("application/json");
+          done();
+        });
+    });
+    it("should return error meetup should be a number  ", done => {
+      chai
+        .request(app)
+        .post("/api/v1/questions")
+        .send({
+          user: "1",
+          title: "what is closure",
+          meetup: "me",
+          body: "nkdsfbdsfjnsdaknsnfsdnfknakdnkldsnaknfsd"
+        })
+        .end((err, res) => {
+          expect(res).to.have.status(400);
+          expect(res.type).to.eql("application/json");
+          done();
+        });
+    });
   });
   describe("GET /questions/<id>", () => {
     it("should get single question by Id", done => {
@@ -258,14 +267,6 @@ describe("/Question Resources", () => {
           expect(res.body.data).to.be.a("array");
           expect(res.body.data.length).to.eq(1);
           expect(res.body.data[0].id).to.eq(1);
-          expect(res.body.data[0]).to.include.keys([
-            "id",
-            "createdOn",
-            "meetup",
-            "title",
-            "body",
-            "votes"
-          ]);
           done();
         });
     });
@@ -274,7 +275,7 @@ describe("/Question Resources", () => {
     it("should return error", done => {
       chai
         .request(app)
-        .get("/api/v1/questions/4")
+        .get("/api/v1/questions/9")
         .end((err, res) => {
           expect(res).to.have.status(404);
           expect(res.type).to.eql("application/json");
@@ -292,10 +293,7 @@ describe("/Question Resources", () => {
           expect(res).to.have.status(200);
           expect(res.type).to.eql("application/json");
           expect(res.body.status).to.equal(200);
-          expect(res.body.data).to.be.a("array");
-          expect(res.body.data.length).to.eq(1);
-          expect(res.body.data[0].votes).to.eq(1);
-          expect(res.body.data[0]).to.include.keys(["meetup", "title", "body", "votes"]);
+          expect(res.body.data).to.be.a("object");
           done();
         });
     });
@@ -304,7 +302,7 @@ describe("/Question Resources", () => {
     it("should return error ", done => {
       chai
         .request(app)
-        .patch("/api/v1/questions/4/upvote")
+        .patch("/api/v1/questions/10/upvote")
         .end((err, res) => {
           expect(res).to.have.status(400);
           expect(res.type).to.eql("application/json");
@@ -323,10 +321,7 @@ describe("/Question Resources", () => {
           expect(res).to.have.status(200);
           expect(res.type).to.eql("application/json");
           expect(res.body.status).to.equal(200);
-          expect(res.body.data).to.be.a("array");
-          expect(res.body.data.length).to.eq(1);
-          expect(res.body.data[0].votes).to.eq(0);
-          expect(res.body.data[0]).to.include.keys(["meetup", "title", "body", "votes"]);
+          expect(res.body.data).to.be.a("object");
           done();
         });
     });
@@ -340,10 +335,7 @@ describe("/Question Resources", () => {
           expect(res).to.have.status(200);
           expect(res.type).to.eql("application/json");
           expect(res.body.status).to.equal(200);
-          expect(res.body.data).to.be.a("array");
-          expect(res.body.data.length).to.eq(1);
-          expect(res.body.data[0].votes).to.eq(2);
-          expect(res.body.data[0]).to.include.keys(["meetup", "title", "body", "votes"]);
+          expect(res.body.data).to.be.a("object");
           done();
         });
     });
@@ -352,7 +344,7 @@ describe("/Question Resources", () => {
     it("should return error", done => {
       chai
         .request(app)
-        .patch("/api/v1/questions/4/downvote")
+        .patch("/api/v1/questions/10/downvote")
         .end((err, res) => {
           expect(res).to.have.status(400);
           expect(res.type).to.eql("application/json");

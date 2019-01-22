@@ -6,11 +6,14 @@
   "scripts": {
     "db:create:dev": "createdb questionerdb_dev",
     "db:init:dev": "psql -d questionerdb_dev -f src/db/schema.sql",
-    "db:query": "babel-node src/db/query",
+    "db:init:test": "psql -d questionerdb_test -f src/db/schema.sql",
+    "db:migrate": "psql -d questionerdb_dev -f src/db/seed.sql",
+    "db:migrate:test": "psql -d questionerdb_test -f src/db/seed.sql",
     "build": "babel src -d dist",
     "start": "npm run build && nodemon dist/index.js",
     "serve": "node dist/index.js",
-    "test": "nyc mocha --require babel-register --timeout 1000000 --exit",
+    "test:dev" :"npm run db:init:dev && npm run db:migrate && nyc mocha --require babel-register  --exit",
+    "test": " npm run db:init:test && npm run db:migrate:test &&nyc mocha --require babel-register  --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {

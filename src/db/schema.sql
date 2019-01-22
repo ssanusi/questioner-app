@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS meetups CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS questions CASCADE;
-DROP TABLE IF EXISTS rsvp CASCADE;
+DROP TABLE IF EXISTS rsvps CASCADE;
 DROP TABLE IF EXISTS comments CASCADE;
 
 CREATE TABLE IF NOT EXISTS meetups (
@@ -16,9 +16,9 @@ CREATE TABLE IF NOT EXISTS meetups (
 
 CREATE TABLE IF NOT EXISTS users(
         id SERIAL PRIMARY KEY ,
-        firstname VARCHAR(128) NOT NULL,
-        lastname VARCHAR(128) NOT NULL,
-        othername VARCHAR(128),
+        firstName VARCHAR(128) NOT NULL,
+        lastName VARCHAR(128) NOT NULL,
+        otherName VARCHAR(128),
         email VARCHAR(128) UNIQUE NOT NULL,
         phoneNumber VARCHAR(128) NOT NULL,
         username VARCHAR(128) UNIQUE NOT NULL,
@@ -30,17 +30,18 @@ CREATE TABLE IF NOT EXISTS users(
 
 CREATE TABLE IF NOT EXISTS questions(
         id SERIAL PRIMARY KEY,
-        createdOn VARCHAR(128) NOT NULL,
-        createdBy INTEGER NOT NULL,
+        createdOn TIMESTAMPTZ DEFAULT NOW(),
+        userId INTEGER NOT NULL,
         meetup INTEGER NOT NULL,
-        title VARCHAR(128)  NOT NULL,
+        title VARCHAR(255)  NOT NULL,
         body VARCHAR(255)  NOT NULL,
-        votes INTEGER DEFAULT 0,
+        upVotes INTEGER DEFAULT 0,
+        DownVotes INTEGER DEFAULT 0,
         FOREIGN KEY (meetup) REFERENCES meetups(id) ON DELETE CASCADE,
-        FOREIGN KEY (createdBy) REFERENCES users(id) ON DELETE CASCADE
+        FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS rsvp(
+CREATE TABLE IF NOT EXISTS rsvps(
         id SERIAL NOT NULL ,
         meetup INTEGER NOT NULL,
         userId INTEGER NOT NULL,
@@ -55,7 +56,7 @@ CREATE TABLE IF NOT EXISTS comments(
         question INTEGER NOT NULL,
         userId INTEGER NOT NULL,
         title VARCHAR(128) NOT NULL,
-        body VARCHAR(128) NOT NULL,
+        body VARCHAR(255) NOT NULL,
         comment VARCHAR(128) NOT NULL,
         PRIMARY KEY(question),
         FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE,
