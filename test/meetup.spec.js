@@ -21,8 +21,8 @@ describe("/Meetups Resources", () => {
           expect(res.type).to.eql("application/json");
           expect(res.body.status).to.equal(201);
           expect(res.body.data).to.be.a("object");
-          done();
         });
+      done();
     });
     it("should return Location field is Required", done => {
       chai
@@ -174,8 +174,8 @@ describe("/Meetups Resources", () => {
             "happeningon",
             "tags"
           ]);
-          done();
         });
+      done();
     });
   });
   describe("GET /meetups/upcoming", () => {
@@ -184,12 +184,13 @@ describe("/Meetups Resources", () => {
         .request(app)
         .get("/api/v1/meetups/upcoming")
         .end((err, res) => {
+          console.log(res.body);
           expect(res).to.have.status(200);
           expect(res.type).to.eql("application/json");
           expect(res.body.status).to.equal(200);
           expect(res.body.data).to.be.a("array");
-          done();
         });
+      done();
     });
   });
   describe("GET /meetups/<id>", () => {
@@ -211,8 +212,8 @@ describe("/Meetups Resources", () => {
             "happeningon",
             "tags"
           ]);
-          done();
         });
+      done();
     });
   });
   describe("GET /meetups/<id>", () => {
@@ -400,6 +401,17 @@ describe("/Meetups Resources", () => {
           expect(res.body.err.code).to.equal("23503");
           done();
         });
+    });
+  });
+  describe("DELETE Meetup /meetup/<id>", () => {
+    it("its should delete a meetup", done => {
+      chai
+        .request(app)
+        .del("/api/v1/meetups/1")
+        .end((err, res) => {
+          console.log(res.body);
+        });
+      done();
     });
   });
 });

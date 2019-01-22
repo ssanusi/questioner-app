@@ -12,8 +12,8 @@
     "build": "babel src -d dist",
     "start": "npm run build && nodemon dist/index.js",
     "serve": "node dist/index.js",
-    "test:dev" :"npm run db:init:dev && npm run db:migrate && nyc mocha --require babel-register  --exit",
-    "test": " npm run db:init:test && npm run db:migrate:test &&nyc mocha --require babel-register  --exit",
+    "test:dev" :"npm run db:init:dev && npm run db:migrate && nyc mocha --require babel-register  --timeout 20000  --exit",
+    "test": "npm run db:init:test && npm run db:migrate:test && nyc mocha --require babel-register --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
