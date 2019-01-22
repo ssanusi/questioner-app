@@ -185,7 +185,6 @@ describe("/Meetups Resources", () => {
         .request(app)
         .get("/api/v1/meetups/upcoming")
         .end((err, res) => {
-          console.log(res.body)
           expect(res).to.have.status(200);
           expect(res.type).to.eql("application/json");
           expect(res.body.status).to.equal(200);
