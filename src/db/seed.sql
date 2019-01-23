@@ -15,7 +15,7 @@ VALUES
 
 
 INSERT INTO "questions"
-    ("userid", "meetup", "title", "body", "upvotes", "downvotes")
+    ("userid", "meetupid", "title", "body", "upvotes", "downvotes")
 VALUES
     (1, 1, 'what is polymorphism?', 'what is polymophism and in what way can we implement it in Javascript', 0, 0),
     ( 1, 1, 'what is polymorphism?', 'what is polymophism and in what way can we implement it in Javascript', 0, 0),

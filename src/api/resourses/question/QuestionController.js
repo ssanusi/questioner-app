@@ -15,7 +15,7 @@ class QuestionController {
 
   static addQuestion(req, res) {
     const queryString = `INSERT INTO
-    questions(createdon,userId, meetup, title, body)
+    questions(createdon,userId, meetupId, title, body)
       VALUES($1, $2, $3, $4, $5)
       returning *`;
     const values = [

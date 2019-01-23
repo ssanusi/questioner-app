@@ -2,7 +2,7 @@ import validator from "validator";
 import isEmpty from "lodash.isempty";
 
 const validateAddQuestion = (req, res, next) => {
-  const { user, meetup, title, body } = req.body;
+  const { user, meetupId, title, body } = req.body;
   const error = {};
   if (!user) {
     error.user = "user field is required";
@@ -12,12 +12,12 @@ const validateAddQuestion = (req, res, next) => {
     error.user = "user field should be numeric";
   }
 
-  if (!meetup) {
-    error.meetup = "meetup field is required";
+  if (!meetupId) {
+    error.meetupId = "meetupId field is required";
   }
 
-  if (meetup && !validator.isNumeric(meetup)) {
-    error.meetup = "Meetup field is required";
+  if (meetupId && !validator.isNumeric(meetupId)) {
+    error.meetupId = "meetupId field is required";
   }
 
   if (!title) {

@@ -72,7 +72,7 @@ class UserController {
           });
       })
       .catch(error => {
-        res.status(400).json({ status: 400, error: "something happerned" });
+        res.status(400).json({ status: 400, error });
       });
   }
 }
