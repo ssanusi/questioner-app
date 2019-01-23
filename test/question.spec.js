@@ -136,7 +136,7 @@ describe("/Question Resources", () => {
         .end((err, res) => {
           expect(res).to.have.status(400);
           expect(res.type).to.equal("application/json");
-          expect(res.body.error.meetup).to.equal("meetup field is required");
+          expect(res.body.error.meetupId).to.equal("meetupId field is required");
           done();
         });
     });
@@ -153,7 +153,7 @@ describe("/Question Resources", () => {
         .end((err, res) => {
           expect(res).to.have.status(400);
           expect(res.type).to.equal("application/json");
-          expect(res.body.error.meetup).to.equal("meetup field is required");
+          expect(res.body.error.meetupId).to.equal("meetupId field is required");
           done();
         });
     });
