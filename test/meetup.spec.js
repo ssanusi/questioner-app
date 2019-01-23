@@ -418,7 +418,7 @@ describe("/Meetups Resources", () => {
         .request(app)
         .del("/api/v1/meetups/8")
         .end((err, res) => {
-          expect(res.status).to.be.equal(404)
+          expect(res.status).to.be.equal(404);
         });
       done();
     });
