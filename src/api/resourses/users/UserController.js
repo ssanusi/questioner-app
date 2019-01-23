@@ -71,8 +71,8 @@ class UserController {
             ]
           });
       })
-      .catch(err => {
-        res.status(400).json({ status: 400, error: "something happerned" });
+      .catch(error => {
+        res.status(400).json({ status: 400, error: "database error" });
       });
   }
 }
