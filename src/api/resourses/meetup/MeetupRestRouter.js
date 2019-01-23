@@ -11,7 +11,10 @@ meetupRouter
 
 meetupRouter.route("/upcoming").get(MeetupController.getAllupcoming);
 
-meetupRouter.route("/:id").get(MeetupController.getMeetupsById);
+meetupRouter
+  .route("/:id")
+  .get(MeetupController.getMeetupsById)
+  .delete(MeetupController.deleteMeetup);
 meetupRouter.route("/:id/rsvps").post(validateAddRsvp, MeetupController.addRsvp);
 
 export default meetupRouter;

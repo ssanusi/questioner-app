@@ -72,6 +72,20 @@ class MeetupController {
       .then(data => res.status(201).json({ status: 201, data: data.rows }))
       .catch(err => res.status(400).json({ err }));
   }
+
+  static deleteMeetup(req, res) {
+    const queryString = "DELETE FROM meetups WHERE id = $1 returning *";
+    const meetup = parseInt(req.params.id, 10);
+
+    db.query(queryString, [meetup]).then(data => {
+      if (data.rows.length === 0) {
+        return res.status(404).json({ status: 404, message: "meetup not found" });
+      }
+      return res
+        .status(200)
+        .json({ status: 200, message: "meetup deleted sucessfully", data: data.rows });
+    });
+  }
 }
 
 export default MeetupController;

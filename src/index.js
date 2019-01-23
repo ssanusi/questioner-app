@@ -10,7 +10,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use("/api/v1", restRouter);
 
-
 app.get("/", (req, res) => {
   res.status(200).json({ message: "Welcome to REST API for Questioner App" });
 });
