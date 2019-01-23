@@ -14,7 +14,7 @@ class CommentController {
           )
           .catch(err => res.status(400).json({ message: "question does not exist" }));
       })
-      .catch(err => res.status(400).json({ err, message: "question does not exist" }));
+      .catch(err => res.status(400).json({ message: "question does not exist" }));
   }
 }
 

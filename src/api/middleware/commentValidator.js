@@ -15,10 +15,10 @@ const validateComment = (req, res, next) => {
     error.comment = "comment field is required";
   }
 
-  if (questionId && !validator.isNumeric(parseInt(questionId, 10))) {
+  if (questionId && !validator.isNumeric(questionId)) {
     error.questionId = "questionId should be numeric";
   }
-  if (userId && !validator.isNumeric(parseInt(userId, 10))) {
+  if (userId && !validator.isNumeric(userId)) {
     error.userId = "userId should be numeric";
   }
 
