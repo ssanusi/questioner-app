@@ -52,11 +52,10 @@ CREATE TABLE IF NOT EXISTS rsvps(
 );
 
 CREATE TABLE IF NOT EXISTS comments(
-        id SERIAL NOT NULL ,
+        id SERIAL PRIMARY KEY ,
         questionId INTEGER NOT NULL,
         userId INTEGER NOT NULL,
         comment VARCHAR(128) NOT NULL,
-        PRIMARY KEY(questionId),
         FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE,
         FOREIGN KEY (questionId) REFERENCES questions(id) ON DELETE CASCADE
 );
