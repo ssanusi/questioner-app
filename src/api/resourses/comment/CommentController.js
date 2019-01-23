@@ -11,7 +11,7 @@ class CommentController {
         .then(cdata =>
           res.status(201).json({ status: 201, data: Object.assign(cdata.rows[0], qdata.rows[0]) })
         )
-        .catch(err => res.status(400).json({ message: "question does not exist" }));
+        .catch(err => res.status(400).json({ err, message: "question does not exist" }));
     });
   }
 }
