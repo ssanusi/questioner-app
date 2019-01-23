@@ -36,14 +36,13 @@ class MeetupController {
   static getAllupcoming(req, res) {
     const today = moment();
     const queryString = "SELECT * FROM meetups WHERE happeningon > $1";
-    db.query(queryString, [today])
-      .then(data =>
-        // if (data.rows === 0) {
-        //   return res.status(404).json({ message: "no meetups" });
-        // }
-        res.status(200).json({ status: 200, data: data.rows })
-      )
-      .catch(err => res.status(400).json({ err }));
+    db.query(queryString, [today]).then(data =>
+      // if (data.rows === 0) {
+      //   return res.status(404).json({ message: "no meetups" });
+      // }
+      res.status(200).json({ status: 200, data: data.rows })
+    );
+    // .catch(err => res.status(400).json({ err }));
   }
 
   static getMeetupsById(req, res) {
