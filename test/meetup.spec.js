@@ -18,7 +18,7 @@ describe("/Meetups Resources", () => {
         })
         .end((err, res) => {
           expect(res).to.have.status(201);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
           expect(res.body.status).to.equal(201);
           expect(res.body.data).to.be.a("object");
         });
@@ -35,7 +35,7 @@ describe("/Meetups Resources", () => {
         })
         .end((err, res) => {
           expect(res).to.have.status(400);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
           expect(res.body.error.location).to.equal("Location field is Required");
           done();
         });
@@ -52,7 +52,7 @@ describe("/Meetups Resources", () => {
         })
         .end((err, res) => {
           expect(res).to.have.status(400);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
           expect(res.body.error.location).to.equal("Location field is Required");
           done();
         });
@@ -68,7 +68,7 @@ describe("/Meetups Resources", () => {
         })
         .end((err, res) => {
           expect(res).to.have.status(400);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
           expect(res.body.error.topic).to.equal("Topic field is Required");
           done();
         });
@@ -85,7 +85,7 @@ describe("/Meetups Resources", () => {
         })
         .end((err, res) => {
           expect(res).to.have.status(400);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
           expect(res.body.error.topic).to.equal("Topic field is Required");
           done();
         });
@@ -102,7 +102,7 @@ describe("/Meetups Resources", () => {
         })
         .end((err, res) => {
           expect(res).to.have.status(400);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
           expect(res.body.error.happeningOn).to.equal("happeningOn field is Required");
           done();
         });
@@ -118,7 +118,7 @@ describe("/Meetups Resources", () => {
         })
         .end((err, res) => {
           expect(res).to.have.status(400);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
           expect(res.body.error.happeningOn).to.equal("happeningOn field is Required");
           done();
         });
@@ -134,7 +134,7 @@ describe("/Meetups Resources", () => {
         })
         .end((err, res) => {
           expect(res).to.have.status(400);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
           expect(res.body.error.tags).to.equal("tags field is Required");
           done();
         });
@@ -151,7 +151,7 @@ describe("/Meetups Resources", () => {
         })
         .end((err, res) => {
           expect(res).to.have.status(400);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
           expect(res.body.error.tags).to.equal("tags field is Required");
           done();
         });
@@ -164,7 +164,7 @@ describe("/Meetups Resources", () => {
         .get("/api/v1/meetups")
         .end((err, res) => {
           expect(res).to.have.status(200);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
           expect(res.body.status).to.equal(200);
           expect(res.body.data).to.be.a("array");
           expect(res.body.data[0]).to.include.keys([
@@ -185,7 +185,7 @@ describe("/Meetups Resources", () => {
         .get("/api/v1/meetups/upcoming")
         .end((err, res) => {
           expect(res).to.have.status(200);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
           expect(res.body.status).to.equal(200);
           expect(res.body.data).to.be.a("array");
         });
@@ -199,7 +199,7 @@ describe("/Meetups Resources", () => {
         .get("/api/v1/meetups/1")
         .end((err, res) => {
           expect(res).to.have.status(200);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
           expect(res.body.status).to.equal(200);
           expect(res.body.data).to.be.a("array");
           expect(res.body.data.length).to.eq(1);
@@ -222,7 +222,7 @@ describe("/Meetups Resources", () => {
         .get("/api/v1/meetups/10")
         .end((err, res) => {
           expect(res).to.have.status(404);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
           expect(res.body.message).to.equal("meetup not found");
           done();
         });
@@ -233,7 +233,7 @@ describe("/Meetups Resources", () => {
         .get("/api/v1/meetups/f")
         .end((err, res) => {
           expect(res).to.have.status(400);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
           expect(res.body.err.code).to.equal("22P02");
           done();
         });
@@ -252,7 +252,7 @@ describe("/Meetups Resources", () => {
         })
         .end((err, res) => {
           expect(res).to.have.status(201);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
           expect(res.body.status).to.equal(201);
           expect(res.body.data).to.be.a("array");
           expect(res.body.data.length).to.eq(1);
@@ -271,8 +271,8 @@ describe("/Meetups Resources", () => {
         })
         .end((err, res) => {
           expect(res).to.have.status(400);
-          expect(res.type).to.eql("application/json");
-          expect(res.body.error.topic).to.eql("Topic field is Required");
+          expect(res.type).to.equal("application/json");
+          expect(res.body.error.topic).to.equal("Topic field is Required");
           done();
         });
     });
@@ -287,8 +287,8 @@ describe("/Meetups Resources", () => {
         })
         .end((err, res) => {
           expect(res).to.have.status(400);
-          expect(res.type).to.eql("application/json");
-          expect(res.body.error.topic).to.eql("Topic field is Required");
+          expect(res.type).to.equal("application/json");
+          expect(res.body.error.topic).to.equal("Topic field is Required");
           done();
         });
     });
@@ -302,8 +302,8 @@ describe("/Meetups Resources", () => {
         })
         .end((err, res) => {
           expect(res).to.have.status(400);
-          expect(res.type).to.eql("application/json");
-          expect(res.body.error.user).to.eql("User field is Required");
+          expect(res.type).to.equal("application/json");
+          expect(res.body.error.user).to.equal("User field is Required");
           done();
         });
     });
@@ -318,8 +318,8 @@ describe("/Meetups Resources", () => {
         })
         .end((err, res) => {
           expect(res).to.have.status(400);
-          expect(res.type).to.eql("application/json");
-          expect(res.body.error.user).to.eql("User field is Required");
+          expect(res.type).to.equal("application/json");
+          expect(res.body.error.user).to.equal("User field is Required");
           done();
         });
     });
@@ -333,8 +333,8 @@ describe("/Meetups Resources", () => {
         })
         .end((err, res) => {
           expect(res).to.have.status(400);
-          expect(res.type).to.eql("application/json");
-          expect(res.body.error.status).to.eql("Status field is Required");
+          expect(res.type).to.equal("application/json");
+          expect(res.body.error.status).to.equal("Status field is Required");
           done();
         });
     });
@@ -349,8 +349,8 @@ describe("/Meetups Resources", () => {
         })
         .end((err, res) => {
           expect(res).to.have.status(400);
-          expect(res.type).to.eql("application/json");
-          expect(res.body.error.status).to.eql("Status field is Required");
+          expect(res.type).to.equal("application/json");
+          expect(res.body.error.status).to.equal("Status field is Required");
           done();
         });
     });
@@ -365,7 +365,7 @@ describe("/Meetups Resources", () => {
         })
         .end((err, res) => {
           expect(res).to.have.status(404);
-          expect(res.type).to.eql("text/html");
+          expect(res.type).to.equal("text/html");
           done();
         });
     });
@@ -380,8 +380,8 @@ describe("/Meetups Resources", () => {
         })
         .end((err, res) => {
           expect(res).to.have.status(400);
-          expect(res.type).to.eql("application/json");
-          expect(res.body.error.id).to.eql("Meetup id must be numeric");
+          expect(res.type).to.equal("application/json");
+          expect(res.body.error.id).to.equal("Meetup id must be numeric");
           done();
         });
     });
@@ -396,7 +396,7 @@ describe("/Meetups Resources", () => {
         })
         .end((err, res) => {
           expect(res).to.have.status(400);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
           expect(res.body.err.code).to.equal("23503");
           done();
         });
@@ -409,7 +409,7 @@ describe("/Meetups Resources", () => {
         .request(app)
         .del("/api/v1/meetups/3")
         .end((err, res) => {
-          expect(res.status).to.be.eql(200);
+          expect(res.status).to.be.equal(200);
         });
       done();
     });

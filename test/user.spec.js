@@ -24,7 +24,7 @@ describe("/User Resources", () => {
         .send(testUser)
         .end((err, res) => {
           expect(res).to.have.status(201);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
           expect(res.body.status).to.equal(201);
           expect(res.body).to.be.an("object");
           expect(res).to.have.header("Authorization");
@@ -57,9 +57,9 @@ describe("/User Resources", () => {
         .send(testUser)
         .end((err, res) => {
           expect(res).to.have.status(400);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
           expect(res.body).to.be.an("object");
-          expect(res.body.error.email).eql("Email is Required");
+          expect(res.body.error.email).equal("Email is Required");
           done();
         });
     });
@@ -79,9 +79,9 @@ describe("/User Resources", () => {
         .send(testUser)
         .end((err, res) => {
           expect(res).to.have.status(400);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
           expect(res.body).to.be.an("object");
-          expect(res.body.error.phoneNumber).eql("Phone No is Required");
+          expect(res.body.error.phoneNumber).equal("Phone No is Required");
           done();
         });
     });
@@ -101,9 +101,9 @@ describe("/User Resources", () => {
         .send(testUser)
         .end((err, res) => {
           expect(res).to.have.status(400);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
           expect(res.body).to.be.an("object");
-          expect(res.body.error.username).eql("username is Required");
+          expect(res.body.error.username).equal("username is Required");
           done();
         });
     });
@@ -123,9 +123,9 @@ describe("/User Resources", () => {
         .send(testUser)
         .end((err, res) => {
           expect(res).to.have.status(400);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
           expect(res.body).to.be.an("object");
-          expect(res.body.error.password).eql("Password must be identical");
+          expect(res.body.error.password).equal("Password must be identical");
           done();
         });
     });
@@ -146,9 +146,9 @@ describe("/User Resources", () => {
         .send(testUser)
         .end((err, res) => {
           expect(res).to.have.status(400);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
           expect(res.body).to.be.an("object");
-          expect(res.body.error.firstName).eql("FirstName is Required");
+          expect(res.body.error.firstName).equal("FirstName is Required");
           done();
         });
     });
@@ -167,9 +167,9 @@ describe("/User Resources", () => {
         .send(testUser)
         .end((err, res) => {
           expect(res).to.have.status(400);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
           expect(res.body).to.be.an("object");
-          expect(res.body.error.password).eql("Password is Required");
+          expect(res.body.error.password).equal("Password is Required");
           done();
         });
     });
@@ -191,9 +191,9 @@ describe("/User Resources", () => {
         .send(testUser)
         .end((err, res) => {
           expect(res).to.have.status(400);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
           expect(res.body).to.be.an("object");
-          expect(res.body.error.email).eql("Valid email is Required");
+          expect(res.body.error.email).equal("Valid email is Required");
           done();
         });
     });
@@ -215,9 +215,9 @@ describe("/User Resources", () => {
         .send(testUser)
         .end((err, res) => {
           expect(res).to.have.status(409);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
           expect(res.body).to.be.an("object");
-          expect(res.body.error).eql("username or email exist");
+          expect(res.body.error).equal("username or email exist");
           done();
         });
     });
@@ -234,7 +234,7 @@ describe("/User Resources", () => {
         .send(testUser)
         .end((err, res) => {
           expect(res).to.have.status(200);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
           expect(res.body.status).to.equal(200);
           expect(res.body).to.be.an("object");
           expect(res).to.have.header("Authorization");
@@ -252,7 +252,7 @@ describe("/User Resources", () => {
         .send(testUser)
         .end((err, res) => {
           expect(res).to.have.status(404);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
           expect(res.body.status).to.equal(404);
           expect(res.body).to.be.an("object");
           expect(res.body.error).to.equal("invalid credentials");
@@ -270,7 +270,7 @@ describe("/User Resources", () => {
         .send(testUser)
         .end((err, res) => {
           expect(res).to.have.status(404);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
           expect(res.body.status).to.equal(404);
           expect(res.body).to.be.an("object");
           expect(res.body.error).to.equal("User not Found");
