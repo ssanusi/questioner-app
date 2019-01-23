@@ -14,7 +14,7 @@ describe("/Question Resources", () => {
         .get("/api/v1/questions")
         .end((err, res) => {
           expect(res).to.have.status(200);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
           expect(res.body.status).to.equal(200);
           expect(res.body.data).to.be.a("array");
           expect(res.body.data.length).to.eq(5);
@@ -35,7 +35,7 @@ describe("/Question Resources", () => {
         })
         .end((err, res) => {
           expect(res).to.have.status(201);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
           expect(res.body.status).to.equal(201);
           expect(res.body.data).to.be.a("object");
         });
@@ -53,7 +53,7 @@ describe("/Question Resources", () => {
         })
         .end((err, res) => {
           expect(res).to.have.status(400);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
           expect(res.body).to.be.a("object");
         });
       done();
@@ -69,7 +69,7 @@ describe("/Question Resources", () => {
         })
         .end((err, res) => {
           expect(res).to.have.status(400);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
           expect(res.body.error.title).to.equal("title field is required");
           done();
         });
@@ -86,7 +86,7 @@ describe("/Question Resources", () => {
         })
         .end((err, res) => {
           expect(res).to.have.status(400);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
           expect(res.body.error.title).to.equal("title field is required");
           done();
         });
@@ -102,7 +102,7 @@ describe("/Question Resources", () => {
         })
         .end((err, res) => {
           expect(res).to.have.status(400);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
           expect(res.body.error.user).to.equal("user field is required");
           done();
         });
@@ -119,7 +119,7 @@ describe("/Question Resources", () => {
         })
         .end((err, res) => {
           expect(res).to.have.status(400);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
           expect(res.body.error.user).to.equal("user field is required");
           done();
         });
@@ -135,8 +135,8 @@ describe("/Question Resources", () => {
         })
         .end((err, res) => {
           expect(res).to.have.status(400);
-          expect(res.type).to.eql("application/json");
-          expect(res.body.error.meetupId).to.equal("meetupId field is required");
+          expect(res.type).to.equal("application/json");
+          expect(res.body.error.meetup).to.equal("meetup field is required");
           done();
         });
     });
@@ -152,8 +152,8 @@ describe("/Question Resources", () => {
         })
         .end((err, res) => {
           expect(res).to.have.status(400);
-          expect(res.type).to.eql("application/json");
-          expect(res.body.error.meetupId).to.equal("meetupId field is required");
+          expect(res.type).to.equal("application/json");
+          expect(res.body.error.meetup).to.equal("meetup field is required");
           done();
         });
     });
@@ -168,7 +168,7 @@ describe("/Question Resources", () => {
         })
         .end((err, res) => {
           expect(res).to.have.status(400);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
           expect(res.body.error.body).to.equal("body field is required");
           done();
         });
@@ -185,7 +185,7 @@ describe("/Question Resources", () => {
         })
         .end((err, res) => {
           expect(res).to.have.status(400);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
           expect(res.body.error.body).to.equal("body field is required");
           done();
         });
@@ -202,7 +202,7 @@ describe("/Question Resources", () => {
         })
         .end((err, res) => {
           expect(res).to.have.status(400);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
         });
       done();
     });
@@ -218,7 +218,7 @@ describe("/Question Resources", () => {
         })
         .end((err, res) => {
           expect(res).to.have.status(400);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
         });
       done();
     });
@@ -234,7 +234,7 @@ describe("/Question Resources", () => {
         })
         .end((err, res) => {
           expect(res).to.have.status(400);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
           done();
         });
     });
@@ -250,7 +250,7 @@ describe("/Question Resources", () => {
         })
         .end((err, res) => {
           expect(res).to.have.status(400);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
           done();
         });
     });
@@ -262,7 +262,7 @@ describe("/Question Resources", () => {
         .get("/api/v1/questions/1")
         .end((err, res) => {
           expect(res).to.have.status(200);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
           expect(res.body.status).to.equal(200);
           expect(res.body.data).to.be.a("array");
           expect(res.body.data.length).to.eq(1);
@@ -278,7 +278,7 @@ describe("/Question Resources", () => {
         .get("/api/v1/questions/9")
         .end((err, res) => {
           expect(res).to.have.status(404);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
           expect(res.body.message).to.equal("question not found");
           done();
         });
@@ -291,7 +291,7 @@ describe("/Question Resources", () => {
         .patch("/api/v1/questions/1/upvote")
         .end((err, res) => {
           expect(res).to.have.status(200);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
           expect(res.body.status).to.equal(200);
           expect(res.body.data).to.be.a("object");
           done();
@@ -305,9 +305,9 @@ describe("/Question Resources", () => {
         .patch("/api/v1/questions/10/upvote")
         .end((err, res) => {
           expect(res).to.have.status(400);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
           expect(res.body.data).to.be.a("undefined");
-          expect(res.body.message).to.eql("question not found");
+          expect(res.body.message).to.equal("question not found");
           done();
         });
     });
@@ -319,7 +319,7 @@ describe("/Question Resources", () => {
         .patch("/api/v1/questions/1/downvote")
         .end((err, res) => {
           expect(res).to.have.status(200);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
           expect(res.body.status).to.equal(200);
           expect(res.body.data).to.be.a("object");
           done();
@@ -333,7 +333,7 @@ describe("/Question Resources", () => {
         .patch("/api/v1/questions/3/downvote")
         .end((err, res) => {
           expect(res).to.have.status(200);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
           expect(res.body.status).to.equal(200);
           expect(res.body.data).to.be.a("object");
           done();
@@ -347,9 +347,9 @@ describe("/Question Resources", () => {
         .patch("/api/v1/questions/10/downvote")
         .end((err, res) => {
           expect(res).to.have.status(400);
-          expect(res.type).to.eql("application/json");
+          expect(res.type).to.equal("application/json");
           expect(res.body.data).to.be.a("undefined");
-          expect(res.body.message).to.eql("question not found");
+          expect(res.body.message).to.equal("question not found");
           done();
         });
     });
