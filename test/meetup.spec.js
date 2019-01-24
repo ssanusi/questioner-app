@@ -501,4 +501,36 @@ describe("UnAuthorized", () => {
       done();
     });
   });
+  describe("User Request Admin Route", () => {
+    let userToken;
+    beforeEach(done => {
+      chai
+        .request(app)
+        .post("/api/v1/auth/login")
+        .send({ email: "testuser@yahoo.com", password: "secret" })
+        .end((err, res) => {
+          const { authorization } = res.header;
+          userToken = authorization;
+          done();
+        });
+    });
+    it("should respond with UnAuthorized Admin Route ", done => {
+      chai
+        .request(app)
+        .post("/api/v1/meetups")
+        .set("Authorization", userToken)
+        .send({
+          location: "235 adeola adeku VI lagos",
+          topic: "Introduction to CSS3",
+          images: ["googgle.com", "msn.com"],
+          happeningOn: "2019-01-022T22:48:05.633",
+          tags: ["programming", "web", "front-end"]
+        })
+        .end((err, res) => {
+          expect(res).to.have.status(401);
+          expect(res.body.message).to.equal("Unauthorized Admin Route");
+        });
+      done();
+    });
+  });
 });

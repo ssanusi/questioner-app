@@ -15,12 +15,44 @@ describe("/User Resources", () => {
         phoneNumber: "08073372043",
         username: "ssanusi",
         password: "password",
-        confirmPassword: "password",
-        isadmin: true
+        confirmPassword: "password"
       };
       chai
         .request(app)
         .post("/api/v1/auth/signup")
+        .send(testUser)
+        .end((err, res) => {
+          expect(res).to.have.status(201);
+          expect(res.type).to.equal("application/json");
+          expect(res.body.status).to.equal(201);
+          expect(res.body).to.be.an("object");
+          expect(res).to.have.header("Authorization");
+          expect(res.body.data[0].user).to.include.keys([
+            "firstname",
+            "lastname",
+            "email",
+            "phonenumber",
+            "username"
+          ]);
+          expect(res.body.data[0].user.username).eq(testUser.username);
+          expect(res.body.data[0].user.email).to.eq(testUser.email);
+        });
+      done();
+    });
+    it("Admin can create account", done => {
+      const testUser = {
+        firstName: "admintest",
+        lastName: "admintest",
+        othername: "admintest",
+        email: "admintest@icloud.com",
+        phoneNumber: "08073372043",
+        username: "admintest",
+        password: "password",
+        confirmPassword: "password"
+      };
+      chai
+        .request(app)
+        .post("/api/v1/admin/auth/signup")
         .send(testUser)
         .end((err, res) => {
           expect(res).to.have.status(201);
@@ -48,8 +80,7 @@ describe("/User Resources", () => {
         phoneNumber: "08073372043",
         username: "ssanusi",
         password: "password",
-        confirmPassword: "password",
-        isadmin: true
+        confirmPassword: "password"
       };
       chai
         .request(app)
@@ -70,8 +101,7 @@ describe("/User Resources", () => {
         email: "sulaiman@icloud.com",
         username: "ssanusi",
         password: "password",
-        confirmPassword: "password",
-        isadmin: true
+        confirmPassword: "password"
       };
       chai
         .request(app)
@@ -92,8 +122,7 @@ describe("/User Resources", () => {
         email: "sulaiman@icloud.com",
         phoneNumber: "08073372043",
         password: "password",
-        confirmPassword: "password",
-        isadmin: true
+        confirmPassword: "password"
       };
       chai
         .request(app)
@@ -114,8 +143,7 @@ describe("/User Resources", () => {
         email: "sulaiman@icloud.com",
         phoneNumber: "08073372043",
         username: "ssanusi",
-        confirmPassword: "password",
-        isadmin: true
+        confirmPassword: "password"
       };
       chai
         .request(app)
@@ -137,8 +165,7 @@ describe("/User Resources", () => {
         phoneNumber: "08073372043",
         username: "ssanusi",
         password: "password",
-        confirmPassword: "password",
-        isadmin: true
+        confirmPassword: "password"
       };
       chai
         .request(app)
@@ -158,8 +185,7 @@ describe("/User Resources", () => {
         othername: "muhammad",
         email: "sulaiman@icloud.com",
         phoneNumber: "08073372043",
-        username: "ssanusi",
-        isadmin: true
+        username: "ssanusi"
       };
       chai
         .request(app)
@@ -182,8 +208,7 @@ describe("/User Resources", () => {
         phoneNumber: "08073372043",
         username: "ssanusi",
         password: "password",
-        confirmPassword: "password",
-        isadmin: true
+        confirmPassword: "password"
       };
       chai
         .request(app)
@@ -206,8 +231,7 @@ describe("/User Resources", () => {
         phoneNumber: "08073372043",
         username: "bbashir",
         password: "password",
-        confirmPassword: "password",
-        isadmin: true
+        confirmPassword: "password"
       };
       chai
         .request(app)

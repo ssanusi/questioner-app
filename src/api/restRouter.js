@@ -11,5 +11,6 @@ restRouter.use("/meetups", isLoggedIn, meetupRouter);
 restRouter.use("/questions", isLoggedIn, questionRouter);
 restRouter.use("/auth", userRouter);
 restRouter.use("/comments", isLoggedIn, commentRouter);
+restRouter.use("/admin/auth", userRouter);
 
 export default restRouter;

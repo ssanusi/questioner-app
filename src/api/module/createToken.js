@@ -5,6 +5,9 @@ dotenv.config();
 
 const secret = process.env.SECRET;
 
-const createToken = user => jwt.sign({ username: user.username }, secret, { expiresIn: "1 day" });
+const createToken = (userId, isAdmin) =>
+  jwt.sign({ userId, isAdmin }, secret, {
+    expiresIn: "1 day"
+  });
 
 export default createToken;

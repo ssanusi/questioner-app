@@ -9,7 +9,7 @@ describe("/Comment Resourse", () => {
     chai
       .request(app)
       .post("/api/v1/auth/login")
-      .send({ email: "test@yahoo.com", password: "secret" })
+      .send({ email: "admin@yahoo.com", password: "adminsecret" })
       .end((err, res) => {
         const { authorization } = res.header;
         userToken = authorization;
