@@ -17,7 +17,7 @@ const isLoggedIn = (req, res, next) => {
 
   try {
     const verifiedToken = jwt.verify(token, secret);
-    req.userId = verifiedToken.id;
+    req.username = verifiedToken.username;
     return next();
   } catch (err) {
     error.message = "Unauthorized";

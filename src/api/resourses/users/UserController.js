@@ -1,34 +1,22 @@
-import bcrypt from "bcryptjs";
 import createToken from "../../module/createToken";
 import db from "../../../db";
+import { hashPassword, checkPassword } from "../../module/encrypt";
 
 class UserController {
   static signUp(req, res) {
-    const hash = bcrypt.hashSync(req.body.password, 14);
-    req.body.password = hash;
+    req.body.password = hashPassword(req.body.password);
     const queryString =
-      "INSERT INTO users(firstname,lastname,othername,email,phonenumber,username,password,isadmin) VALUES($1,$2,$3,$4,$5,$6,$7,$8) returning id, firstname, lastname, email, phonenumber, username, isadmin";
+      "INSERT INTO users(firstname,lastname,othername,email,phonenumber,username,password,isadmin) VALUES($1,$2,$3,$4,$5,$6,$7,$8) returning id, firstname, lastname, email, phonenumber, username";
     db.query(queryString, Object.values(req.body))
       .then(data => {
         const user = data.rows[0];
-        const token = createToken(req.body.username);
+        const token = createToken(user.username, user.id, user.email);
         return res
-          .status(201)
           .header("Authorization", `Bearer ${token}`)
+          .status(201)
           .json({
             status: 201,
-            data: [
-              {
-                token,
-                user: {
-                  firstname: user.firstname,
-                  lastname: user.lastname,
-                  email: user.email,
-                  phonenumber: user.phonenumber,
-                  username: user.username
-                }
-              }
-            ]
+            data: [{ token, user: data.rows[0] }]
           });
       })
       .catch(e => {
@@ -39,18 +27,17 @@ class UserController {
   }
 
   static login(req, res) {
-    const queryString = "SELECT * FROM users WHERE email = $1";
-    //  Database query
+    const queryString = "SELECT  id,email,username,password,isAdmin FROM users WHERE email = $1 ";
     db.query(queryString, [req.body.email])
       .then(data => {
         const user = data.rows[0];
         if (!user) {
           res.status(404).json({ status: 404, error: "User not Found" });
         }
-        if (!bcrypt.compareSync(req.body.password, user.password)) {
+        if (!checkPassword(req.body.password, user.password)) {
           res.status(404).json({ status: 404, error: "invalid credentials" });
         }
-        const token = createToken(req.body.email);
+        const token = createToken(user.username, user.id, user.email);
         return res
           .status(200)
           .header("Authorization", `Bearer ${token}`)
@@ -59,14 +46,8 @@ class UserController {
             data: [
               {
                 token,
-                message: "logged in",
-                user: {
-                  Firstname: user.firstname,
-                  LastName: user.lastname,
-                  Email: user.email,
-                  Phone: user.phonenumber,
-                  UserName: user.username
-                }
+                message: `welcome ${user.username}`,
+                user: { email: user.email, username: user.username }
               }
             ]
           });
