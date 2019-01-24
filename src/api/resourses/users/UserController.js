@@ -1,16 +1,19 @@
 import createToken from "../../module/createToken";
 import db from "../../../db";
 import { hashPassword, checkPassword } from "../../module/encrypt";
+import checkAdminRoute from "../../module/isAdminRoute";
 
 class UserController {
   static signUp(req, res) {
     req.body.password = hashPassword(req.body.password);
+    const isAdmin = checkAdminRoute(req.originalUrl);
+    req.body.isAdmin = isAdmin;
     const queryString =
       "INSERT INTO users(firstname,lastname,othername,email,phonenumber,username,password,isadmin) VALUES($1,$2,$3,$4,$5,$6,$7,$8) returning id, firstname, lastname, email, phonenumber, username";
     db.query(queryString, Object.values(req.body))
       .then(data => {
         const user = data.rows[0];
-        const token = createToken(user.username, user.id);
+        const token = createToken(user.id, user.isadmin);
         return res
           .header("Authorization", `Bearer ${token}`)
           .status(201)
@@ -37,7 +40,7 @@ class UserController {
         if (!checkPassword(req.body.password, user.password)) {
           res.status(404).json({ status: 404, error: "invalid credentials" });
         }
-        const token = createToken(user.id, user.username, user.isadmin);
+        const token = createToken(user.id, user.isadmin);
         return res
           .status(200)
           .header("Authorization", `Bearer ${token}`)

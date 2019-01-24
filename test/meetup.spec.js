@@ -527,7 +527,6 @@ describe("UnAuthorized", () => {
           tags: ["programming", "web", "front-end"]
         })
         .end((err, res) => {
-          console.log(res.body)
           expect(res).to.have.status(401);
           expect(res.body.message).to.equal("Unauthorized Admin Route");
         });
