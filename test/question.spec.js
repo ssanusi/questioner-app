@@ -7,11 +7,24 @@ const { expect } = chai;
 chai.use(chaiHttp);
 
 describe("/Question Resources", () => {
+  let userToken;
+  beforeEach(done => {
+    chai
+      .request(app)
+      .post("/api/v1/auth/login")
+      .send({ email: "test@yahoo.com", password: "secret" })
+      .end((err, res) => {
+        const { authorization } = res.header;
+        userToken = authorization;
+        done();
+      });
+  });
   describe("GET /questions", () => {
     it("should get all questions", done => {
       chai
         .request(app)
         .get("/api/v1/questions")
+        .set("Authorization", userToken)
         .end((err, res) => {
           expect(res).to.have.status(200);
           expect(res.type).to.equal("application/json");
@@ -27,17 +40,20 @@ describe("/Question Resources", () => {
       chai
         .request(app)
         .post("/api/v1/questions")
+        .set("Authorization", userToken)
         .send({
-          user: "1",
+          userId: "1",
           meetupId: "1",
           title: "what is execution context",
           body: "How can we implement execution cotext"
         })
         .end((err, res) => {
+          console.log(res.body)
           expect(res).to.have.status(201);
           expect(res.type).to.equal("application/json");
           expect(res.body.status).to.equal(201);
           expect(res.body.data).to.be.a("object");
+          expect(res.body.status).to.equal(201);
         });
       done();
     });
@@ -45,8 +61,9 @@ describe("/Question Resources", () => {
       chai
         .request(app)
         .post("/api/v1/questions")
+        .set("Authorization", userToken)
         .send({
-          user: "1",
+          userId: "1",
           meetupId: "5",
           title: "what is execution context",
           body: "How can we implement execution cotext"
@@ -62,8 +79,9 @@ describe("/Question Resources", () => {
       chai
         .request(app)
         .post("/api/v1/questions")
+        .set("Authorization", userToken)
         .send({
-          user: "1",
+          userId: "1",
           meetupId: "1",
           body: "How can we implement execution cotext"
         })
@@ -78,8 +96,9 @@ describe("/Question Resources", () => {
       chai
         .request(app)
         .post("/api/v1/questions")
+        .set("Authorization", userToken)
         .send({
-          user: "1",
+          userId: "1",
           meetupId: "1",
           body: "How can we implement execution cotext",
           title: ""
@@ -95,6 +114,7 @@ describe("/Question Resources", () => {
       chai
         .request(app)
         .post("/api/v1/questions")
+        .set("Authorization", userToken)
         .send({
           title: "what is closure",
           topic: "what is execution context",
@@ -103,7 +123,7 @@ describe("/Question Resources", () => {
         .end((err, res) => {
           expect(res).to.have.status(400);
           expect(res.type).to.equal("application/json");
-          expect(res.body.error.user).to.equal("user field is required");
+          expect(res.body.error.userId).to.equal("user field is required");
           done();
         });
     });
@@ -111,8 +131,9 @@ describe("/Question Resources", () => {
       chai
         .request(app)
         .post("/api/v1/questions")
+        .set("Authorization", userToken)
         .send({
-          user: "",
+          userId: "",
           title: "what is closure",
           topic: "what is execution context",
           body: "How can we implement execution cotext"
@@ -120,7 +141,7 @@ describe("/Question Resources", () => {
         .end((err, res) => {
           expect(res).to.have.status(400);
           expect(res.type).to.equal("application/json");
-          expect(res.body.error.user).to.equal("user field is required");
+          expect(res.body.error.userId).to.equal("user field is required");
           done();
         });
     });
@@ -128,8 +149,9 @@ describe("/Question Resources", () => {
       chai
         .request(app)
         .post("/api/v1/questions")
+        .set("Authorization", userToken)
         .send({
-          user: "1",
+          userId: "1",
           title: "what is closure",
           body: "How can we implement execution cotext"
         })
@@ -144,8 +166,9 @@ describe("/Question Resources", () => {
       chai
         .request(app)
         .post("/api/v1/questions")
+        .set("Authorization", userToken)
         .send({
-          user: "1",
+          userId: "1",
           title: "what is closure",
           meetupId: "",
           body: "How can we implement execution cotext"
@@ -161,8 +184,9 @@ describe("/Question Resources", () => {
       chai
         .request(app)
         .post("/api/v1/questions")
+        .set("Authorization", userToken)
         .send({
-          user: "1",
+          userId: "1",
           title: "what is closure",
           meetupId: "1"
         })
@@ -177,8 +201,9 @@ describe("/Question Resources", () => {
       chai
         .request(app)
         .post("/api/v1/questions")
+        .set("Authorization", userToken)
         .send({
-          user: "1",
+          userId: "1",
           title: "what is closure",
           meetupId: "1",
           body: ""
@@ -194,8 +219,9 @@ describe("/Question Resources", () => {
       chai
         .request(app)
         .post("/api/v1/questions")
+        .set("Authorization", userToken)
         .send({
-          user: "10",
+          userId: "10",
           title: "what is closure",
           meetupId: "1",
           body: "nkdsfbdsfjnsdaknsnfsdnfknakdnkldsnaknfsd"
@@ -210,8 +236,9 @@ describe("/Question Resources", () => {
       chai
         .request(app)
         .post("/api/v1/questions")
+        .set("Authorization", userToken)
         .send({
-          user: "1",
+          userId: "1",
           title: "what is closure",
           meetupId: "10",
           body: "nkdsfbdsfjnsdaknsnfsdnfknakdnkldsnaknfsd"
@@ -226,8 +253,9 @@ describe("/Question Resources", () => {
       chai
         .request(app)
         .post("/api/v1/questions")
+        .set("Authorization", userToken)
         .send({
-          user: "me",
+          userId: "me",
           title: "what is closure",
           meetupId: "10",
           body: "nkdsfbdsfjnsdaknsnfsdnfknakdnkldsnaknfsd"
@@ -242,8 +270,9 @@ describe("/Question Resources", () => {
       chai
         .request(app)
         .post("/api/v1/questions")
+        .set("Authorization", userToken)
         .send({
-          user: "1",
+          userId: "1",
           title: "what is closure",
           meetupId: "me",
           body: "nkdsfbdsfjnsdaknsnfsdnfknakdnkldsnaknfsd"
@@ -260,6 +289,7 @@ describe("/Question Resources", () => {
       chai
         .request(app)
         .get("/api/v1/questions/1")
+        .set("Authorization", userToken)
         .end((err, res) => {
           expect(res).to.have.status(200);
           expect(res.type).to.equal("application/json");
@@ -276,6 +306,7 @@ describe("/Question Resources", () => {
       chai
         .request(app)
         .get("/api/v1/questions/9")
+        .set("Authorization", userToken)
         .end((err, res) => {
           expect(res).to.have.status(404);
           expect(res.type).to.equal("application/json");
@@ -289,6 +320,7 @@ describe("/Question Resources", () => {
       chai
         .request(app)
         .patch("/api/v1/questions/1/upvote")
+        .set("Authorization", userToken)
         .end((err, res) => {
           expect(res).to.have.status(200);
           expect(res.type).to.equal("application/json");
@@ -303,6 +335,7 @@ describe("/Question Resources", () => {
       chai
         .request(app)
         .patch("/api/v1/questions/10/upvote")
+        .set("Authorization", userToken)
         .end((err, res) => {
           expect(res).to.have.status(400);
           expect(res.type).to.equal("application/json");
@@ -317,6 +350,7 @@ describe("/Question Resources", () => {
       chai
         .request(app)
         .patch("/api/v1/questions/1/downvote")
+        .set("Authorization", userToken)
         .end((err, res) => {
           expect(res).to.have.status(200);
           expect(res.type).to.equal("application/json");
@@ -331,6 +365,7 @@ describe("/Question Resources", () => {
       chai
         .request(app)
         .patch("/api/v1/questions/3/downvote")
+        .set("Authorization", userToken)
         .end((err, res) => {
           expect(res).to.have.status(200);
           expect(res.type).to.equal("application/json");
@@ -345,6 +380,7 @@ describe("/Question Resources", () => {
       chai
         .request(app)
         .patch("/api/v1/questions/10/downvote")
+        .set("Authorization", userToken)
         .end((err, res) => {
           expect(res).to.have.status(400);
           expect(res.type).to.equal("application/json");

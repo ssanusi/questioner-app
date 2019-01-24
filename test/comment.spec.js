@@ -4,11 +4,24 @@ import app from "../src";
 
 chai.use(chaiHttp);
 describe("/Comment Resourse", () => {
+  let userToken;
+  beforeEach(done => {
+    chai
+      .request(app)
+      .post("/api/v1/auth/login")
+      .send({ email: "test@yahoo.com", password: "secret" })
+      .end((err, res) => {
+        const { authorization } = res.header;
+        userToken = authorization;
+        done();
+      });
+  });
   describe("Post Comment", () => {
     it("Should post comment to a question", done => {
       chai
         .request(app)
         .post("/api/v1/comments")
+        .set("Authorization", userToken)
         .send({
           userId: "1",
           questionId: "1",
@@ -25,6 +38,7 @@ describe("/Comment Resourse", () => {
       chai
         .request(app)
         .post("/api/v1/comments")
+        .set("Authorization", userToken)
         .send({
           userId: "1",
           questionId: "10",
@@ -41,6 +55,7 @@ describe("/Comment Resourse", () => {
       chai
         .request(app)
         .post("/api/v1/comments")
+        .set("Authorization", userToken)
         .send({
           userId: "1",
           comment: "what is execution context fdfdsfsddsfdof javacript"
@@ -56,6 +71,7 @@ describe("/Comment Resourse", () => {
       chai
         .request(app)
         .post("/api/v1/comments")
+        .set("Authorization", userToken)
         .send({
           userId: "1",
           questionId: "m",
@@ -72,6 +88,7 @@ describe("/Comment Resourse", () => {
       chai
         .request(app)
         .post("/api/v1/comments")
+        .set("Authorization", userToken)
         .send({
           questionId: "10",
           comment: "what is execution context fdfdsfsddsfdof javacript"
@@ -87,6 +104,7 @@ describe("/Comment Resourse", () => {
       chai
         .request(app)
         .post("/api/v1/comments")
+        .set("Authorization", userToken)
         .send({
           userId: "m",
           questionId: "1",
@@ -103,10 +121,10 @@ describe("/Comment Resourse", () => {
       chai
         .request(app)
         .post("/api/v1/comments")
+        .set("Authorization", userToken)
         .send({
           userId: "1",
-          questionId: "1",
-
+          questionId: "1"
         })
         .end((err, res) => {
           expect(res).to.have.status(400);
