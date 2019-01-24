@@ -5,12 +5,8 @@ class QuestionController {
   static getAllQuestions(req, res) {
     const queryString = "SELECT * FROM questions";
     db.query(queryString).then(data => {
-      // if (data.rows.length === 0) {
-      //   return res.status(404).json({ message: "no questions" });
-      // }
       res.status(200).json({ status: 200, data: data.rows });
     });
-    // .catch(err => res.status(400).json({ err }));
   }
 
   static addQuestion(req, res) {
@@ -34,7 +30,6 @@ class QuestionController {
         if (err.code === "23503" && err.constraint === "questions_meetup_fkey") {
           return res.status(400).json({ message: "meetup does not exist" });
         }
-        // return res.status(400).json({ error: err });
       });
   }
 
@@ -48,7 +43,6 @@ class QuestionController {
       }
       return res.status(200).json({ status: 200, data: data.rows });
     });
-    // .catch(err => res.status(400).json({ err }));
   }
 
   static upvote(req, res) {
@@ -60,7 +54,6 @@ class QuestionController {
       }
       return res.status(200).json({ status: 200, data: data.rows[0] });
     });
-    // .catch(err => res.status(400).json({ err }));
   }
 
   static downvote(req, res) {
@@ -72,7 +65,6 @@ class QuestionController {
       }
       return res.status(200).json({ status: 200, data: data.rows[0] });
     });
-    // .catch(err => res.status(400).json({ err }));
   }
 }
 
