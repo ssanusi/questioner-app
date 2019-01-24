@@ -15,14 +15,14 @@ const isLoggedIn = (req, res, next) => {
     return res.status(401).json({ error });
   }
 
-  jwt.verify(token, secret, (err, decodedToken) => {
-    if (err) {
-      error.message = "Unauthorized";
-      return res.status(401).json({ error });
-    }
-    req.userId = decodedToken;
+  try {
+    const verifiedToken = jwt.verify(token, secret);
+    req.userId = verifiedToken.id;
     return next();
-  });
+  } catch (err) {
+    error.message = "Unauthorized";
+    return res.status(401).json({ error });
+  }
 };
 
 export default isLoggedIn;
