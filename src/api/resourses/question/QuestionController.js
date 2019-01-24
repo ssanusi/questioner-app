@@ -20,8 +20,8 @@ class QuestionController {
       returning *`;
     const values = [
       moment(new Date()),
-      parseInt(req.body.user, 10),
-      parseInt(req.body.meetup, 10),
+      parseInt(req.body.userId, 10),
+      parseInt(req.body.meetupId, 10),
       req.body.title,
       req.body.body
     ];

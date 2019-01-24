@@ -5,9 +5,6 @@ class MeetupController {
   static getAllMeetups(req, res) {
     const queryString = "SELECT * FROM meetups";
     db.query(queryString).then(data => {
-      // if (data.rows.length === 0) {
-      //   return res.status(404).json({ message: "no meetups" });
-      // }
       res.status(200).json({ status: 200, data: data.rows });
     });
     // .catch(err => res.status(400).json({ err }));
