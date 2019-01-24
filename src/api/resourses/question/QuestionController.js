@@ -64,7 +64,7 @@ class QuestionController {
   }
 
   static downvote(req, res) {
-    const queryString = "UPDATE questions SET downvotes = downvotes - 1 WHERE id = $1 returning *";
+    const queryString = "UPDATE questions SET downvotes = downvotes + 1 WHERE id = $1 returning *";
     const question = parseInt(req.params.id, 10);
     db.query(queryString, [question]).then(data => {
       if (!data.rows[0]) {
