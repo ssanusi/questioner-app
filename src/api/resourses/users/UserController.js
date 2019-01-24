@@ -10,7 +10,7 @@ class UserController {
     db.query(queryString, Object.values(req.body))
       .then(data => {
         const user = data.rows[0];
-        const token = createToken(user.username, user.id, user.email);
+        const token = createToken(user.username, user.id);
         return res
           .header("Authorization", `Bearer ${token}`)
           .status(201)
@@ -27,7 +27,7 @@ class UserController {
   }
 
   static login(req, res) {
-    const queryString = "SELECT  id,email,username,password,isAdmin FROM users WHERE email = $1 ";
+    const queryString = "SELECT  id,email,username,password,isadmin FROM users WHERE email = $1 ";
     db.query(queryString, [req.body.email])
       .then(data => {
         const user = data.rows[0];
@@ -37,7 +37,7 @@ class UserController {
         if (!checkPassword(req.body.password, user.password)) {
           res.status(404).json({ status: 404, error: "invalid credentials" });
         }
-        const token = createToken(user.username, user.id, user.email);
+        const token = createToken(user.id, user.username, user.isadmin);
         return res
           .status(200)
           .header("Authorization", `Bearer ${token}`)

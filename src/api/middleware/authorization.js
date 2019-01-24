@@ -1,5 +1,9 @@
+const authorise = (req, res, next) => {
+  const { isAdmin } = req.user;
+  if (!isAdmin) {
+    return res.status(401).json({ message: "Unauthorized Admin Route" });
+  }
+  return next();
+};
 
-const authorise = ( req, res, next) => {
-    const { userId } = req
-    
-}
+export default authorise;
