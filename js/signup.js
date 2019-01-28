@@ -18,19 +18,24 @@ const handleFormSubmit = event => {
   event.preventDefault();
 
   const data = toJSONString(form);
-  console.log(data)
+  console.log(data);
 
   const options = {
     method: "post",
     headers: {
-      "Content-type": "application/json"
+      "Content-type": "application/json",
+      mode: "cors"
     },
+
     body: data
   };
 
   fetch("https://questioner-app-api.herokuapp.com/api/v1/auth/signup", options)
     .then(response => {
       console.log(response);
+    })
+    .then(body => {
+      console.log(body);
     })
     .catch(error => {
       console.log(error);
