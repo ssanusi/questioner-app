@@ -5,11 +5,10 @@ import bodyParser from "body-parser";
 import restRouter from "./api/restRouter";
 
 const app = express();
-app.use(cors())
-app.use(logger("dev"));
-app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cors());
+app.use(logger("dev"));
 app.use("/api/v1", restRouter);
 
 app.get("/", (req, res) => {
