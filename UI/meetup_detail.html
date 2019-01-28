@@ -4,11 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Questioner | Meetup details</title>
-    <link
-      href="https://fonts.googleapis.com/css?family=Varela+Round"
-      rel="stylesheet"
-    />
+    <title>Questioner | Meetup Details</title>
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
@@ -18,9 +15,7 @@
 
     <link rel="stylesheet" href="css/main.css" />
   </head>
-
   <body>
-    <!-- Navigation -->
     <header class="navbar">
       <h1 class="col-1-4 logo text-left">Questioner</h1>
       <div class="toggle-show">&#9776;</div>
@@ -34,190 +29,141 @@
         </ul>
       </nav>
     </header>
-
-    <main class="bg-light meetup-menu-main">
-      <h1 class="meetup">
-        <i class="fab fa-meetup"></i>Introduction to Javacript
-      </h1>
-      <p class="meetup">
-        <i class="fas fa-map-marker-alt"></i> 235 ikorodu road ilupeju lagos
-      </p>
-      <p class="meetup">
-        <i class="fas fa-calendar-alt"></i> 20th January 2019
-      </p>
-      <button class="btn btn-default btn-default-medium font-weight-bold" id="askQuestion"> <i class="fas fa-bullhorn"></i>ask question</button>
-      <!-- <section class="card meetup-menu "> -->
-      <section class="questions-container">
-        <div class="question-wrapper">
-          <h2>closure</h2>
-          <div class="question">
-            <div class="question-vote">
-              <button><i class="fas fa-angle-up fa-3x"></i></button>
-              <div class="count">0</div>
-              <button><i class="fas fa-angle-down fa-3x"></i></button>
-            </div>
-            <div class="question-body">
-              <span
-                ><p>
-                  in what senarios can we use closure to our advantage in
-                  javascript? and what is closure in another programming
-                  language
-                </p></span
-              >
-              <div class="question-info">
-                <h4><i class="fas fa-user-circle"></i> ssanusi</h4>
-                <a href="#"><i class="fas fa-comments"></i> comments</a>
-              </div>
-            </div>
+    <main class="bg-light meetup-menu-main flex-container">
+      <section class="meetup-header">
+        <div class="meetup-detail">
+        <h1><i class="fab fa-meetup"></i>Introduction to Javacript</h1>
+        <p><i class="fas fa-map-marker-alt"></i> 235 ikorodu road ilupeju lagos</p>
+        <p><i class="fas fa-calendar-alt"></i> 20th January 2019</p>
+        <p><i class="far fa-clock"></i> 5:00 AM</p>
+      </div>
+      <img src="../UI/img/Meetup_Sky02.jpeg" alt="">
+      <div class="meetup-rsvp">
+          <h1>Are you coming</h1>
+          <i class="far fa-calendar-check fa-3x"></i>
+          <i class="far fa-calendar-times fa-3x"></i>
+          <div class="rsvp">
+              <h1>confirmed</h1>
+              <i class="far fa-check-circle fa-3x"></i>
+              <i class="far fa-times-circle fa-3x"></i>
           </div>
-          <div class="comment-container">
-            <input type="comment" name="" id="" placeholder="comments" />
-            <div class="question-comments" id="comment1">
-              <div class="comment">
-                closure is when function remember its variabe outside of its
-                execution
-              </div>
-              <i class="fas fa-user-circle"> ssanusi</i>
-            </div>
-            <div-- class="question-comments" id="comment1">
-              <div class="comment">
-                closure is when function remember its variabe outside of its
-                execution
-              </div>
-              <i class="fas fa-user-circle"> ssanusi</i>
-            </div-->
-            <div-- class="question-comments" id="comment1">
-              <div class="comment">
-                closure is when function remember its variabe outside of its
-                execution
-              </div>
-              <i class="fas fa-user-circle"> ssanusi</i>
-            </div-->
+      </div>
+      </section>
+      <section class="card question-menu ">
+          <button class="btn btn-default font-weight-bold" id="askQuestion">
+              <i class="fas fa-bullhorn"></i>ask question
+            </button>
+        <div class="question-menu-item">
+          <div class="question-header"><h2 id="1">Introduction to HTML5</h2></div>
+          <div class="question-body">
+            <h3>
+              What easy research papers do you want to see that for some reason still haven't been
+              published yet?
+            </h3>
+            <h4><i class="fas fa-user-circle fa-2x"></i> Sulaiman Sanusi</h4>
           </div>
-
-        </div>
-        <div class="question-wrapper">
-          <h2>closure</h2>
-          <div class="question">
-            <div class="question-vote">
-              <button><i class="fas fa-angle-up fa-3x"></i></button>
-              <div class="count">0</div>
-              <button><i class="fas fa-angle-down fa-3x"></i></button>
+          <div class="question-vote">
+            <h4><i class="far fa-thumbs-up fa-3x"></i>10000</h4>
+            <h4><i class="far fa-thumbs-down fa-3x"></i>10000</h4>
+          </div>
+          <div>
+            <h3>comments<i class="fas fa-sort-down fa-2x"></i></h3>
+          </div>
+          <div class="comments-container">
+            <div class="comment-input">
+              <input type="comment" name="" id="" placeholder="comments" />
             </div>
-            <div class="question-body">
-              <span
-                ><p>
-                  in what senarios can we use closure to our advantage in
-                  javascript? and what is closure in another programming
-                  language
-                </p></span
-              >
-              <div class="question-info">
-                <h4><i class="fas fa-user-circle"></i> ssanusi</h4>
-                <a href="#"><i class="fas fa-comments"></i> comments</a>
-              </div>
+            <div class="comment">
+              <h3>i like this question</h3>
+              <h4><i class="fas fa-user-circle"></i>ssanusi</h4>
+            </div>
+            <div class="comment">
+              <h3>i like this question</h3>
+              <h4><i class="fas fa-user-circle"></i>ssanusi</h4>
             </div>
           </div>
         </div>
-        <div class="question-wrapper">
-          <h2>closure</h2>
-          <div class="question">
-            <div class="question-vote">
-              <button><i class="fas fa-angle-up fa-3x"></i></button>
-              <div class="count">0</div>
-              <button><i class="fas fa-angle-down fa-3x"></i></button>
-            </div>
-            <div class="question-body">
-              <span
-                ><p>
-                  in what senarios can we use closure to our advantage in
-                  javascript? and what is closure in another programming
-                  language
-                </p></span
-              >
-              <div class="question-info">
-                <h4><i class="fas fa-user-circle"></i> ssanusi</h4>
-                <a href="#"><i class="fas fa-comments"></i> comments</a>
-              </div>
-            </div>
+        <div class="question-menu-item">
+          <div class="question-header"><h2 id="1">Introduction to HTML5</h2></div>
+          <div class="question-body">
+            <h3>
+              What easy research papers do you want to see that for some reason still haven't been
+              published yet?
+            </h3>
+            <h4><i class="fas fa-user-circle fa-2x"></i> Sulaiman Sanusi</h4>
           </div>
-        </div>
-        <div class="question-wrapper">
-          <h2>closure</h2>
-          <div class="question">
-            <div class="question-vote">
-              <button><i class="fas fa-angle-up fa-3x"></i></button>
-              <div class="count">0</div>
-              <button><i class="fas fa-angle-down fa-3x"></i></button>
-            </div>
-            <div class="question-body">
-              <span
-                ><p>
-                  in what senarios can we use closure to our advantage in
-                  javascript? and what is closure in another programming
-                  language
-                </p></span
-              >
-              <div class="question-info">
-                <h4><i class="fas fa-user-circle"></i> ssanusi</h4>
-                <a href="#"><i class="fas fa-comments"></i> comments</a>
-              </div>
-            </div>
+          <div class="question-vote">
+            <h4><i class="far fa-thumbs-up fa-3x"></i>100</h4>
+            <h4><i class="far fa-thumbs-down fa-3x"></i>100</h4>
           </div>
-        </div>
-        <div class="question-wrapper">
-          <h2>closure</h2>
-          <div class="question">
-            <div class="question-vote">
-              <button><i class="fas fa-angle-up fa-3x"></i></button>
-              <div class="count">0</div>
-              <button><i class="fas fa-angle-down fa-3x"></i></button>
+          <div>
+            <h3>comments<i class="fas fa-sort-down fa-2x"></i></h3>
+          </div>
+          <div- class="comments-container">
+            <div class="comment-input">
+              <input type="comment" name="" id="" placeholder="comments" />
             </div>
-            <div class="question-body">
-              <span
-                ><p>
-                  in what senarios can we use closure to our advantage in
-                  javascript? and what is closure in another programming
-                  language
-                </p></span
-              >
-              <div class="question-info">
-                <h4><i class="fas fa-user-circle"></i> ssanusi</h4>
-                <a href="#"><i class="fas fa-comments"></i> comments</a>
-              </div>
+            <div class="comment">
+              <h3>i like this question</h3>
+              <h4><i class="fas fa-user-circle"></i>ssanusi</h4>
+            </div>
+            <div class="comment">
+              <h3>i like this question</h3>
+              <h4><i class="fas fa-user-circle"></i>ssanusi</h4>
+            </div>
+          </div->
+        </div>
+        <div class="question-menu-item">
+          <div class="question-header"><h2 id="1">Introduction to HTML5</h2></div>
+          <div class="question-body">
+            <h3>
+              What easy research papers do you want to see that for some reason still haven't been
+              published yet?
+            </h3>
+            <h4><i class="fas fa-user-circle fa-2x"></i> Sulaiman Sanusi</h4>
+          </div>
+          <div class="question-vote">
+            <h4><i class="far fa-thumbs-up  fa-3x"></i>10000</h4>
+            <h4><i class="far fa-thumbs-down  fa-3x"></i>10000</h4>
+          </div>
+          <div>
+            comments<span><i class="fas fa-sort-down fa-2x"></i></span>
+          </div>
+          <div class="comments-container">
+            <div class="comment-input">
+              <input type="comment" name="" id="" placeholder="comments" />
+            </div>
+            <div class="comment">
+              <h3>i like this question</h3>
+              <h4><i class="fas fa-user-circle"></i>ssanusi</h4>
+            </div>
+            <div class="comment">
+              <h3>i like this question</h3>
+              <h4><i class="fas fa-user-circle"></i>ssanusi</h4>
             </div>
           </div>
         </div>
       </section>
-      <!-- modal -->
-      <div id="questionModal" class="modal">
-
+      <div-- id="questionModal" class="modal">
         <!-- Modal content -->
-            <form class="modal-content form card" action="#">
-                <h2 class="text-dark text-center">Add Question</h2>
-                <div>
-                  <label class="label" for="meetup">
-                    Title:
-                  </label>
-                  <input type="text" id="meetup" placeholder="Enter title"
-                    required />
-                </div>
-                <div>
-                  <label for="description" class="label">
-                   Body:
-                    <textarea name="description" id="description" placeholder="Enter question">
-                    </textarea>
-                  </label>
-                </div>
-                <button type="submit" class="btn btn-default font-weight-bold">
-                  submit
-                </button>
-              </form>
-          <span class="close">&times;</span>
-        </div>
+        <form class="modal-content form card" action="#">
+          <h2 class="text-dark text-center">Add Question</h2>
+          <div>
+            <label class="label" for="meetup"> Title: </label>
+            <input type="text" id="meetup" placeholder="Enter title" required />
+          </div>
+          <div>
+            <label for="description" class="label">
+              Body:
+              <textarea name="description" id="description" placeholder="Enter question">
+              </textarea required>
+            </label>
+          </div>
+          <button type="submit" class="btn btn-default font-weight-bold">submit</button>
+        </form>
+        <span class="close">&times;</span>
+      </div-->
     </main>
-
-    <!-- Footer -->
     <footer class="text-center">
       <p>&copy; Questioner <span id="year"></span></p>
     </footer>
