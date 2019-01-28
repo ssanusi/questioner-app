@@ -21,10 +21,11 @@ const handleFormSubmit = event => {
   console.log(data);
 
   const options = {
-    method: "post",
+    method: "POST",
     headers: {
       "Content-type": "application/json",
-      mode: "cors"
+      "Access-Control-Allow-Origin": "*",
+      "mode": "cors"
     },
 
     body: data
