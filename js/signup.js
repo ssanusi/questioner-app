@@ -11,7 +11,7 @@ const toJSONString = formhtml => {
     }
   }
 
-  return JSON.stringify(obj);
+  return obj;
 };
 
 const handleFormSubmit = event => {
@@ -20,27 +20,16 @@ const handleFormSubmit = event => {
   const data = toJSONString(form);
   console.log(data);
 
-  const options = {
-    method: "POST",
+  fetch("https://questioner-app-api.herokuapp.com/api/v1/auth/signup", {
+    method: "POST", // or 'PUT'
     headers: {
-      "Content-type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-      "mode": "cors"
+      "Content-Type": "application/json"
     },
-
-    body: data
-  };
-
-  fetch("https://questioner-app-api.herokuapp.com/api/v1/auth/signup", options)
-    .then(response => {
-      console.log(response);
-    })
-    .then(body => {
-      console.log(body);
-    })
-    .catch(error => {
-      console.log(error);
-    });
+    body: JSON.stringify(data)
+  })
+    .then(res => res.json())
+    .then(response => console.log("Success:", JSON.stringify(response)))
+    .catch(error => console.error("Error:", error));
 };
 
 form.addEventListener("submit", handleFormSubmit);
