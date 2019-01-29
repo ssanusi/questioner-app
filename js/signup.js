@@ -28,9 +28,20 @@ const handleFormSubmit = event => {
       if (response.status === 201) {
         localStorage.setItem("token", JSON.stringify(response.data[0].token));
         statusDiv.innerHTML = `<div class="success"><h4>Account created Sucessfully</h4></div>`;
+        setTimeout(() => {
+          window.location.href = "signin.html";
+        }, 2000);
       }
       if (response.error) {
-        statusDiv.innerHTML = `<div class="error"><h4>${response.error}</h4></div>`;
+        if (response.error.user === "username or email exist") {
+          statusDiv.innerHTML = `<div class="error"><h4>${Object.values(
+            response.error
+          )}</h4></div>`;
+          setTimeout(() => {
+            window.location.href = "signin.html";
+          }, 2000);
+        }
+        statusDiv.innerHTML = `<div class="error"><h4>${Object.values(response.error)}</h4></div>`;
       }
     });
 };
