@@ -24,30 +24,38 @@
     </section>
 
     <!-- Aside -->
-    <section id="signUp" class="col-1-4 aside">
+    <section class="col-1-4 aside">
 
       <!-- Sign up form -->
-      <form  name="signUp" class="form card" action="admin_dashboard.html">
+      <form  id="signUp" name="signUp" class="form card">
         <h2 class="text-center">Sign Up</h2>
+         <div id="status"></div>
         <div>
           <label class="label label-block" for="name">
-            Full name
+            First Name
           </label>
-          <input type="text" placeholder="John Doe"
-            id="fullName" required />
+          <input name="firstName" type="text" placeholder="John"
+            id="firstName" required />
+        </div>
+        <div>
+          <label class="label label-block" for="name">
+            Last Name
+          </label>
+          <input name="lastName" type="text" placeholder="Doe"
+            id="lastName" required />
         </div>
         <div>
             <label class="label label-block" for="phone">
               phone:
             </label>
-            <input type="text" placeholder="08055555555"
+            <input name="phoneNumber" type="text" placeholder="08055555555"
               id="phone" required />
           </div>
         <div>
           <label class="label label-block" for="email">
             Email address:
           </label>
-          <input type="email" placeholder="username@domain.com"
+          <input name="email" type="email" placeholder="username@domain.com"
             id="signUpemail" required />
         </div>
         <div>
@@ -55,15 +63,15 @@
               for="username">
               username:
             </label>
-            <input type="password" placeholder="user1234"
-              id="signUppassword" required />
+            <input name="username" type="text" placeholder="user1234"
+              id="username" required />
           </div>
         <div>
           <label class="label label-block"
             for="password">
             Password:
           </label>
-          <input type="password" placeholder="password"
+          <input name="password" type="password" placeholder="password"
             id="signUppassword" required />
         </div>
         <div>
@@ -71,7 +79,7 @@
             for="confirmPassword">
             Confirm Password:
           </label>
-          <input type="password" placeholder="password"
+          <input name="confirmPassword"type="password" placeholder="password"
             id="confirmPassword" required />
         </div>
         <button type="submit"
@@ -90,7 +98,7 @@
     </section>
 
   </main>
-  <script src="js/main.js"></script>
+  <script src="js/signup.js"></script>
 </body>
 
 </html>
