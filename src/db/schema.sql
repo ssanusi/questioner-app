@@ -18,7 +18,6 @@ CREATE TABLE IF NOT EXISTS users(
         id SERIAL PRIMARY KEY ,
         firstName VARCHAR(128) NOT NULL,
         lastName VARCHAR(128) NOT NULL,
-        otherName VARCHAR(128),
         email VARCHAR(128) UNIQUE NOT NULL,
         phoneNumber VARCHAR(128) NOT NULL,
         username VARCHAR(128) UNIQUE NOT NULL,
