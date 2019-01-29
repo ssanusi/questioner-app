@@ -10,9 +10,22 @@ const toJSONString = formhtml => {
       obj[name] = value.trim();
     }
   }
-
-  return obj;
+  obj.otherName = ""
+  return JSON.stringify(obj);
 };
+
+const checkStatus = response => {
+  if (response.ok) {
+    return Promise.resolve("response");
+  }
+  return Promise.reject(new Error(response.statusText));
+};
+
+// const fetchData = url =>
+//   fetch(url)
+//     .then(checkStatus)
+//     .then(res => res.json())
+//     .catch(error => console.log(error));
 
 const handleFormSubmit = event => {
   event.preventDefault();
@@ -21,15 +34,17 @@ const handleFormSubmit = event => {
   console.log(data);
 
   fetch("https://questioner-app-api.herokuapp.com/api/v1/auth/signup", {
-    method: "POST", // or 'PUT'
+    method: "POST",
+    mode: "no-cors",
     headers: {
-      "Content-Type": "application/json"
+      "Access-Control-Allow-Origin": "*",
+      "Content-Type": "application/json/"
     },
-    body: JSON.stringify(data)
+    body: data
   })
+    .then(checkStatus)
     .then(res => res.json())
-    .then(response => console.log("Success:", JSON.stringify(response)))
-    .catch(error => console.error("Error:", error));
+    .catch(error => console.log(error));
 };
 
 form.addEventListener("submit", handleFormSubmit);
