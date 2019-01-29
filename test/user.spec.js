@@ -10,9 +10,8 @@ describe("/User Resources", () => {
       const testUser = {
         firstName: "sanusi",
         lastName: "sulaiman",
-        othername: "muhammad",
-        email: "sulaiman@icloud.com",
         phoneNumber: "08073372043",
+        email: "sulaiman@icloud.com",
         username: "ssanusi",
         password: "password",
         confirmPassword: "password"
@@ -43,9 +42,8 @@ describe("/User Resources", () => {
       const testUser = {
         firstName: "admintest",
         lastName: "admintest",
-        othername: "admintest",
-        email: "admintest@icloud.com",
         phoneNumber: "08073372043",
+        email: "admintest@icloud.com",
         username: "admintest",
         password: "password",
         confirmPassword: "password"
@@ -76,7 +74,6 @@ describe("/User Resources", () => {
       const testUser = {
         firstName: "sanusi",
         lastName: "sulaiman",
-        othername: "muhammad",
         phoneNumber: "08073372043",
         username: "ssanusi",
         password: "password",
@@ -97,7 +94,6 @@ describe("/User Resources", () => {
     it("user should get error for missing phone Number", done => {
       const testUser = {
         firstName: "sanusi",
-        othername: "muhammad",
         email: "sulaiman@icloud.com",
         username: "ssanusi",
         password: "password",
@@ -118,9 +114,8 @@ describe("/User Resources", () => {
     it("user should get error for missing phone Number", done => {
       const testUser = {
         firstName: "sanusi",
-        othername: "muhammad",
-        email: "sulaiman@icloud.com",
         phoneNumber: "08073372043",
+        email: "sulaiman@icloud.com",
         password: "password",
         confirmPassword: "password"
       };
@@ -139,9 +134,8 @@ describe("/User Resources", () => {
     it("user should get error for missing phone Number", done => {
       const testUser = {
         firstName: "sanusi",
-        othername: "muhammad",
-        email: "sulaiman@icloud.com",
         phoneNumber: "08073372043",
+        email: "sulaiman@icloud.com",
         username: "ssanusi",
         confirmPassword: "password"
       };
@@ -160,9 +154,8 @@ describe("/User Resources", () => {
     it("user should get error for missing First Name", done => {
       const testUser = {
         lastName: "sulaiman",
-        othername: "muhammad",
-        email: "sulaiman@icloud.com",
         phoneNumber: "08073372043",
+        email: "sulaiman@icloud.com",
         username: "ssanusi",
         password: "password",
         confirmPassword: "password"
@@ -182,7 +175,6 @@ describe("/User Resources", () => {
     it("user should get error for missing phone Number", done => {
       const testUser = {
         firstName: "sanusi",
-        othername: "muhammad",
         email: "sulaiman@icloud.com",
         phoneNumber: "08073372043",
         username: "ssanusi"
@@ -203,9 +195,8 @@ describe("/User Resources", () => {
       const testUser = {
         firstName: "sanusi",
         lastName: "sulaiman",
-        othername: "muhammad",
-        email: "sulaimanicloud.com",
         phoneNumber: "08073372043",
+        email: "sulaimanicloud.com",
         username: "ssanusi",
         password: "password",
         confirmPassword: "password"
@@ -226,9 +217,8 @@ describe("/User Resources", () => {
       const testUser = {
         firstName: "bashir",
         lastName: "musa",
-        othername: "ahmed",
-        email: "bashir@icloud.com",
         phoneNumber: "08073372043",
+        email: "bashir@icloud.com",
         username: "bbashir",
         password: "password",
         confirmPassword: "password"
@@ -241,7 +231,7 @@ describe("/User Resources", () => {
           expect(res).to.have.status(409);
           expect(res.type).to.equal("application/json");
           expect(res.body).to.be.an("object");
-          expect(res.body.error).equal("username or email exist");
+          expect(res.body.error.user).equal("username or email exist");
           done();
         });
     });

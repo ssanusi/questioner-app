@@ -9,7 +9,7 @@ class UserController {
     const isAdmin = checkAdminRoute(req.originalUrl);
     req.body.isAdmin = isAdmin;
     const queryString =
-      "INSERT INTO users(firstname,lastname,othername,email,phonenumber,username,password,isadmin) VALUES($1,$2,$3,$4,$5,$6,$7,$8) returning id, firstname, lastname, email, phonenumber, username";
+      "INSERT INTO users(firstname,lastname,phonenumber,email,username,password,isadmin) VALUES($1,$2,$3,$4,$5,$6,$7) returning id, firstname, lastname, email, phonenumber, username";
     db.query(queryString, Object.values(req.body))
       .then(data => {
         const user = data.rows[0];
@@ -24,7 +24,7 @@ class UserController {
       })
       .catch(e => {
         if (e.code === "23505") {
-          return res.status(409).json({ error: "username or email exist" });
+          return res.status(409).json({ error: { user: "username or email exist" } });
         }
       });
   }
