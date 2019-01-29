@@ -9,7 +9,7 @@ class UserController {
     const isAdmin = checkAdminRoute(req.originalUrl);
     req.body.isAdmin = isAdmin;
     const queryString =
-      "INSERT INTO users(firstname,lastname,phonenumber,email,username,password,isadmin) VALUES($1,$2,$3,$4,$5,$6,$7,$8) returning id, firstname, lastname, email, phonenumber, username";
+      "INSERT INTO users(firstname,lastname,phonenumber,email,username,password,isadmin) VALUES($1,$2,$3,$4,$5,$6,$7) returning id, firstname, lastname, email, phonenumber, username";
     db.query(queryString, Object.values(req.body))
       .then(data => {
         const user = data.rows[0];
