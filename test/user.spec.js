@@ -231,7 +231,7 @@ describe("/User Resources", () => {
           expect(res).to.have.status(409);
           expect(res.type).to.equal("application/json");
           expect(res.body).to.be.an("object");
-          expect(res.body.error).equal("username or email exist");
+          expect(res.body.error.user).equal("username or email exist");
           done();
         });
     });
