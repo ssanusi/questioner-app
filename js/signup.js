@@ -1,6 +1,7 @@
 const form = document.getElementById("signUp");
 const statusDiv = document.getElementById("status");
 
+
 const toJSONString = formhtml => {
   const obj = {};
   const elements = formhtml.querySelectorAll("input, select, textarea");
@@ -11,6 +12,7 @@ const toJSONString = formhtml => {
       obj[name] = value.trim();
     }
   }
+
   return JSON.stringify(obj);
 };
 const handleFormSubmit = event => {
