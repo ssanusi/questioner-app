@@ -28,8 +28,10 @@ const handleFormSubmit = event => {
   })
     .then(res => res.json())
     .then(response => {
+      console.log(response);
       if (response.status === 200) {
         localStorage.setItem("token", JSON.stringify(response.data[0].token));
+        localStorage.setItem("username", JSON.stringify(response.data[0].user.username));
         statusDiv.innerHTML = `<div class="success"><h4>${response.data[0].message}</h4></div>`;
         setTimeout(() => {
           window.location.href = "meetups.html";
