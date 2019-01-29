@@ -1,4 +1,4 @@
-const form = document.getElementById("signUp");
+const form = document.getElementById("login");
 const statusDiv = document.getElementById("status");
 
 const toJSONString = formhtml => {
@@ -14,11 +14,13 @@ const toJSONString = formhtml => {
 
   return JSON.stringify(obj);
 };
+
 const handleFormSubmit = event => {
   event.preventDefault();
 
   const data = toJSONString(form);
-  const url = "https://questioner-app-api.herokuapp.com/api/v1/auth/signup";
+  console.log(data);
+  const url = "https://questioner-app-api.herokuapp.com/api/v1/auth/login";
   fetch(url, {
     method: "POST",
     body: data,
@@ -26,23 +28,20 @@ const handleFormSubmit = event => {
   })
     .then(res => res.json())
     .then(response => {
-      if (response.status === 201) {
+      if (response.status === 200) {
         localStorage.setItem("token", JSON.stringify(response.data[0].token));
-        statusDiv.innerHTML = `<div class="success"><h4>Account created Sucessfully</h4></div>`;
+        statusDiv.innerHTML = `<div class="success"><h4>${response.data[0].message}</h4></div>`;
         setTimeout(() => {
-          window.location.href = "signin.html";
+          window.location.href = "meetups.html";
         }, 2000);
       }
       if (response.error) {
-        if (response.error.user === "username or email exist") {
-          statusDiv.innerHTML = `<div class="error"><h4>${Object.values(
-            response.error
-          )}</h4></div>`;
-          setTimeout(() => {
-            window.location.href = "signin.html";
-          }, 2000);
+        if (response.error === "User not Found") {
+          statusDiv.innerHTML = `<div class="error"><h4> account not found please register </h4></div>`;
         }
-        statusDiv.innerHTML = `<div class="error"><h4>${Object.values(response.error)}</h4></div>`;
+        if (response.error === "invalid credentials") {
+          statusDiv.innerHTML = `<div class="error"><h4>Invalid Credentials</h4></div>`;
+        }
       }
     });
 };
