@@ -1149,3 +1149,11 @@ input[type="comment"] {
         max-height: 100%;
         width: 100%;
 }
+
+.success h4 {
+  color : green
+}
+
+.error h4 {
+  color : red
+}

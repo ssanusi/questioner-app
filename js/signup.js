@@ -1,4 +1,5 @@
 const form = document.getElementById("signUp");
+const statusDiv = document.getElementById("status");
 
 const toJSONString = formhtml => {
   const obj = {};
@@ -10,41 +11,28 @@ const toJSONString = formhtml => {
       obj[name] = value.trim();
     }
   }
-  obj.otherName = ""
   return JSON.stringify(obj);
 };
-
-const checkStatus = response => {
-  if (response.ok) {
-    return Promise.resolve("response");
-  }
-  return Promise.reject(new Error(response.statusText));
-};
-
-// const fetchData = url =>
-//   fetch(url)
-//     .then(checkStatus)
-//     .then(res => res.json())
-//     .catch(error => console.log(error));
-
 const handleFormSubmit = event => {
   event.preventDefault();
 
   const data = toJSONString(form);
-  console.log(data);
-
-  fetch("https://questioner-app-api.herokuapp.com/api/v1/auth/signup", {
+  const url = "https://questioner-app-api.herokuapp.com/api/v1/auth/signup";
+  fetch(url, {
     method: "POST",
-    mode: "no-cors",
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Content-Type": "application/json/"
-    },
-    body: data
+    body: data,
+    headers: { "Content-Type": "application/json" }
   })
-    .then(checkStatus)
     .then(res => res.json())
-    .catch(error => console.log(error));
+    .then(response => {
+      if (response.status === 201) {
+        localStorage.setItem("token", JSON.stringify(response.data[0].token));
+        statusDiv.innerHTML = `<div class="success"><h4>Account created Sucessfully</h4></div>`;
+      }
+      if (response.error) {
+        statusDiv.innerHTML = `<div class="error"><h4>${response.error}</h4></div>`;
+      }
+    });
 };
 
 form.addEventListener("submit", handleFormSubmit);
