@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import MeetupController from "./MeetupController";
 import { validateAddMeetup, validateAddRsvp } from "../../middleware/meetupValidator";
 import authorise from "../../middleware/authorization";
@@ -11,7 +12,7 @@ meetupRouter
   .get(isLoggedIn, MeetupController.getAllMeetups)
   .post(isLoggedIn, authorise, validateAddMeetup, MeetupController.createMeetup);
 
-meetupRouter.route("/upcoming").get(MeetupController.getAllupcoming);
+meetupRouter.route("/upcoming").get(cors(), MeetupController.getAllupcoming);
 
 meetupRouter
   .route("/:id")

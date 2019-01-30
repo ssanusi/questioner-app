@@ -11,6 +11,8 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
 
   <link rel="stylesheet" href="css/main.css" />
+  <script src="https://unpkg.com/moment"></script>
+  <script src="./js/meetups.js"></script>
 </head>
 
 <body>
@@ -24,109 +26,17 @@
           <li><a class="active" href="meetups.html">All Meetups</a></li>
         <li><a class="active" href="user_meetups.html">My Meetups</a></li>
         <li><a href="my_questions.html">My Questions</a></li>
-        <li><a href="#">ssanusi</a></li>
+        <li><a href="#" id="user">user</a></li>
         <li><a href="index.html">Logout</a></li>
       </ul>
     </nav>
   </header>
 
-  <main class="bg-light meetup-menu-main ">
-    <h2 class="text-center meetup">All Meetups from <span id="date"></span></h2>
+  <main class="bg-light meetup-menu-main">
+    <h2 class="text-center meetup">All Meetups</h2>
     <!-- Menu -->
-    <section class="card card meetup-menu text-left" style="min-height: 60vh">
-      <!-- <div class="card meetup-menu-item">
-        <img src="img/meetupIndex.jpg"
-          alt="">
-            <p class="meetup">Introduction to HTML5</p>
-            <p class="meetup"><i class="fas fa-map-marker-alt"></i> 235 ikorodu road ilupeju lagos</p>
-            <p class="meetup"><i class="fas fa-calendar-alt"></i> 20th January 2019</p>
-        <button class="btn btn-default">
-          <a href="meetup_detail.html">view Questions</a>
-        </button>
-      </div>
-      <div class="card meetup-menu-item">
-        <img src="img/meetupIndex.jpg"
-          alt="" />
-          <p class="meetup">Introduction to HTML5</p>
-          <p class="meetup"><i class="fas fa-map-marker-alt"></i> 235 ikorodu road ilupeju lagos</p>
-          <p class="meetup"><i class="fas fa-calendar-alt"></i> 20th January 2019</p>
-        <button class="btn btn-default">
-          <a href="meetup_detail.html">view Questions</a>
-        </button>
-      </div>
-      <div class="card meetup-menu-item">
-        <img src="img/meetupIndex.jpg"
-          alt="" />
-          <p class="meetup">Introduction to HTML5</p>
-          <p class="meetup"><i class="fas fa-map-marker-alt"></i> 235 ikorodu road ilupeju lagos</p>
-          <p class="meetup"><i class="fas fa-calendar-alt"></i> 20th January 2019</p>
-        <button class="btn btn-default">
-          <a href="meetup_detail.html">view Questions</a>
-        </button>
-      </div>
-      <div class="card meetup-menu-item">
-        <img src="img/meetupIndex.jpg"
-          alt="">
-          <p class="meetup">Introduction to HTML5</p>
-          <p class="meetup"><i class="fas fa-map-marker-alt"></i> 235 ikorodu road ilupeju lagos</p>
-          <p class="meetup"><i class="fas fa-calendar-alt"></i> 20th January 2019</p>
-          <p class="meetup"><i class="far fa-clock"></i> 5:00 AM</p>
-        <button class="btn btn-default">
-          <a href="meetup_detail.html">view Questions</a>
-        </button>
-      </div>
-      <div class="card meetup-menu-item">
-        <img src="img/meetupIndex.jpg"
-          alt="">
-          <p class="meetup">Introduction to HTML5</p>
-          <p class="meetup"><i class="fas fa-map-marker-alt"></i> 235 ikorodu road ilupeju lagos</p>
-          <p class="meetup"><i class="fas fa-calendar-alt"></i> 20th January 2019</p>
-          <p class="meetup"><i class="far fa-clock"></i> 5:00 AM</p>
-        <button class="btn btn-default">
-          <a href="meetup_detail.html">view Questions</a>
-        </button>
-      </div>
-      <div class="card meetup-menu-item">
-        <img src="img/meetupIndex.jpg"
-          alt=""/>
-          <p class="meetup">Introduction to HTML5</p>
-          <p class="meetup"><i class="fas fa-map-marker-alt"></i> 235 ikorodu road ilupeju lagos</p>
-          <p class="meetup"><i class="fas fa-calendar-alt"></i> 20th January 2019</p>
-          <p class="meetup"><i class="far fa-clock"></i> 5:00 AM</p>
-        <button class="btn btn-default">
-          <a href="meetup_detail.html">view Questions</a>
-        </button>
-      </div>
-      <div class="card meetup-menu-item">
-        <img src="img/meetupIndex.jpg"
-          alt="" />
-          <p class="meetup">Introduction to HTML5</p>
-          <p class="meetup"><i class="fas fa-map-marker-alt"></i> 235 ikorodu road ilupeju lagos</p>
-          <p class="meetup"><i class="fas fa-calendar-alt"></i> 20th January 2019</p>
-          <button class="btn btn-default">
-          <a href="meetup_detail.html">view Questions</a>
-        </button>
-      </div>
-      <div class="card meetup-menu-item">
-        <img src="img/meetupIndex.jpg"
-          alt="">
-          <p class="meetup">Introduction to HTML5</p>
-          <p class="meetup"><i class="fas fa-map-marker-alt"></i> 235 ikorodu road ilupeju lagos</p>
-          <p class="meetup"><i class="fas fa-calendar-alt"></i> 20th January 2019</p>
-        <button class="btn btn-default">
-          <a href="meetup_detail.html">view Questions</a>
-        </button>
-      </div>
-      <div class="card meetup-menu-item">
-        <img src="img/meetupIndex.jpg"
-        alt="">
-          <p class="meetup">Introduction to HTML5</p>
-          <p class="meetup"><i class="fas fa-map-marker-alt"></i> 235 ikorodu road ilupeju lagos</p>
-          <p class="meetup"><i class="fas fa-calendar-alt"></i> 20th January 2019</p>
-        <button class="btn btn-default">
-          <a href="meetup_detail.html">view Questions</a>
-        </button>
-      </div> -->
+    <section class="card card meetup-menu text-left" id="meetups">
+
     </section>
   </main>
   <!-- Footer -->
@@ -134,7 +44,6 @@
     <p>&copy; Questioner <span id="year"></span>
     </p>
   </footer>
-  <script src="js/main.js"></script>
 </body>
 
 </html>
