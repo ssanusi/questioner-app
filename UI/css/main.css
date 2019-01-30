@@ -506,6 +506,7 @@ td[title] {
 .meetup-menu {
   margin: 2rem auto;
   width: 950px;
+  min-height: 60vh;
   max-width: 100%;
   display: flex;
   justify-content: center;
@@ -1151,9 +1152,14 @@ input[type="comment"] {
 }
 
 .success h4 {
-  color : green
+  color : green;
+
 }
 
 .error h4 {
   color : red
+}
+
+#status{
+  justify-content: center;
 }
