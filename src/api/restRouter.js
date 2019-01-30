@@ -7,7 +7,7 @@ import isLoggedIn from "./middleware/authenticate";
 
 const restRouter = express.Router();
 
-restRouter.use("/meetups",  meetupRouter);
+restRouter.use("/meetups", meetupRouter);
 restRouter.use("/questions", isLoggedIn, questionRouter);
 restRouter.use("/auth", userRouter);
 restRouter.use("/comments", isLoggedIn, commentRouter);
