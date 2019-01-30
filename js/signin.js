@@ -13,7 +13,6 @@ const handleFormSubmit = event => {
   })
     .then(res => res.json())
     .then(response => {
-      console.log(response);
       if (response.status === 200) {
         localStorage.setItem("token", JSON.stringify(response.data[0].token));
         localStorage.setItem("username", JSON.stringify(response.data[0].user.username));

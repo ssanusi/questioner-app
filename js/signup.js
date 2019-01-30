@@ -5,7 +5,6 @@ const handleFormSubmit = event => {
   event.preventDefault();
 
   const data = toJSONString(form);
-  console.log(data);
   const url = "https://questioner-app-api.herokuapp.com/api/v1/auth/signup";
   fetch(url, {
     method: "POST",
