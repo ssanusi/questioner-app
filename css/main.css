@@ -371,6 +371,7 @@ a.active:hover {
 
 .meetups {
   padding-bottom: 2rem;
+  min-height: 60vh;
 }
 
 .meetups h2 {
