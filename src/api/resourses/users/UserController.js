@@ -30,15 +30,18 @@ class UserController {
   }
 
   static login(req, res) {
-    const queryString = "SELECT  id,email,username,password,isadmin FROM users WHERE email = $1 ";
+    const queryString = "SELECT id,email,username,password,isadmin FROM users WHERE email = $1";
     db.query(queryString, [req.body.email])
       .then(data => {
         const user = data.rows[0];
         if (!user) {
-          res.status(404).json({ status: 404, error: "User not Found" });
+          return res.status(404).json({ status: 404, error: "User not Found" });
         }
         if (!checkPassword(req.body.password, user.password)) {
-          res.status(404).json({ status: 404, error: "invalid credentials" });
+          return res.status(404).json({ status: 404, error: "invalid credentials" });
+        }
+        if (checkAdminRoute(req.originalUrl) && !user.isadmin) {
+          return res.status(401).json({ status: 401, error: "Admin only " });
         }
         const token = createToken(user.id, user.isadmin);
         return res
