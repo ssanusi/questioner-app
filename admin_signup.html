@@ -27,30 +27,52 @@
 
     <!-- Aside -->
     <section id="signUp" class="col-1-4 aside">
-
       <!-- Sign up form -->
-      <form class="form card" action="admin_dashboard.html">
+      <form  id="signUp" name="signUp" class="form card">
         <h2 class="text-center">Sign Up</h2>
+         <div id="status"></div>
         <div>
           <label class="label label-block" for="name">
-            Full name
+            First Name
           </label>
-          <input type="text" placeholder="Enter full name"
-            id="name" required />
+          <input name="firstName" type="text" placeholder="John"
+            id="firstName" required />
         </div>
+        <div>
+          <label class="label label-block" for="name">
+            Last Name
+          </label>
+          <input name="lastName" type="text" placeholder="Doe"
+            id="lastName" required />
+        </div>
+        <div>
+            <label class="label label-block" for="phone">
+              phone:
+            </label>
+            <input name="phoneNumber" type="text" placeholder="08055555555"
+              id="phone" required />
+          </div>
         <div>
           <label class="label label-block" for="email">
             Email address:
           </label>
-          <input type="email" placeholder="admine@domain.com"
+          <input name="email" type="email" placeholder="username@domain.com"
             id="signUpemail" required />
         </div>
+        <div>
+            <label class="label label-block"
+              for="username">
+              username:
+            </label>
+            <input name="username" type="text" placeholder="user1234"
+              id="username" required />
+          </div>
         <div>
           <label class="label label-block"
             for="password">
             Password:
           </label>
-          <input type="password" placeholder="Enter password"
+          <input name="password" type="password" placeholder="password"
             id="signUppassword" required />
         </div>
         <div>
@@ -58,7 +80,7 @@
             for="confirmPassword">
             Confirm Password:
           </label>
-          <input type="password" placeholder="Enter password"
+          <input name="confirmPassword"type="password" placeholder="password"
             id="confirmPassword" required />
         </div>
         <button type="submit"
@@ -67,15 +89,15 @@
           Sign Up
         </button>
       </form>
-
       <!-- Footer -->
       <footer class="text-center">
-        <p>&copy; questioner <span id="year"></span>.
+        <p>&copy; questioner <span id="year"></span>
         </p>
       </footer>
     </section>
   </main>
-  <script src="js/main.js"></script>
+  <script src="js/helper/formToJson.js"></script>
+  <script src="js/adminSignup.js"></script>
 </body>
 
 </html>
