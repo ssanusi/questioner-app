@@ -28,21 +28,22 @@
     <section id="signIn" class="col-1-4 aside">
 
 			<!-- Sign in form -->
-			<form  class="form card" action="">
+			<form  id="login" class="form card" action="">
 				<h2 class="text-center">Sign In</h2>
-				<p class="text-center font-weight-bold">Welcome to questioner.</p>
+				<p class="text-center font-weight-bold">Welcome to questioner Admin Dashboard</p>
+				<div id="status"></div>
 				<div>
-					<label class="label label-block" for="email">
+					<label  class="label label-block" for="email">
 						Email address:
 					</label>
-					<input type="email" placeholder="johndoe@domain.com"
+					<input name="email" type="email" placeholder="johndoe@domain.com"
 						id="email" required />
 				</div>
 				<div>
 					<label class="label label-block" for="password">
 						Password:
 					</label>
-					<input type="password" placeholder="Enter password"
+					<input name="password" type="password" placeholder="Enter password"
 						id="password" required />
 				</div>
 				<button type="submit"
@@ -68,7 +69,7 @@
     </section>
 
   </main>
-  <script src="js/main.js"></script>
+	<script src="js/helper/formToJson.js"></script>
+  <script src="js/adminSignin.js"></script>
 </body>
-
 </html>

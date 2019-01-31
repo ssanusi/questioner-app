@@ -6,6 +6,7 @@ window.addEventListener("load", () => {
     const navContainer = document.getElementsByClassName("nav-container")[0];
     navContainer.classList.toggle("navbar-toggle-show");
   };
+
   const token = JSON.parse(localStorage.getItem("token"));
   const user = JSON.parse(localStorage.getItem("username"));
   if (!token) {
@@ -23,23 +24,23 @@ window.addEventListener("load", () => {
   })
     .then(res => res.json())
     .then(response => {
-      let output = "";
       response.data.forEach(element => {
-        output += `<div class="card meetup-menu-item">
-                      <img src=${element.images[0]} alt="">
-                      <p class="meetup">${element.topic}</p>
-                      <p class="meetup"><i class="fas fa-map-marker-alt"></i> ${
-                        element.location
-                      }</p>
-                      <p class="meetup"><i class="fas fa-calendar-alt"></i> ${moment(
-                        element.happeningon
-                      ).format("MMMM Do YYYY, h:mm:ss a")}</p>
-                      <button class="btn btn-default">
-                         <a href="meetup_detail.html">view Questions</a>
-                     </button>
-                     </div>`;
-        const meetupContainer = document.getElementById("meetups");
-        meetupContainer.innerHTML = output;
+        const row = `<tr>
+        <td>${moment(element.happeningon).format("MMMM Do YYYY")}</td>
+        <td>${element.topic}</td>
+        <td>${element.location}</td>
+        <td class="actions">
+          <span>
+            <button class="btn btn-light font-weight-bold">Edit</button>
+          </span>
+          <span>
+            <button class="btn  btn-danger font-weight-bold">Delete</button>
+          </span>
+        </td>
+      </tr>`;
+        const tbref = document.getElementById("table").getElementsByTagName("tbody")[0];
+        const newRow = tbref.insertRow(tbref.rows.length);
+        newRow.innerHTML = row;
       });
     });
 

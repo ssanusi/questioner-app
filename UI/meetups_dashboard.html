@@ -20,9 +20,9 @@
       <ul class="nav-container text-center">
         <!-- <li><a href="">Dashboard</a></li> -->
         <li><a href="add_meetup.html" id="addMeetup">Add Meetup</a></li>
-        <li><a href="meetups.html" class="active">Meetups</a></li>
-        <li><a href="#">admin</a></li>
+        <li><a href="#" id="user">user</a></li>
         <li><a href="index.html">Logout</a></li>
+        <script src="https://unpkg.com/moment"></script>
       </ul>
     </nav>
   </header>
@@ -32,7 +32,7 @@
      <section class="meetups text-dark">
       <h2 class="text-center">Meetups</h2>
       <div class="table-scroll text-center">
-        <table>
+        <table id="table">
           <caption class="text-left">
             &#9776; Meetups
           </caption>
@@ -44,75 +44,7 @@
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>22 January 2019</td>
-              <td>Introduction to HTML5</td>
-              <td>235 ikorodu road lagos</td>
-              <td class="actions">
-                <span>
-                  <button class="btn btn-light font-weight-bold">
-                    Edit
-                  </button>
-                </span>
-                <span>
-                  <button class="btn  btn-danger font-weight-bold">
-                    Delete
-                  </button>
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td>22 January 2019</td>
-              <td>Introduction to HTML5</td>
-              <td>235 ikorodu road lagos</td>
-              <td class="actions">
-                <span>
-                  <button class="btn btn-light font-weight-bold">
-                    Edit
-                  </button>
-                </span>
-                <span>
-                  <button class="btn btn-danger font-weight-bold">
-                    Delete
-                  </button>
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td>22 January 2019</td>
-              <td>Introduction to HTML5</td>
-              <td>235 ikorodu road lagos</td>
-              <td class="actions">
-                <span>
-                  <button class="btn btn-light font-weight-bold">
-                    Edit
-                  </button>
-                </span>
-                <span>
-                  <button class="btn  btn-danger font-weight-bold">
-                    Delete
-                  </button>
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td>22 January 2019</td>
-              <td>Introduction to HTML5</td>
-              <td>235 ikorodu road lagos</td>
-              <td class="actions">
-                <span>
-                  <button class="btn btn-light font-weight-bold">
-                    Edit
-                  </button>
-                </span>
-                <span>
-                  <button class="btn  btn-danger font-weight-bold">
-                    Delete
-                  </button>
-                </span>
-              </td>
-            </tr>
+          <tbody id="tbody">
           </tbody>
         </table>
       </div>
@@ -167,7 +99,7 @@
     <p>&copy; questioner <span id="year"></span>.
     </p>
   </footer>
-  <script src="js/main.js"></script>
+  <script src="js/Meetupdashboard.js"></script>
 </body>
 
 </html>
