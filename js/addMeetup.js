@@ -31,8 +31,11 @@ const handleFormSubmit = event => {
           window.location.href = "meetups_dashboard.html";
         }, 2000);
       }
-      if (response.error) {
-        statusDiv.innerHTML = `<div class="error"><h4>${Object.values(response.error)}</h4></div>`;
+      if (response.message === "Unauthorized Admin Route") {
+        statusDiv.innerHTML = `<div class="error"><h4>Unauthorized only Admin can Admin Can create meetup</h4></div>`;
+        setTimeout(() => {
+          window.location.href = "meetups_dashboard.html";
+        }, 2000);
       }
     });
 };
