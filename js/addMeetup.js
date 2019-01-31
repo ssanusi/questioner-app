@@ -34,7 +34,7 @@ const handleFormSubmit = event => {
       if (response.message === "Unauthorized Admin Route") {
         statusDiv.innerHTML = `<div class="error"><h4>Unauthorized only Admin can Admin Can create meetup</h4></div>`;
         setTimeout(() => {
-          window.location.href = "meetups_dashboard.html";
+          window.location.href = "meetups.html";
         }, 2000);
       }
     });
