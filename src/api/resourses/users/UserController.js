@@ -41,7 +41,7 @@ class UserController {
           return res.status(404).json({ status: 404, error: "invalid credentials" });
         }
         if (checkAdminRoute(req.originalUrl) && !user.isadmin) {
-          return res.status(401).json({ status: 401, error: "Admin only " });
+          return res.status(401).json({ status: 401, error: "Admin only" });
         }
         const token = createToken(user.id, user.isadmin);
         return res

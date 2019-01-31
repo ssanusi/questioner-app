@@ -292,4 +292,21 @@ describe("/User Resources", () => {
         });
     });
   });
+  it("User should get Unauthorized", done => {
+    const testUser = { email: "testuser@yahoo.com", password: "secret" };
+
+    chai
+      .request(app)
+      .post("/api/v1/admin/auth/login")
+      .send(testUser)
+      .end((err, res) => {
+        console.log(res.body);
+        expect(res).to.have.status(401);
+        expect(res.type).to.equal("application/json");
+        expect(res.body.status).to.equal(401);
+        expect(res.body).to.be.an("object");
+        expect(res.body.error).to.equal("Admin only");
+        done();
+      });
+  });
 });
