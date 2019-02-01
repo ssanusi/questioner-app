@@ -21,7 +21,6 @@ window.addEventListener("load", () => {
   })
     .then(res => res.json())
     .then(response => {
-      console.log(response);
       meetupDetail.innerHTML = `<div class="meetup-detail">
         <h1><i class="fab fa-meetup"></i> ${response.data[0].topic}</h1>
         <p><i class="fas fa-map-marker-alt"></i> ${response.data[0].location}</p>
