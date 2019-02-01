@@ -35,7 +35,7 @@ window.addEventListener("load", () => {
                         element.happeningon
                       ).format("MMMM Do YYYY, h:mm:ss a")}</p>
                       <button class="btn btn-default">
-                         <a href="meetup_detail.html">view Questions</a>
+                         <a href="meetup_detail.html?id=${element.id}">view Questions</a>
                      </button>
                      </div>`;
         const meetupContainer = document.getElementById("meetups");

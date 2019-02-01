@@ -14,6 +14,7 @@
     />
 
     <link rel="stylesheet" href="css/main.css" />
+    <script src="https://unpkg.com/moment"></script>
   </head>
   <body>
     <header class="navbar">
@@ -30,24 +31,7 @@
       </nav>
     </header>
     <main class="bg-light meetup-menu-main flex-container">
-      <section class="meetup-header">
-        <div class="meetup-detail">
-        <h1><i class="fab fa-meetup"></i>Introduction to Javacript</h1>
-        <p><i class="fas fa-map-marker-alt"></i> 235 ikorodu road ilupeju lagos</p>
-        <p><i class="fas fa-calendar-alt"></i> 20th January 2019</p>
-        <p><i class="far fa-clock"></i> 5:00 AM</p>
-      </div>
-      <img src="../UI/img/Meetup_Sky02.jpeg" alt="">
-      <div class="meetup-rsvp">
-          <h1>Are you coming</h1>
-          <i class="far fa-calendar-check fa-3x"></i>
-          <i class="far fa-calendar-times fa-3x"></i>
-          <div class="rsvp">
-              <h1>confirmed</h1>
-              <i class="far fa-check-circle fa-3x"></i>
-              <i class="far fa-times-circle fa-3x"></i>
-          </div>
-      </div>
+      <section class="meetup-header" id="meetup-detail">
       </section>
       <section class="card question-menu ">
           <button class="btn btn-default font-weight-bold" id="askQuestion">
@@ -167,6 +151,6 @@
     <footer class="text-center">
       <p>&copy; Questioner <span id="year"></span></p>
     </footer>
-    <script src="js/main.js"></script>
+    <script src="js/meetupDetail.js"></script>
   </body>
 </html>
