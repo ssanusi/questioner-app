@@ -7,7 +7,7 @@ const handleFormSubmit = event => {
   const token = JSON.parse(localStorage.getItem("token"));
   const user = JSON.parse(localStorage.getItem("username"));
   if (!token) {
-    window.location.href = "signin.html";
+    window.location.href = "admin_signin.html";
   }
 
   const data = toJSONString(form);
@@ -29,12 +29,6 @@ const handleFormSubmit = event => {
         statusDiv.innerHTML = `<div class="success"><h4>Meetup created Sucessfully</h4></div>`;
         setTimeout(() => {
           window.location.href = "meetups_dashboard.html";
-        }, 2000);
-      }
-      if (response.message === "Unauthorized Admin Route") {
-        statusDiv.innerHTML = `<div class="error"><h4>Unauthorized only Admin can Admin Can create meetup</h4></div>`;
-        setTimeout(() => {
-          window.location.href = "meetups.html";
         }, 2000);
       }
     });
