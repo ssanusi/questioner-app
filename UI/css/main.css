@@ -787,6 +787,7 @@ hr {
   footer {
     padding-top: 1.75rem;
     padding-bottom: 1.75rem;
+    bottom:0;
   }
 
   .add-section form {
@@ -798,6 +799,10 @@ hr {
     display: flex;
     justify-content: space-around;
     flex-direction: row;
+  }
+
+  .meetup-header{
+    width: 45%
   }
 
   .col-3-4 {
@@ -925,6 +930,10 @@ hr {
 
   .meetup-menu-item:nth-of-type(3n) {
     margin-right: auto;
+  }
+
+  .meetup-header{
+    width: 45%
   }
 }
 
