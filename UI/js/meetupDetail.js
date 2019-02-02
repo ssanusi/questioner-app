@@ -54,13 +54,14 @@ window.addEventListener("load", () => {
   })
     .then(res => res.json())
     .then(response => {
+      console.log(response.data)
       let output = "";
       response.data.forEach(element => {
         output += `<div class="question-menu-item">
        <div class="question-header"><h2 id="${element.id}">${element.title}</h2></div>
        <div class="question-body">
          <h3>${element.body}</h3>
-         <h4><i class="fas fa-user-circle fa-2x"></i> Sulaiman Sanusi</h4>
+         <h4><i class="fas fa-user-circle fa-2x"></i> ${element.firstname} ${element.lastname}</h4>
        </div>
        <div class="question-vote">
          <h4><i class="far fa-thumbs-up fa-3x"></i>${element.upvotes}</h4>
