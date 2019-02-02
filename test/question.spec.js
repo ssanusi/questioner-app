@@ -23,14 +23,14 @@ describe("/Question Resources", () => {
     it("should get all questions", done => {
       chai
         .request(app)
-        .get("/api/v1/questions")
+        .get("/api/v1/questions?id=1")
         .set("Authorization", userToken)
         .end((err, res) => {
           expect(res).to.have.status(200);
           expect(res.type).to.equal("application/json");
           expect(res.body.status).to.equal(200);
           expect(res.body.data).to.be.a("array");
-          expect(res.body.data.length).to.eq(5);
+          expect(res.body.data.length).to.eq(3);
           done();
         });
     });

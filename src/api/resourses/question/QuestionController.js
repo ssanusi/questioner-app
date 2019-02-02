@@ -3,8 +3,9 @@ import db from "../../../db";
 
 class QuestionController {
   static getAllQuestions(req, res) {
-    const queryString = "SELECT * FROM questions";
-    db.query(queryString).then(data => {
+    const queryString =
+      "SELECT questions.id, questions.title, questions.body, questions.upvotes, questions.downvotes, questions.meetupid, questions.userid , users.firstname, users.lastname FROM questions JOIN users ON questions.userid = users.id WHERE meetupid = $1";
+    db.query(queryString, [req.query.id]).then(data => {
       res.status(200).json({ status: 200, data: data.rows });
     });
   }
