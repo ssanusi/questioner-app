@@ -14,6 +14,10 @@ const meetupId = getParamUrl();
 const questionUrl = `https://questioner-app-api.herokuapp.com/api/v1/questions?id=${meetupId}`;
 
 window.addEventListener("load", () => {
+  if (!token) {
+    window.location.href = "signin.html";
+  }
+
   fetch(meetupUrl + meetupId, {
     method: "GET",
     headers: {
