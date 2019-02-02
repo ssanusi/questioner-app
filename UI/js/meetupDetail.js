@@ -54,8 +54,7 @@ window.addEventListener("load", () => {
   })
     .then(res => res.json())
     .then(response => {
-      console.log(response.data)
-      let output = "";
+      let output = "<h1>Questions</h1>";
       response.data.forEach(element => {
         output += `<div class="question-menu-item">
        <div class="question-header"><h2 id="${element.id}">${element.title}</h2></div>
