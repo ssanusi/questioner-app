@@ -1,6 +1,6 @@
 const meetupUrl = "https://questioner-app-api.herokuapp.com/api/v1/meetups/";
 const token = JSON.parse(localStorage.getItem("token"));
-const user = JSON.parse(localStorage.getItem("username"));
+const userId = localStorage.getItem("userId");
 const bearer = `Bearer ${token}`;
 const meetupDetail = document.getElementById("meetup-detail");
 const questionContainer = document.getElementById("question-container");
@@ -99,7 +99,6 @@ window.addEventListener("load", () => {
 
 const handleButtonClick = event => {
   event.preventDefault();
-  console.log(event.target);
   if (event.target.getAttribute("id") === "askQuestion") {
     modal.style.display = "block";
   }
@@ -113,18 +112,20 @@ const handleButtonClick = event => {
   }
 
   if (event.target.id === "submitQuestion") {
-    console.log("sending data......")
-    const data = toJSONString(form);
-    console.log(data)
+    let data = toJSONString(form);
+    data = JSON.parse(data);
+    data = Object.assign(data, { userId, meetupId });
     const url = "https://questioner-app-api.herokuapp.com/api/v1/questions/";
     fetch(url, {
       method: "POST",
-      body: data,
+      body: JSON.stringify(data),
       headers: { Authorization: bearer, "Content-Type": "application/json" }
     })
       .then(res => res.json())
       .then(response => {
-        console.log(response.data)
+        if (response.status === 201) {
+          window.location.reload("true");
+        }
       });
   }
 };
