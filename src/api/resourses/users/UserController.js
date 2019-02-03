@@ -56,8 +56,7 @@ class UserController {
                 user: {
                   email: user.email,
                   username: user.username,
-                  userId: user.id,
-                  fullName: `${user.firstname} ${user.lastname}`
+                  userId: user.id
                 }
               }
             ]
