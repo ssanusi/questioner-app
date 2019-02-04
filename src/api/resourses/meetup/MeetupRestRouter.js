@@ -13,6 +13,7 @@ meetupRouter
   .post(isLoggedIn, authorise, validateAddMeetup, MeetupController.createMeetup);
 
 meetupRouter.route("/upcoming").get(cors(), MeetupController.getAllupcoming);
+meetupRouter.route("/rsvps").get(isLoggedIn, MeetupController.getRsvpsByUser);
 
 meetupRouter
   .route("/:id")
