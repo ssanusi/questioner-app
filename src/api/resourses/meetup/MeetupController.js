@@ -76,6 +76,13 @@ class MeetupController {
         .json({ status: 200, message: "meetup deleted sucessfully", data: data.rows });
     });
   }
+
+  static getRsvpsByUser(req, res) {
+    const queryString = "SELECT * FROM rsvps WHERE userid = $1";
+    db.query(queryString, [req.user.userId]).then(data =>
+      res.status(200).json({ status: 200, data: data.rows })
+    );
+  }
 }
 
 export default MeetupController;

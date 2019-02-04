@@ -31,40 +31,36 @@ class UserController {
 
   static login(req, res) {
     const queryString = "SELECT id,email,username,password,isadmin FROM users WHERE email = $1";
-    db.query(queryString, [req.body.email])
-      .then(data => {
-        const user = data.rows[0];
-        if (!user) {
-          return res.status(404).json({ status: 404, error: "User not Found" });
-        }
-        if (!checkPassword(req.body.password, user.password)) {
-          return res.status(404).json({ status: 404, error: "invalid credentials" });
-        }
-        if (checkAdminRoute(req.originalUrl) && !user.isadmin) {
-          return res.status(401).json({ status: 401, error: "Admin only" });
-        }
-        const token = createToken(user.id, user.isadmin);
-        return res
-          .status(200)
-          .header("Authorization", `Bearer ${token}`)
-          .json({
-            status: 200,
-            data: [
-              {
-                token,
-                message: `welcome ${user.username}`,
-                user: {
-                  email: user.email,
-                  username: user.username,
-                  userId: user.id
-                }
+    db.query(queryString, [req.body.email]).then(data => {
+      const user = data.rows[0];
+      if (!user) {
+        return res.status(404).json({ status: 404, error: "User not Found" });
+      }
+      if (!checkPassword(req.body.password, user.password)) {
+        return res.status(404).json({ status: 404, error: "invalid credentials" });
+      }
+      if (checkAdminRoute(req.originalUrl) && !user.isadmin) {
+        return res.status(401).json({ status: 401, error: "Admin only" });
+      }
+      const token = createToken(user.id, user.isadmin);
+      return res
+        .status(200)
+        .header("Authorization", `Bearer ${token}`)
+        .json({
+          status: 200,
+          data: [
+            {
+              token,
+              message: `welcome ${user.username}`,
+              user: {
+                email: user.email,
+                username: user.username,
+                userId: user.id
               }
-            ]
-          });
-      })
-      .catch(error => {
-        res.status(400).json({ status: 400, error });
-      });
+            }
+          ]
+        });
+    });
   }
 }
 export default UserController;
