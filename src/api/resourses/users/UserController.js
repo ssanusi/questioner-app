@@ -53,7 +53,11 @@ class UserController {
               {
                 token,
                 message: `welcome ${user.username}`,
-                user: { email: user.email, username: user.username }
+                user: {
+                  email: user.email,
+                  username: user.username,
+                  userId: user.id
+                }
               }
             ]
           });

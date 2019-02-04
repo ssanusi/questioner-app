@@ -1,9 +1,13 @@
 const meetupUrl = "https://questioner-app-api.herokuapp.com/api/v1/meetups/";
 const token = JSON.parse(localStorage.getItem("token"));
-const user = JSON.parse(localStorage.getItem("username"));
+const userId = localStorage.getItem("userId");
 const bearer = `Bearer ${token}`;
 const meetupDetail = document.getElementById("meetup-detail");
 const questionContainer = document.getElementById("question-container");
+const modal = document.getElementById("questionModal");
+// const btn = document.getElementById("askQuestion");
+// const span = document.getElementsByClassName("close")[0];
+const form = document.getElementById("questionForm");
 
 const getParamUrl = () => {
   const urlString = window.location.search.substring(1);
@@ -92,3 +96,39 @@ window.addEventListener("load", () => {
       questionContainer.innerHTML = output;
     });
 });
+
+const handleButtonClick = event => {
+  event.preventDefault();
+  
+  if (event.target.getAttribute("id") === "askQuestion") {
+    modal.style.display = "block";
+  }
+
+  if (event.target.getAttribute("class") === "close" || event.target === modal) {
+    modal.style.display = "none";
+  }
+
+  if (event.target === modal) {
+    modal.style.display = "none";
+  }
+
+  if (event.target.id === "submitQuestion") {
+    let data = toJSONString(form);
+    data = JSON.parse(data);
+    data = Object.assign(data, { userId, meetupId });
+    const url = "https://questioner-app-api.herokuapp.com/api/v1/questions/";
+    fetch(url, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: { Authorization: bearer, "Content-Type": "application/json" }
+    })
+      .then(res => res.json())
+      .then(response => {
+        if (response.status === 201) {
+          window.location.reload("true");
+        }
+      });
+  }
+};
+
+window.addEventListener("click", handleButtonClick);

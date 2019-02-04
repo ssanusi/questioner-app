@@ -942,6 +942,10 @@ hr {
   .meetup-header{
     width: 45%
   }
+
+  .modal-content{
+    width: 40%
+  }
 }
 
 @media screen and (min-width: 1200px) {
@@ -955,6 +959,10 @@ hr {
 
   .aside {
     padding: 0;
+  }
+
+  .modal-content{
+    width: 40%
   }
 }
 
@@ -1015,6 +1023,7 @@ hr {
   padding-left: 0.2rem;
   padding-right: 0.2rem;
   height: 25%;
+  overflow-wrap: break-word;
 }
 
 .question-body p {
@@ -1089,7 +1098,6 @@ input[type="comment"] {
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 60%;
 }
 
 .close {
