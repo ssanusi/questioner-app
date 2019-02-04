@@ -8,6 +8,7 @@ const modal = document.getElementById("questionModal");
 // const btn = document.getElementById("askQuestion");
 // const span = document.getElementsByClassName("close")[0];
 const form = document.getElementById("questionForm");
+const questionUrl = "https://questioner-app-api.herokuapp.com/api/v1/questions/";
 
 const getParamUrl = () => {
   const urlString = window.location.search.substring(1);
@@ -15,7 +16,7 @@ const getParamUrl = () => {
   return params;
 };
 const meetupId = getParamUrl();
-const questionUrl = `https://questioner-app-api.herokuapp.com/api/v1/questions?id=${meetupId}`;
+const questionsUrl = `https://questioner-app-api.herokuapp.com/api/v1/questions?id=${meetupId}`;
 
 window.addEventListener("load", () => {
   if (!token) {
@@ -54,7 +55,7 @@ window.addEventListener("load", () => {
     </div>`;
     });
 
-  fetch(questionUrl, {
+  fetch(questionsUrl, {
     method: "GET",
     headers: {
       Authorization: bearer
@@ -63,7 +64,8 @@ window.addEventListener("load", () => {
     .then(res => res.json())
     .then(response => {
       let output = "<h1>Questions</h1>";
-      response.data.forEach(element => {
+      const sorted = response.data.sort((a, b) => a.downvotes - b.downvotes);
+      sorted.forEach(element => {
         output += `<div class="question-menu-item">
        <div class="question-header"><h2 id="${element.id}">${element.title}</h2></div>
        <div class="question-body">
@@ -71,9 +73,11 @@ window.addEventListener("load", () => {
          <h4><i class="fas fa-user-circle fa-2x"></i> ${element.firstname} ${element.lastname}</h4>
        </div>
        <div class="question-vote">
-         <h4><i class="far fa-thumbs-up fa-3x"></i>${element.upvotes}</h4>
+         <h4><i class="far fa-thumbs-up fa-3x" data-upvote=${element.id}></i>${element.upvotes}</h4>
 
-         <h4><i class="far fa-thumbs-down fa-3x"></i>${element.downvotes}</h4>
+         <h4><i class="far fa-thumbs-down fa-3x"  data-downvote=${element.id}></i>${
+          element.downvotes
+        }</h4>
        </div>
        <div>
          <h3>comments<i class="fas fa-sort-down fa-2x"></i></h3>
@@ -99,7 +103,7 @@ window.addEventListener("load", () => {
 
 const handleButtonClick = event => {
   event.preventDefault();
-  
+  console.log(event.target);
   if (event.target.getAttribute("id") === "askQuestion") {
     modal.style.display = "block";
   }
@@ -127,6 +131,32 @@ const handleButtonClick = event => {
         if (response.status === 201) {
           window.location.reload("true");
         }
+      });
+  }
+  if (event.target.matches("[data-upvote]")) {
+    const id = event.target.getAttribute("data-upvote");
+    fetch(`${questionUrl}${id}/upvote`, {
+      method: "PATCH",
+      headers: {
+        Authorization: bearer
+      }
+    })
+      .then(res => res.json())
+      .then(response => {
+        window.location.reload(true);
+      });
+  }
+  if (event.target.matches("[data-downvote]")) {
+    const id = event.target.getAttribute("data-downvote");
+    fetch(`${questionUrl}${id}/downvote`, {
+      method: "PATCH",
+      headers: {
+        Authorization: bearer
+      }
+    })
+      .then(res => res.json())
+      .then(response => {
+        window.location.reload(true);
       });
   }
 };
