@@ -673,8 +673,9 @@ input[type="date"] {
   margin-top: 5px;
 }
 
-.meetup-rsvp {
+#meetup-rsvp {
  color: #333;
+ display: none;
 }
 
 .meetup-menu-item p {
@@ -1162,7 +1163,8 @@ input[type="comment"] {
 }
 
 .rsvp{
-    /* display: ; */
+    display: none;
+    color: #333;
 }
 
 .meetup-flex{
