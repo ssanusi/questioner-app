@@ -134,4 +134,29 @@ describe("/Comment Resourse", () => {
         });
     });
   });
+
+  describe("GET /comments", () => {
+    it("Should get all comments for a specific question", done => {
+      chai
+        .request(app)
+        .get("/api/v1/comments?questionId=1")
+        .set("Authorization", userToken)
+        .end((err, res) => {
+          expect(res).to.have.status(200);
+          expect(res.type).to.equal("application/json");
+          done();
+        });
+    });
+    it("Should return error comments not found question", done => {
+      chai
+        .request(app)
+        .get("/api/v1/comments?questionId=th")
+        .set("Authorization", userToken)
+        .end((err, res) => {
+          expect(res).to.have.status(400);
+          expect(res.type).to.equal("application/json");
+          done();
+        });
+    });
+  });
 });
