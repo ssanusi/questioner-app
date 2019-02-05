@@ -19,7 +19,6 @@ window.addEventListener("load", () => {
   if (!token) {
     window.location.href = "signin.html";
   }
-  const output = "";
   fetch(meetupUrl + meetupId, {
     method: "GET",
     headers: {
@@ -94,9 +93,11 @@ window.addEventListener("load", () => {
     .then(res => res.json())
     .then(response => {
       const meetupRsvp = document.getElementById("meetup-rsvp");
+
       const rsvped = response.data.findIndex(
         element => element.meetupid === parseInt(meetupId, 10)
       );
+
       if (response.data.length === 0 || rsvped === -1) {
         meetupRsvp.style.display = "block";
       } else if (response.data[rsvped].response === "yes") {
@@ -115,6 +116,7 @@ window.addEventListener("load", () => {
 
 const handleButtonClick = event => {
   event.preventDefault();
+  console.log(event.target);
   if (event.target.getAttribute("id") === "askQuestion") {
     modal.style.display = "block";
   }
@@ -143,6 +145,17 @@ const handleButtonClick = event => {
           window.location.reload("true");
         }
       });
+  }
+
+  if (event.target.matches("[data-rsvpin]")) {
+    console.log(event.target.getAttribute("data-rsvpin"));
+    fetch(`${meetupUrl}${meetupId}rsvps`, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: { Authorization: bearer, "Content-Type": "application/json" }
+    })
+      .then(res => res.json())
+      .then(response => {});
   }
 };
 
