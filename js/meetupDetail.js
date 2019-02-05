@@ -5,8 +5,6 @@ const bearer = `Bearer ${token}`;
 const meetupDetail = document.getElementById("meetup-detail");
 const questionContainer = document.getElementById("question-container");
 const modal = document.getElementById("questionModal");
-// const btn = document.getElementById("askQuestion");
-// const span = document.getElementsByClassName("close")[0];
 const form = document.getElementById("questionForm");
 const questionUrl = "https://questioner-app-api.herokuapp.com/api/v1/questions/";
 
@@ -103,7 +101,6 @@ window.addEventListener("load", () => {
 
 const handleButtonClick = event => {
   event.preventDefault();
-  console.log(event.target);
   if (event.target.getAttribute("id") === "askQuestion") {
     modal.style.display = "block";
   }
