@@ -116,7 +116,6 @@ window.addEventListener("load", () => {
 
 const handleButtonClick = event => {
   event.preventDefault();
-  console.log(event.target);
   if (event.target.getAttribute("id") === "askQuestion") {
     modal.style.display = "block";
   }
@@ -148,14 +147,18 @@ const handleButtonClick = event => {
   }
 
   if (event.target.matches("[data-rsvpin]")) {
-    console.log(event.target.getAttribute("data-rsvpin"));
-    fetch(`${meetupUrl}${meetupId}rsvps`, {
+    const data = JSON.stringify({ meetupId, status: event.target.getAttribute("data-rsvpin") });
+    fetch(`${meetupUrl}${meetupId}/rsvps`, {
       method: "POST",
-      body: JSON.stringify(data),
+      body: data,
       headers: { Authorization: bearer, "Content-Type": "application/json" }
     })
       .then(res => res.json())
-      .then(response => {});
+      .then(response => {
+        if (response.status === 201) {
+          window.location.reload("true");
+        }
+      });
   }
 };
 
