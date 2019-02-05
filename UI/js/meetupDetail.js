@@ -5,8 +5,6 @@ const bearer = `Bearer ${token}`;
 const meetupDetail = document.getElementById("meetup-detail");
 const questionContainer = document.getElementById("question-container");
 const modal = document.getElementById("questionModal");
-// const btn = document.getElementById("askQuestion");
-// const span = document.getElementsByClassName("close")[0];
 const form = document.getElementById("questionForm");
 
 const getParamUrl = () => {
@@ -21,7 +19,7 @@ window.addEventListener("load", () => {
   if (!token) {
     window.location.href = "signin.html";
   }
-
+  const output = "";
   fetch(meetupUrl + meetupId, {
     method: "GET",
     headers: {
@@ -31,6 +29,7 @@ window.addEventListener("load", () => {
     .then(res => res.json())
     .then(response => {
       meetupDetail.innerHTML = `<div class="meetup-detail">
+          <div>
         <h1><i class="fab fa-meetup"></i> ${response.data[0].topic}</h1>
         <p><i class="fas fa-map-marker-alt"></i> ${response.data[0].location}</p>
         <p><i class="fas fa-calendar-alt"></i> ${moment(response.data[0].happeningon).format(
@@ -41,16 +40,6 @@ window.addEventListener("load", () => {
       </button>
     </div>
     <img src="${response.data[0].images[0]}" alt="">
-    <div class="meetup-rsvp">
-          <h1>Are you coming</h1>
-          <i class="far fa-calendar-check fa-3x"></i>
-          <i class="far fa-calendar-times fa-3x"></i>
-
-      </div>
-      <div class="rsvp">
-        <h1>confirmed</h1>
-        <i class="far fa-check-circle fa-3x"></i>
-        <i class="far fa-times-circle fa-3x"></i>
     </div>`;
     });
 
@@ -95,11 +84,37 @@ window.addEventListener("load", () => {
       });
       questionContainer.innerHTML = output;
     });
+
+  fetch(`${meetupUrl}rsvps`, {
+    method: "GET",
+    headers: {
+      Authorization: bearer
+    }
+  })
+    .then(res => res.json())
+    .then(response => {
+      const meetupRsvp = document.getElementById("meetup-rsvp");
+      const rsvped = response.data.findIndex(
+        element => element.meetupid === parseInt(meetupId, 10)
+      );
+      if (response.data.length === 0 || rsvped === -1) {
+        meetupRsvp.style.display = "block";
+      } else if (response.data[rsvped].response === "yes") {
+        const rsvpStatus = document.getElementById("rsvpStatus");
+        rsvpStatus.innerHTML = `<h1>confirmed</h1>
+        <i class="far fa-check-circle fa-3x"></i>`;
+        rsvpStatus.style.display = "block";
+      } else if (response.data[rsvped].response === "no") {
+        const rsvpStatus = document.getElementById("rsvpStatus");
+        rsvpStatus.innerHTML = `<h1>confirmed</h1>
+        <i class="far fa-times-circle fa-3x"></i>`;
+        rsvpStatus.style.display = "block";
+      }
+    });
 });
 
 const handleButtonClick = event => {
   event.preventDefault();
-  
   if (event.target.getAttribute("id") === "askQuestion") {
     modal.style.display = "block";
   }
