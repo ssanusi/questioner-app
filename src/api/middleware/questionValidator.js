@@ -2,9 +2,8 @@ import validator from "validator";
 import isEmpty from "lodash.isempty";
 
 const validateAddQuestion = (req, res, next) => {
-  const { userId, meetupId, title, body } = req.body;
+  const { meetupId, title, body } = req.body;
   const error = {};
-  
 
   if (!meetupId) {
     error.meetupId = "meetupId field is required";
