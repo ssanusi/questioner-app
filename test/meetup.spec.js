@@ -287,6 +287,7 @@ describe("/Meetups Resources", () => {
     });
   });
   describe("GET /meetups/<id>/rsvps", () => {
+<<<<<<< HEAD
     it("should reply with error MeetupId is not passed", done => {
       chai
         .request(app)
@@ -318,14 +319,19 @@ describe("/Meetups Resources", () => {
           done();
         });
     });
+=======
+>>>>>>> [feature #163728997] refactor test
     it("should reply with error status field is not passed", done => {
       chai
         .request(app)
         .post("/api/v1/meetups/1/rsvps")
         .set("Authorization", userToken)
+<<<<<<< HEAD
         .send({
           meetupId: "1"
         })
+=======
+>>>>>>> [feature #163728997] refactor test
         .end((err, res) => {
           expect(res).to.have.status(400);
           expect(res.type).to.equal("application/json");
@@ -339,7 +345,10 @@ describe("/Meetups Resources", () => {
         .post("/api/v1/meetups/1/rsvps")
         .set("Authorization", userToken)
         .send({
+<<<<<<< HEAD
           meetupId: "1",
+=======
+>>>>>>> [feature #163728997] refactor test
           status: ""
         })
         .end((err, res) => {
@@ -355,7 +364,6 @@ describe("/Meetups Resources", () => {
         .post("/api/v1/meetups/rsvps")
         .set("Authorization", userToken)
         .send({
-          meetupId: "1",
           status: "no"
         })
         .end((err, res) => {
@@ -370,7 +378,10 @@ describe("/Meetups Resources", () => {
         .post("/api/v1/meetups/meetupId/rsvps")
         .set("Authorization", userToken)
         .send({
+<<<<<<< HEAD
           meetupId: "1",
+=======
+>>>>>>> [feature #163728997] refactor test
           status: "no"
         })
         .end((err, res) => {
@@ -386,7 +397,10 @@ describe("/Meetups Resources", () => {
         .post("/api/v1/meetups/7/rsvps")
         .set("Authorization", userToken)
         .send({
+<<<<<<< HEAD
           meetupId: "1",
+=======
+>>>>>>> [feature #163728997] refactor test
           status: "yes"
         })
         .end((err, res) => {
