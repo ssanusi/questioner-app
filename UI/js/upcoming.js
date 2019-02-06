@@ -4,6 +4,8 @@ window.addEventListener("load", () => {
     .then(response => {
       let output = "";
       response.data.forEach(element => {
+        const spinner = document.getElementById("spinner");
+        spinner.style.display = "none";
         output += `<div class="card meetup-menu-item">
           <img src=${element.images[0]} />
           <p class="meetup"> ${element.topic}</p>

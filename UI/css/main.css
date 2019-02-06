@@ -914,8 +914,6 @@ hr {
     margin: 0 1.125rem;
   }
 
-
-
   .form-group{
     display: flex;
     justify-content: space-between;
@@ -953,11 +951,11 @@ hr {
   }
 
   .modal-content{
-    width: 40%
+    width: 30%
   }
 
   .form{
-    width: 90%
+    width: 50%
   }
   .form-group{
     display: flex;
@@ -984,7 +982,7 @@ hr {
   }
 
   .form {
-    width: 75%
+    width: 50%
   }
 
   .form-group{
@@ -1227,6 +1225,10 @@ input[type="comment"] {
 .spinner{
   width: 80px;
   height: 80px;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  
 
   border: 2px solid #333;
   border-top:3px solid #fff;
@@ -1253,6 +1255,7 @@ input[type="comment"] {
 .form-group{
   display: flex;
   justify-content: space-between;
+  flex-direction: row
 }
 
 .comments-body{
