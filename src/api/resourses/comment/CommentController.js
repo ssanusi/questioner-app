@@ -6,7 +6,7 @@ class CommentController {
     Db.query(questionQueryString, [req.body.questionId]).then(qdata => {
       const commentQueryString =
         "INSERT INTO comments(questionId,userId,comment) VALUES($1,$2,$3) returning comment, questionid";
-      const values = [req.body.questionId, req.body.userId, req.body.comment];
+      const values = [req.body.questionId, req.user.userId, req.body.comment];
       Db.query(commentQueryString, values)
         .then(cdata =>
           res.status(201).json({ status: 201, data: Object.assign(cdata.rows[0], qdata.rows[0]) })
