@@ -26,6 +26,8 @@ window.addEventListener("load", () => {
   })
     .then(res => res.json())
     .then(response => {
+      const spinner = document.getElementById("spinner");
+      spinner.style.display = "none";
       response.data.forEach(element => {
         const row = `<tr>
         <td>${moment(element.happeningon).format("MMMM Do YYYY")}</td>

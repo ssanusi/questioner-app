@@ -23,6 +23,8 @@ window.addEventListener("load", () => {
   })
     .then(res => res.json())
     .then(response => {
+      const spinner = document.getElementById("spinner");
+      spinner.style.display = "none";
       let output = "";
       response.data.forEach(element => {
         output += `<div class="card meetup-menu-item">
@@ -34,8 +36,10 @@ window.addEventListener("load", () => {
                       <p class="meetup"><i class="fas fa-calendar-alt"></i> ${moment(
                         element.happeningon
                       ).format("MMMM Do YYYY, h:mm:ss a")}</p>
-                      <button class="btn btn-default">
-                         <a href="meetup_detail.html?id=${element.id}">view Questions</a>
+                      <button onclick="location.href='meetup_detail.html?id=${
+                        element.id
+                      }';" class="btn btn-default">
+                         view Questions
                      </button>
                      </div>`;
         const meetupContainer = document.getElementById("meetups");
