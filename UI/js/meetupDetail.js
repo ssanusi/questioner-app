@@ -112,28 +112,15 @@ window.addEventListener("load", () => {
     });
 });
 
-const handleOnChange = event => {
-  const comment = event.target.value;
-  const questionId = event.target.getAttribute("data-addComment");
-  const commentUrl = "https://questioner-app-api.herokuapp.com/api/v1/comments";
-
-  fetch(commentUrl, {
-    method: "POST",
-    body: JSON.stringify({ questionId, comment }),
-    headers: { Authorization: bearer, "Content-Type": "application/json" }
-  })
-    .then(res => res.json())
-    .then(response => {
-      window.location.reload(true);
-    });
-};
-
 const handleButtonClick = event => {
   event.preventDefault();
+
+  // Modal for add aquestion form
   if (event.target.getAttribute("id") === "askQuestion") {
     modal.style.display = "block";
   }
 
+  // Modal for closing add question form
   if (event.target.getAttribute("class") === "close" || event.target === modal) {
     modal.style.display = "none";
   }
@@ -142,6 +129,7 @@ const handleButtonClick = event => {
     modal.style.display = "none";
   }
 
+  // Submit Question handler
   if (event.target.id === "submitQuestion") {
     let data = toJSONString(form);
     data = JSON.parse(data);
@@ -159,6 +147,7 @@ const handleButtonClick = event => {
         }
       });
   }
+  // Get Comment handler
   if (event.target.matches("[data-comments]")) {
     const questionId = event.target.getAttribute("data-comments");
     const commentsUrl = `https://questioner-app-api.herokuapp.com/api/v1/comments?questionId=${questionId}`;
@@ -185,7 +174,7 @@ const handleButtonClick = event => {
         commentToggle.style.display = "block";
       });
   }
-
+// Post RSVP handler
   if (event.target.matches("[data-rsvpin]")) {
     const data = JSON.stringify({ meetupId, status: event.target.getAttribute("data-rsvpin") });
     fetch(`${meetupUrl}${meetupId}/rsvps`, {
@@ -200,7 +189,7 @@ const handleButtonClick = event => {
         }
       });
   }
-
+// handler for upvote
   if (event.target.matches("[data-upvote]")) {
     const id = event.target.getAttribute("data-upvote");
     fetch(`${questionUrl}${id}/upvote`, {
@@ -214,7 +203,7 @@ const handleButtonClick = event => {
         window.location.reload(true);
       });
   }
-
+// handler for downvote
   if (event.target.matches("[data-downvote]")) {
     const id = event.target.getAttribute("data-downvote");
     fetch(`${questionUrl}${id}/downvote`, {
@@ -228,7 +217,25 @@ const handleButtonClick = event => {
         window.location.reload(true);
       });
   }
+  // handler for add comment 
+  if (event.target.matches("[data-addComment]")) {
+    const commentInput = event.target;
+    const questionId = event.target.getAttribute("data-addComment");
+    const commentUrl = "https://questioner-app-api.herokuapp.com/api/v1/comments";
+
+    commentInput.addEventListener("change", () => {
+      const comment = event.target.value;
+      fetch(commentUrl, {
+        method: "POST",
+        body: JSON.stringify({ questionId, comment }),
+        headers: { Authorization: bearer, "Content-Type": "application/json" }
+      })
+        .then(res => res.json())
+        .then(response => {
+          window.location.reload(true);
+        });
+    });
+  }
 };
 
 window.addEventListener("click", handleButtonClick);
-window.addEventListener("change", handleOnChange);
