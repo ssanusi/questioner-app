@@ -914,7 +914,7 @@ hr {
     margin: 0 1.125rem;
   }
 
-  
+
 
   .form-group{
     display: flex;
@@ -1050,7 +1050,8 @@ hr {
 .question-body {
   padding-left: 0.2rem;
   padding-right: 0.2rem;
-  height: 25%;
+  /* height: 25%; */
+  height: fit-content;
   overflow-wrap: break-word;
 }
 
@@ -1174,9 +1175,10 @@ input[type="comment"] {
   margin-bottom: 2px;
   justify-content: flex-start;
   align-items: center;
+  height: 1.5rem;
 }
 
-.comment h3 {
+.comment h5 {
   margin: 0;
   padding: 0;
   margin-right: 10px;
@@ -1251,4 +1253,9 @@ input[type="comment"] {
 .form-group{
   display: flex;
   justify-content: space-between;
+}
+
+.comments-body{
+ display: flex;
+ flex-direction: column;
 }
