@@ -157,7 +157,7 @@ footer a:hover {
 }
 
 .form {
-  width: 17.1875rem; /* 275px */
+  width: 80%; /* 275px */
   background: #fff;
   padding: 30px;
   margin: 2rem auto;
@@ -912,6 +912,14 @@ hr {
   hr {
     margin: 0 1.125rem;
   }
+
+  
+
+  .form-group{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row
+  }
 }
 
 @media screen and (min-width: 1024px) {
@@ -946,6 +954,15 @@ hr {
   .modal-content{
     width: 40%
   }
+
+  .form{
+    width: 90%
+  }
+  .form-group{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row
+  }
 }
 
 @media screen and (min-width: 1200px) {
@@ -963,6 +980,16 @@ hr {
 
   .modal-content{
     width: 40%
+  }
+
+  .form {
+    width: 75%
+  }
+
+  .form-group{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row
   }
 }
 
@@ -1191,4 +1218,35 @@ input[type="comment"] {
 #status{
   display: flex;
   justify-content: center;
+}
+
+.spinner{
+  width: 80px;
+  height: 80px;
+
+  border: 2px solid #333;
+  border-top:3px solid #fff;
+  border-radius: 100%;
+
+  position: absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right: 0;
+  margin: auto;
+
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  from{
+      transform: rotate(0deg);
+  }to{
+      transform: rotate(360deg);
+  }
+}
+
+.form-group{
+  display: flex;
+  justify-content: space-between;
 }
