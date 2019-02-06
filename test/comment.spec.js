@@ -96,24 +96,6 @@ describe("/Comment Resourse", () => {
         .end((err, res) => {
           expect(res).to.have.status(400);
           expect(res.type).to.equal("application/json");
-          expect(res.body.error.userId).to.equal("userId is required");
-          done();
-        });
-    });
-    it("Should respond with error to a question", done => {
-      chai
-        .request(app)
-        .post("/api/v1/comments")
-        .set("Authorization", userToken)
-        .send({
-          userId: "m",
-          questionId: "1",
-          comment: "what is execution context fdfdsfsddsfdof javacript"
-        })
-        .end((err, res) => {
-          expect(res).to.have.status(400);
-          expect(res.type).to.equal("application/json");
-          expect(res.body.error.userId).to.equal("userId should be numeric");
           done();
         });
     });
