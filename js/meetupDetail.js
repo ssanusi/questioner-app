@@ -151,7 +151,6 @@ const handleButtonClick = event => {
       });
   }
 
-
   if (event.target.matches("[data-rsvpin]")) {
     const data = JSON.stringify({ meetupId, status: event.target.getAttribute("data-rsvpin") });
     fetch(`${meetupUrl}${meetupId}/rsvps`, {
@@ -164,6 +163,8 @@ const handleButtonClick = event => {
         if (response.status === 201) {
           window.location.reload("true");
         }
+      });
+  }
 
   if (event.target.matches("[data-upvote]")) {
     const id = event.target.getAttribute("data-upvote");
@@ -178,6 +179,7 @@ const handleButtonClick = event => {
         window.location.reload(true);
       });
   }
+
   if (event.target.matches("[data-downvote]")) {
     const id = event.target.getAttribute("data-downvote");
     fetch(`${questionUrl}${id}/downvote`, {
@@ -192,5 +194,4 @@ const handleButtonClick = event => {
       });
   }
 };
-
 window.addEventListener("click", handleButtonClick);
