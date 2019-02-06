@@ -101,6 +101,7 @@ window.addEventListener("load", () => {
 
 const handleButtonClick = event => {
   event.preventDefault();
+
   if (event.target.getAttribute("id") === "askQuestion") {
     modal.style.display = "block";
   }
