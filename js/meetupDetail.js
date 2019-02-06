@@ -51,6 +51,8 @@ window.addEventListener("load", () => {
   })
     .then(res => res.json())
     .then(response => {
+      const spinner = document.getElementById("spinner");
+      spinner.style.display = "none";
       let output = "<h1>Questions</h1>";
       const sorted = response.data.sort((a, b) => a.downvotes - b.downvotes);
       sorted.forEach(element => {
@@ -217,7 +219,7 @@ const handleButtonClick = event => {
         window.location.reload(true);
       });
   }
-  // handler for add comment 
+  // handler for add comment
   if (event.target.matches("[data-addComment]")) {
     const commentInput = event.target;
     const questionId = event.target.getAttribute("data-addComment");

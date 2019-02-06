@@ -1,6 +1,8 @@
 const form = document.getElementById("login");
 const statusDiv = document.getElementById("status");
 
+
+
 const handleFormSubmit = event => {
   event.preventDefault();
 
