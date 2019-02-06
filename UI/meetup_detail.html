@@ -31,7 +31,15 @@
       </nav>
     </header>
     <main class="bg-light meetup-menu-main flex-container">
-      <section class="meetup-header" id="meetup-detail">
+      <section class="meetup-header" >
+          <div id="meetup-detail"></div>
+          <div class="meetup-rsvp" id="meetup-rsvp">
+              <h1>Are you coming</h1>
+              <i class="far fa-calendar-check fa-3x" data-rsvpIn="yes"></i>
+              <i class="far fa-calendar-times fa-3x" data-rsvpIn="no"></i>
+          </div>
+          <div class="rsvp" id="rsvpStatus">
+        </div>
       </section>
       <section class="card question-menu" id="question-container" style="min-height: 60vh">
       </section>

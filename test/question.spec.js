@@ -8,7 +8,7 @@ chai.use(chaiHttp);
 
 describe("/Question Resources", () => {
   let userToken;
-  beforeEach(done => {
+  before(done => {
     chai
       .request(app)
       .post("/api/v1/auth/login")
@@ -42,13 +42,11 @@ describe("/Question Resources", () => {
         .post("/api/v1/questions")
         .set("Authorization", userToken)
         .send({
-          userId: "1",
           meetupId: "1",
           title: "what is execution context",
           body: "How can we implement execution cotext"
         })
         .end((err, res) => {
-          console.log(res.body)
           expect(res).to.have.status(201);
           expect(res.type).to.equal("application/json");
           expect(res.body.status).to.equal(201);
@@ -63,7 +61,6 @@ describe("/Question Resources", () => {
         .post("/api/v1/questions")
         .set("Authorization", userToken)
         .send({
-          userId: "1",
           meetupId: "5",
           title: "what is execution context",
           body: "How can we implement execution cotext"
@@ -81,7 +78,6 @@ describe("/Question Resources", () => {
         .post("/api/v1/questions")
         .set("Authorization", userToken)
         .send({
-          userId: "1",
           meetupId: "1",
           body: "How can we implement execution cotext"
         })
@@ -98,7 +94,6 @@ describe("/Question Resources", () => {
         .post("/api/v1/questions")
         .set("Authorization", userToken)
         .send({
-          userId: "1",
           meetupId: "1",
           body: "How can we implement execution cotext",
           title: ""
@@ -110,48 +105,12 @@ describe("/Question Resources", () => {
           done();
         });
     });
-    it("should return error for missing user field", done => {
-      chai
-        .request(app)
-        .post("/api/v1/questions")
-        .set("Authorization", userToken)
-        .send({
-          title: "what is closure",
-          topic: "what is execution context",
-          body: "How can we implement execution cotext"
-        })
-        .end((err, res) => {
-          expect(res).to.have.status(400);
-          expect(res.type).to.equal("application/json");
-          expect(res.body.error.userId).to.equal("user field is required");
-          done();
-        });
-    });
-    it("should return error for empty user field", done => {
-      chai
-        .request(app)
-        .post("/api/v1/questions")
-        .set("Authorization", userToken)
-        .send({
-          userId: "",
-          title: "what is closure",
-          topic: "what is execution context",
-          body: "How can we implement execution cotext"
-        })
-        .end((err, res) => {
-          expect(res).to.have.status(400);
-          expect(res.type).to.equal("application/json");
-          expect(res.body.error.userId).to.equal("user field is required");
-          done();
-        });
-    });
     it("should return error for missing meetupId field", done => {
       chai
         .request(app)
         .post("/api/v1/questions")
         .set("Authorization", userToken)
         .send({
-          userId: "1",
           title: "what is closure",
           body: "How can we implement execution cotext"
         })
@@ -168,7 +127,6 @@ describe("/Question Resources", () => {
         .post("/api/v1/questions")
         .set("Authorization", userToken)
         .send({
-          userId: "1",
           title: "what is closure",
           meetupId: "",
           body: "How can we implement execution cotext"
@@ -186,7 +144,6 @@ describe("/Question Resources", () => {
         .post("/api/v1/questions")
         .set("Authorization", userToken)
         .send({
-          userId: "1",
           title: "what is closure",
           meetupId: "1"
         })
@@ -203,7 +160,6 @@ describe("/Question Resources", () => {
         .post("/api/v1/questions")
         .set("Authorization", userToken)
         .send({
-          userId: "1",
           title: "what is closure",
           meetupId: "1",
           body: ""
@@ -215,30 +171,12 @@ describe("/Question Resources", () => {
           done();
         });
     });
-    it("should return error user does not exit ", done => {
-      chai
-        .request(app)
-        .post("/api/v1/questions")
-        .set("Authorization", userToken)
-        .send({
-          userId: "10",
-          title: "what is closure",
-          meetupId: "1",
-          body: "nkdsfbdsfjnsdaknsnfsdnfknakdnkldsnaknfsd"
-        })
-        .end((err, res) => {
-          expect(res).to.have.status(400);
-          expect(res.type).to.equal("application/json");
-        });
-      done();
-    });
     it("should return error meetupId does not exit ", done => {
       chai
         .request(app)
         .post("/api/v1/questions")
         .set("Authorization", userToken)
         .send({
-          userId: "1",
           title: "what is closure",
           meetupId: "10",
           body: "nkdsfbdsfjnsdaknsnfsdnfknakdnkldsnaknfsd"
@@ -248,23 +186,6 @@ describe("/Question Resources", () => {
           expect(res.type).to.equal("application/json");
         });
       done();
-    });
-    it("should return error user should be a number  ", done => {
-      chai
-        .request(app)
-        .post("/api/v1/questions")
-        .set("Authorization", userToken)
-        .send({
-          userId: "me",
-          title: "what is closure",
-          meetupId: "10",
-          body: "nkdsfbdsfjnsdaknsnfsdnfknakdnkldsnaknfsd"
-        })
-        .end((err, res) => {
-          expect(res).to.have.status(400);
-          expect(res.type).to.equal("application/json");
-          done();
-        });
     });
     it("should return error meetupId should be a number  ", done => {
       chai
@@ -272,7 +193,6 @@ describe("/Question Resources", () => {
         .post("/api/v1/questions")
         .set("Authorization", userToken)
         .send({
-          userId: "1",
           title: "what is closure",
           meetupId: "me",
           body: "nkdsfbdsfjnsdaknsnfsdnfknakdnkldsnaknfsd"
@@ -300,8 +220,6 @@ describe("/Question Resources", () => {
           done();
         });
     });
-  });
-  describe("GET /questions/<id>", () => {
     it("should return error", done => {
       chai
         .request(app)
@@ -315,6 +233,9 @@ describe("/Question Resources", () => {
         });
     });
   });
+  // describe("GET /questions/<id>", () => {
+
+  // });
   describe("PATCH /questions/<id>/upvote", () => {
     it("should upvote a question", done => {
       chai

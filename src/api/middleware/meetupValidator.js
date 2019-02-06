@@ -29,16 +29,13 @@ export const validateAddMeetup = (req, res, next) => {
 };
 
 export const validateAddRsvp = (req, res, next) => {
-  const { user, topic, status } = req.body;
+  const { meetupId, status } = req.body;
   const { id } = req.params;
   const validatedMeetup = {};
   const error = {};
-  if (user) {
-    validatedMeetup.user = parseInt(user, 10);
-  }
 
-  if (topic) {
-    validatedMeetup.topic = topic;
+  if (meetupId) {
+    validatedMeetup.meetupId = meetupId;
   }
 
   if (status) {
@@ -47,12 +44,9 @@ export const validateAddRsvp = (req, res, next) => {
   if (id) {
     validatedMeetup.meetup = parseInt(id, 10);
   }
-  if (!user) {
-    error.user = "User field is Required";
-  }
 
-  if (!topic) {
-    error.topic = "Topic field is Required";
+  if (!meetupId) {
+    error.meetupId = "meetupId field is Required";
   }
 
   if (!status) {

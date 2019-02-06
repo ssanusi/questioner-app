@@ -273,8 +273,7 @@ describe("/Meetups Resources", () => {
         .post("/api/v1/meetups/1/rsvps")
         .set("Authorization", userToken)
         .send({
-          user: "1",
-          topic: "Introduction to javascript",
+          meetupId: "1",
           status: "no"
         })
         .end((err, res) => {
@@ -288,69 +287,34 @@ describe("/Meetups Resources", () => {
     });
   });
   describe("GET /meetups/<id>/rsvps", () => {
-    it("should reply with error Topic is not passed", done => {
+    it("should reply with error MeetupId is not passed", done => {
       chai
         .request(app)
         .post("/api/v1/meetups/1/rsvps")
         .set("Authorization", userToken)
         .send({
-          user: "1",
           status: "no"
         })
         .end((err, res) => {
           expect(res).to.have.status(400);
           expect(res.type).to.equal("application/json");
-          expect(res.body.error.topic).to.equal("Topic field is Required");
+          expect(res.body.error.meetupId).to.equal("meetupId field is Required");
           done();
         });
     });
-    it("should reply with error when empty Topic is passed", done => {
+    it("should reply with error when empty meetupId is passed", done => {
       chai
         .request(app)
         .post("/api/v1/meetups/1/rsvps")
         .set("Authorization", userToken)
         .send({
-          user: "1",
-          topic: "",
+          meetupId: "",
           status: "no"
         })
         .end((err, res) => {
           expect(res).to.have.status(400);
           expect(res.type).to.equal("application/json");
-          expect(res.body.error.topic).to.equal("Topic field is Required");
-          done();
-        });
-    });
-    it("should reply with error user field is not passed", done => {
-      chai
-        .request(app)
-        .post("/api/v1/meetups/1/rsvps")
-        .set("Authorization", userToken)
-        .send({
-          topic: "Introduction to javascript",
-          status: "no"
-        })
-        .end((err, res) => {
-          expect(res).to.have.status(400);
-          expect(res.type).to.equal("application/json");
-          expect(res.body.error.user).to.equal("User field is Required");
-          done();
-        });
-    });
-    it("should reply with error when empty User is passed", done => {
-      chai
-        .request(app)
-        .post("/api/v1/meetups/1/rsvps")
-        .set("Authorization", userToken)
-        .send({
-          topic: "Introduction to javascript",
-          user: "",
-          status: "no"
-        })
-        .end((err, res) => {
-          expect(res).to.have.status(400);
-          expect(res.type).to.equal("application/json");
-          expect(res.body.error.user).to.equal("User field is Required");
+          expect(res.body.error.meetupId).to.equal("meetupId field is Required");
           done();
         });
     });
@@ -360,8 +324,7 @@ describe("/Meetups Resources", () => {
         .post("/api/v1/meetups/1/rsvps")
         .set("Authorization", userToken)
         .send({
-          user: "1",
-          topic: "Introduction to javascript"
+          meetupId: "1"
         })
         .end((err, res) => {
           expect(res).to.have.status(400);
@@ -376,8 +339,7 @@ describe("/Meetups Resources", () => {
         .post("/api/v1/meetups/1/rsvps")
         .set("Authorization", userToken)
         .send({
-          topic: "Introduction to javascript",
-          user: "1",
+          meetupId: "1",
           status: ""
         })
         .end((err, res) => {
@@ -393,8 +355,7 @@ describe("/Meetups Resources", () => {
         .post("/api/v1/meetups/rsvps")
         .set("Authorization", userToken)
         .send({
-          user: "1",
-          topic: "Introduction to javascript",
+          meetupId: "1",
           status: "no"
         })
         .end((err, res) => {
@@ -409,8 +370,7 @@ describe("/Meetups Resources", () => {
         .post("/api/v1/meetups/meetupId/rsvps")
         .set("Authorization", userToken)
         .send({
-          topic: "Introduction to javascript",
-          user: "1",
+          meetupId: "1",
           status: "no"
         })
         .end((err, res) => {
@@ -426,8 +386,7 @@ describe("/Meetups Resources", () => {
         .post("/api/v1/meetups/7/rsvps")
         .set("Authorization", userToken)
         .send({
-          topic: "Introduction to javascript",
-          user: "1",
+          meetupId: "1",
           status: "yes"
         })
         .end((err, res) => {

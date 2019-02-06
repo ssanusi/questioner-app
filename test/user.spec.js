@@ -300,7 +300,6 @@ describe("/User Resources", () => {
       .post("/api/v1/admin/auth/login")
       .send(testUser)
       .end((err, res) => {
-        console.log(res.body);
         expect(res).to.have.status(401);
         expect(res.type).to.equal("application/json");
         expect(res.body.status).to.equal(401);
