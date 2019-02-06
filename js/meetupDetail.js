@@ -103,12 +103,12 @@ window.addEventListener("load", () => {
       } else if (response.data[rsvped].response === "yes") {
         const rsvpStatus = document.getElementById("rsvpStatus");
         rsvpStatus.innerHTML = `<h1>confirmed</h1>
-        <i class="far fa-check-circle fa-3x"></i>`;
+                                <i class="far fa-check-circle fa-3x"></i>`;
         rsvpStatus.style.display = "block";
       } else if (response.data[rsvped].response === "no") {
         const rsvpStatus = document.getElementById("rsvpStatus");
         rsvpStatus.innerHTML = `<h1>confirmed</h1>
-        <i class="far fa-times-circle fa-3x"></i>`;
+                               <i class="far fa-times-circle fa-3x"></i>`;
         rsvpStatus.style.display = "block";
       }
     });
