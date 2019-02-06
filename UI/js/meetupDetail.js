@@ -113,12 +113,23 @@ window.addEventListener("load", () => {
 });
 
 const handleOnChange = event => {
-  console.log(event.target.value);
+  const comment = event.target.value;
+  const questionId = event.target.getAttribute("data-addComment");
+  const commentUrl = "https://questioner-app-api.herokuapp.com/api/v1/comments";
+
+  fetch(commentUrl, {
+    method: "POST",
+    body: JSON.stringify({ questionId, comment }),
+    headers: { Authorization: bearer, "Content-Type": "application/json" }
+  })
+    .then(res => res.json())
+    .then(response => {
+      window.location.reload(true);
+    });
 };
 
 const handleButtonClick = event => {
   event.preventDefault();
-  console.log(event.target);
   if (event.target.getAttribute("id") === "askQuestion") {
     modal.style.display = "block";
   }
@@ -216,23 +227,6 @@ const handleButtonClick = event => {
       .then(response => {
         window.location.reload(true);
       });
-  }
-  if (event.target.matches("[data-addComment]")) {
-    const questionId = event.target.getAttribute("data-addComment");
-    const commentInput = event.target;
-    commentInput.addEventListener("submit", () => {
-      const comment = commentInput.value;
-      const commentUrl = "https://questioner-app-api.herokuapp.com/api/v1/comments";
-      fetch(commentUrl, {
-        method: "POST",
-        body: JSON.stringify({ questionId, comment }),
-        headers: { Authorization: bearer, "Content-Type": "application/json" }
-      })
-        .then(res => res.json())
-        .then(response => {
-          console.log(response)
-        }); 
-    });
   }
 };
 
