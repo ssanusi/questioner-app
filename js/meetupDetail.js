@@ -70,7 +70,12 @@ window.addEventListener("load", () => {
        <div>
          <h3>comments<i class="fas fa-sort-down fa-2x" data-comments=${element.id}></i></h3>
        </div>
-       <div class="comments-container" id="comments-container">
+       <div class="comments-container" >
+       <div class="comment-input">
+          <input type="comment" name="" id="" placeholder="comments" />
+       </div>
+       <div id="comments-container">
+       </div>
        </div>
      </div>`;
       });
@@ -150,10 +155,8 @@ const handleButtonClick = event => {
     })
       .then(res => res.json())
       .then(response => {
-        console.log(response)
-        let output = `<div class="comment-input">
-                         <input type="comment" name="" id="" placeholder="comments" />
-                      </div>`;
+
+        let output = "";
         response.data.forEach(element => {
           output += `<div class="comment">
                       <h4>${element.comment}</h4>
@@ -165,8 +168,8 @@ const handleButtonClick = event => {
 
         const commentsContainer = document.getElementById("comments-container");
         commentsContainer.innerHTML = output;
-        commentsContainer.style.display = "flex";
-      });
+        commentsContainer.style.display = "block";
+      });  
   }
 };
 
