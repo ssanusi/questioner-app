@@ -20,7 +20,6 @@ window.addEventListener("load", () => {
   if (!token) {
     window.location.href = "signin.html";
   }
-
   fetch(meetupUrl + meetupId, {
     method: "GET",
     headers: {
@@ -30,6 +29,7 @@ window.addEventListener("load", () => {
     .then(res => res.json())
     .then(response => {
       meetupDetail.innerHTML = `<div class="meetup-detail">
+          <div>
         <h1><i class="fab fa-meetup"></i> ${response.data[0].topic}</h1>
         <p><i class="fas fa-map-marker-alt"></i> ${response.data[0].location}</p>
         <p><i class="fas fa-calendar-alt"></i> ${moment(response.data[0].happeningon).format(
@@ -40,16 +40,6 @@ window.addEventListener("load", () => {
       </button>
     </div>
     <img src="${response.data[0].images[0]}" alt="">
-    <div class="meetup-rsvp">
-          <h1>Are you coming</h1>
-          <i class="far fa-calendar-check fa-3x"></i>
-          <i class="far fa-calendar-times fa-3x"></i>
-
-      </div>
-      <div class="rsvp">
-        <h1>confirmed</h1>
-        <i class="far fa-check-circle fa-3x"></i>
-        <i class="far fa-times-circle fa-3x"></i>
     </div>`;
     });
 
@@ -97,6 +87,35 @@ window.addEventListener("load", () => {
       });
       questionContainer.innerHTML = output;
     });
+
+  fetch(`${meetupUrl}rsvps`, {
+    method: "GET",
+    headers: {
+      Authorization: bearer
+    }
+  })
+    .then(res => res.json())
+    .then(response => {
+      const meetupRsvp = document.getElementById("meetup-rsvp");
+
+      const rsvped = response.data.findIndex(
+        element => element.meetupid === parseInt(meetupId, 10)
+      );
+
+      if (response.data.length === 0 || rsvped === -1) {
+        meetupRsvp.style.display = "block";
+      } else if (response.data[rsvped].response === "yes") {
+        const rsvpStatus = document.getElementById("rsvpStatus");
+        rsvpStatus.innerHTML = `<h1>confirmed</h1>
+                                <i class="far fa-check-circle fa-3x"></i>`;
+        rsvpStatus.style.display = "block";
+      } else if (response.data[rsvped].response === "no") {
+        const rsvpStatus = document.getElementById("rsvpStatus");
+        rsvpStatus.innerHTML = `<h1>confirmed</h1>
+                               <i class="far fa-times-circle fa-3x"></i>`;
+        rsvpStatus.style.display = "block";
+      }
+    });
 });
 
 const handleButtonClick = event => {
@@ -131,6 +150,21 @@ const handleButtonClick = event => {
         }
       });
   }
+
+
+  if (event.target.matches("[data-rsvpin]")) {
+    const data = JSON.stringify({ meetupId, status: event.target.getAttribute("data-rsvpin") });
+    fetch(`${meetupUrl}${meetupId}/rsvps`, {
+      method: "POST",
+      body: data,
+      headers: { Authorization: bearer, "Content-Type": "application/json" }
+    })
+      .then(res => res.json())
+      .then(response => {
+        if (response.status === 201) {
+          window.location.reload("true");
+        }
+
   if (event.target.matches("[data-upvote]")) {
     const id = event.target.getAttribute("data-upvote");
     fetch(`${questionUrl}${id}/upvote`, {
