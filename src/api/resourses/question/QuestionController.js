@@ -24,14 +24,7 @@ class QuestionController {
     ];
     db.query(queryString, values)
       .then(data => res.status(201).json({ status: 201, data: data.rows[0] }))
-      .catch(err => {
-        if (err.code === "23503" && err.constraint === "questions_userid_fkey") {
-          return res.status(400).json({ message: "user does not exist" });
-        }
-        if (err.code === "23503" && err.constraint === "questions_meetup_fkey") {
-          return res.status(400).json({ message: "meetup does not exist" });
-        }
-      });
+      .catch(err => res.status(400).json({ err, message: "meetup does not exist" }));
   }
 
   static getQuestionById(req, res) {

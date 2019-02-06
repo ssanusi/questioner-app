@@ -31,11 +31,7 @@ class UserController {
             data: [{ token, user: data.rows[0] }]
           });
       })
-      .catch(e => {
-        if (e.code === "23505") {
-          return res.status(409).json({ error: { user: "username or email exist" } });
-        }
-      });
+      .catch(e => res.status(409).json({ error: { user: "username or email exist" } }));
   }
 
   static login(req, res) {
