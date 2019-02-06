@@ -10,7 +10,16 @@ class UserController {
     req.body.isAdmin = isAdmin;
     const queryString =
       "INSERT INTO users(firstname,lastname,phonenumber,email,username,password,isadmin) VALUES($1,$2,$3,$4,$5,$6,$7) returning id, firstname, lastname, email, phonenumber, username";
-    db.query(queryString, Object.values(req.body))
+    const values = [
+      req.body.firstName,
+      req.body.lastName,
+      req.body.phoneNumber,
+      req.body.email,
+      req.body.username,
+      req.body.password,
+      req.body.isAdmin
+    ];
+    db.query(queryString, values)
       .then(data => {
         const user = data.rows[0];
         const token = createToken(user.id, user.isadmin);
@@ -22,11 +31,7 @@ class UserController {
             data: [{ token, user: data.rows[0] }]
           });
       })
-      .catch(e => {
-        if (e.code === "23505") {
-          return res.status(409).json({ error: { user: "username or email exist" } });
-        }
-      });
+      .catch(e => res.status(409).json({ error: { user: "username or email exist" } }));
   }
 
   static login(req, res) {

@@ -56,7 +56,7 @@ class MeetupController {
     VALUES($1, $2, $3)
     returning *`;
     const { validatedMeetup } = req.body;
-    const values = [validatedMeetup.meetup, req.user.userId, validatedMeetup.status];
+    const values = [parseInt(req.params.id, 10), req.user.userId, validatedMeetup.status];
 
     db.query(queryString, values)
       .then(data => res.status(201).json({ status: 201, data: data.rows }))

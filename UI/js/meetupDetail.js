@@ -67,21 +67,13 @@ window.addEventListener("load", () => {
           element.downvotes
         }</h4>
        </div>
-       <div>
-         <h3>comments<i class="fas fa-sort-down fa-2x"></i></h3>
-       </div>
-       <div class="comments-container">
-         <div class="comment-input">
-           <input type="comment" name="" id="" placeholder="comments" />
-         </div>
-         <div class="comment">
-           <h3>i like this question</h3>
-           <h4><i class="fas fa-user-circle"></i>ssanusi</h4>
-         </div>
-         <div class="comment">
-           <h3>i like this question</h3>
-           <h4><i class="fas fa-user-circle"></i>ssanusi</h4>
-         </div>
+         <h3>comments<i class="fas fa-sort-down fa-2x" data-comments=${element.id}></i></h3>
+       <div class="comments-container" data-id${element.id}>
+          <div class="comment-input">
+              <input type="comment" name="" id="" placeholder="comments" />
+          </div>
+          <div class="comments-body" id="comments-container">
+          </div>
        </div>
      </div>`;
       });
@@ -150,7 +142,32 @@ const handleButtonClick = event => {
         }
       });
   }
+  if (event.target.matches("[data-comments]")) {
+    const questionId = event.target.getAttribute("data-comments");
+    const commentsUrl = `https://questioner-app-api.herokuapp.com/api/v1/comments?questionId=${questionId}`;
+    fetch(commentsUrl, {
+      method: "GET",
+      headers: {
+        Authorization: bearer
+      }
+    })
+      .then(res => res.json())
+      .then(response => {
+        let output = "";
+        response.data.forEach(element => {
+          output += `<div class="comment">
+                      <h5> ${element.comment} </h5> <h6><i class="fas fa-user-circle"></i> ${
+            element.firstname
+          } ${element.lastname} </h6>
+                    </div>`;
+        });
 
+        const commentToggle = event.target.parentNode.nextElementSibling;
+        const commentsContainer = commentToggle.children[1];
+        commentsContainer.innerHTML = output;
+        commentToggle.style.display = "block";
+      });
+  }
 
   if (event.target.matches("[data-rsvpin]")) {
     const data = JSON.stringify({ meetupId, status: event.target.getAttribute("data-rsvpin") });
@@ -164,6 +181,8 @@ const handleButtonClick = event => {
         if (response.status === 201) {
           window.location.reload("true");
         }
+      });
+  }
 
   if (event.target.matches("[data-upvote]")) {
     const id = event.target.getAttribute("data-upvote");
@@ -178,6 +197,7 @@ const handleButtonClick = event => {
         window.location.reload(true);
       });
   }
+
   if (event.target.matches("[data-downvote]")) {
     const id = event.target.getAttribute("data-downvote");
     fetch(`${questionUrl}${id}/downvote`, {
@@ -192,5 +212,4 @@ const handleButtonClick = event => {
       });
   }
 };
-
 window.addEventListener("click", handleButtonClick);

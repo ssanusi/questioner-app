@@ -29,24 +29,12 @@ export const validateAddMeetup = (req, res, next) => {
 };
 
 export const validateAddRsvp = (req, res, next) => {
-  const { meetupId, status } = req.body;
+  const { status } = req.body;
   const { id } = req.params;
   const validatedMeetup = {};
   const error = {};
-
-  if (meetupId) {
-    validatedMeetup.meetupId = meetupId;
-  }
-
   if (status) {
     validatedMeetup.status = status;
-  }
-  if (id) {
-    validatedMeetup.meetup = parseInt(id, 10);
-  }
-
-  if (!meetupId) {
-    error.meetupId = "meetupId field is Required";
   }
 
   if (!status) {

@@ -24,7 +24,7 @@ class QuestionController {
     ];
     db.query(queryString, values)
       .then(data => res.status(201).json({ status: 201, data: data.rows[0] }))
-      .catch(err => res.status(400).json({ err }));
+      .catch(err => res.status(400).json({ err, message: "meetup does not exist" }));
   }
 
   static getQuestionById(req, res) {

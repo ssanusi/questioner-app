@@ -298,7 +298,6 @@ describe("/Meetups Resources", () => {
         .end((err, res) => {
           expect(res).to.have.status(400);
           expect(res.type).to.equal("application/json");
-          expect(res.body.error.meetupId).to.equal("meetupId field is Required");
           done();
         });
     });
@@ -314,7 +313,6 @@ describe("/Meetups Resources", () => {
         .end((err, res) => {
           expect(res).to.have.status(400);
           expect(res.type).to.equal("application/json");
-          expect(res.body.error.meetupId).to.equal("meetupId field is Required");
           done();
         });
     });
@@ -355,7 +353,6 @@ describe("/Meetups Resources", () => {
         .post("/api/v1/meetups/rsvps")
         .set("Authorization", userToken)
         .send({
-          meetupId: "1",
           status: "no"
         })
         .end((err, res) => {
@@ -498,7 +495,6 @@ describe("UnAuthorized", () => {
           .get("/api/v1/meetups/rsvps")
           .set("Authorization", userToken)
           .end((err, res) => {
-            console.log(res.body)
             expect(res).to.have.status(200);
           });
         done();
@@ -509,7 +505,6 @@ describe("UnAuthorized", () => {
           .get("/api/v1/meetups/rsvps")
           .set("Authorization", userToken)
           .end((err, res) => {
-            console.log(res.body)
             expect(res).to.have.status(200);
           });
         done();
