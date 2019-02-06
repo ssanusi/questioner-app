@@ -67,20 +67,13 @@ window.addEventListener("load", () => {
           element.downvotes
         }</h4>
        </div>
-       <div>
          <h3>comments<i class="fas fa-sort-down fa-2x" data-comments=${element.id}></i></h3>
-<<<<<<< HEAD
-       </div>
-       <div class="comments-container" >
-       <div class="comment-input">
-          <input type="comment" name="" id="" placeholder="comments" />
-       </div>
-       <div id="comments-container">
-       </div>
-=======
-       </div>
-       <div class="comments-container" id="comments-container">
->>>>>>> 0cbfbfa1eed510dd7b5c7269950d203a8549efe7
+       <div class="comments-container" data-id${element.id}>
+          <div class="comment-input">
+              <input type="comment" name="" id="" placeholder="comments" />
+          </div>
+          <div class="comments-body" id="comments-container">
+          </div>
        </div>
      </div>`;
       });
@@ -160,23 +153,21 @@ const handleButtonClick = event => {
     })
       .then(res => res.json())
       .then(response => {
-
         let output = "";
         response.data.forEach(element => {
           output += `<div class="comment">
-                      <h4>${element.comment}</h4>
-                       <h5><i class="fas fa-user-circle"></i> ${element.firstname} ${
-            element.lastname
-          }</h5>
+                      <h5> ${element.comment} </h5> <h6><i class="fas fa-user-circle"></i> ${
+            element.firstname
+          } ${element.lastname} </h6>
                     </div>`;
         });
 
-        const commentsContainer = document.getElementById("comments-container");
+        const commentToggle = event.target.parentNode.nextElementSibling;
+        const commentsContainer = commentToggle.children[1];
         commentsContainer.innerHTML = output;
-        commentsContainer.style.display = "block";
+        commentToggle.style.display = "block";
       });
   }
-};
 
   if (event.target.matches("[data-rsvpin]")) {
     const data = JSON.stringify({ meetupId, status: event.target.getAttribute("data-rsvpin") });
