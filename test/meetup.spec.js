@@ -298,7 +298,6 @@ describe("/Meetups Resources", () => {
         .end((err, res) => {
           expect(res).to.have.status(400);
           expect(res.type).to.equal("application/json");
-          expect(res.body.error.meetupId).to.equal("meetupId field is Required");
           done();
         });
     });
@@ -314,7 +313,6 @@ describe("/Meetups Resources", () => {
         .end((err, res) => {
           expect(res).to.have.status(400);
           expect(res.type).to.equal("application/json");
-          expect(res.body.error.meetupId).to.equal("meetupId field is Required");
           done();
         });
     });
