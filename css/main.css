@@ -1070,10 +1070,11 @@ input[type="comment"] {
 
 .comments-container {
   width: 100%;
-  display: flex;
+  display: none;
   flex-direction: column;
   padding-bottom: 1rem;
   justify-items: flex-end;
+
 }
 .question-comments {
   width: 80%;

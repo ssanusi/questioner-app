@@ -76,20 +76,9 @@ window.addEventListener("load", () => {
          <h4><i class="far fa-thumbs-down fa-3x"></i>${element.downvotes}</h4>
        </div>
        <div>
-         <h3>comments<i class="fas fa-sort-down fa-2x"></i></h3>
+         <h3>comments<i class="fas fa-sort-down fa-2x" data-comments=${element.id}></i></h3>
        </div>
-       <div class="comments-container">
-         <div class="comment-input">
-           <input type="comment" name="" id="" placeholder="comments" />
-         </div>
-         <div class="comment">
-           <h3>i like this question</h3>
-           <h4><i class="fas fa-user-circle"></i>ssanusi</h4>
-         </div>
-         <div class="comment">
-           <h3>i like this question</h3>
-           <h4><i class="fas fa-user-circle"></i>ssanusi</h4>
-         </div>
+       <div class="comments-container" id="comments-container">
        </div>
      </div>`;
       });
@@ -99,7 +88,8 @@ window.addEventListener("load", () => {
 
 const handleButtonClick = event => {
   event.preventDefault();
-  
+  console.log(event.target);
+
   if (event.target.getAttribute("id") === "askQuestion") {
     modal.style.display = "block";
   }
@@ -127,6 +117,35 @@ const handleButtonClick = event => {
         if (response.status === 201) {
           window.location.reload("true");
         }
+      });
+  }
+  if (event.target.matches("[data-comments]")) {
+    const questionId = event.target.getAttribute("data-comments");
+    const commentsUrl = `https://questioner-app-api.herokuapp.com/api/v1/comments?questionId=${questionId}`;
+    fetch(commentsUrl, {
+      method: "GET",
+      headers: {
+        Authorization: bearer
+      }
+    })
+      .then(res => res.json())
+      .then(response => {
+        console.log(response)
+        let output = `<div class="comment-input">
+                         <input type="comment" name="" id="" placeholder="comments" />
+                      </div>`;
+        response.data.forEach(element => {
+          output += `<div class="comment">
+                      <h4>${element.comment}</h4>
+                       <h5><i class="fas fa-user-circle"></i> ${element.firstname} ${
+            element.lastname
+          }</h5>
+                    </div>`;
+        });
+
+        const commentsContainer = document.getElementById("comments-container");
+        commentsContainer.innerHTML = output;
+        commentsContainer.style.display = "flex";
       });
   }
 };
