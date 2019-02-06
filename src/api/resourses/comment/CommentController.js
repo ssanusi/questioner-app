@@ -16,7 +16,8 @@ class CommentController {
   }
 
   static getcommentsByQuestion(req, res) {
-    const queryString = "SELECT comments.comment, users.firstname, users.lastname FROM comments JOIN users on userid = users.id WHERE questionid = $1";
+    const queryString =
+      "SELECT comments.comment, users.firstname, users.lastname FROM comments JOIN users on userid = users.id WHERE questionid = $1";
     Db.query(queryString, [req.query.questionId])
       .then(data => res.status(200).json({ status: 200, data: data.rows }))
       .catch(err =>
