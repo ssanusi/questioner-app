@@ -69,6 +69,7 @@ window.addEventListener("load", () => {
        </div>
        <div>
          <h3>comments<i class="fas fa-sort-down fa-2x" data-comments=${element.id}></i></h3>
+<<<<<<< HEAD
        </div>
        <div class="comments-container" >
        <div class="comment-input">
@@ -76,6 +77,10 @@ window.addEventListener("load", () => {
        </div>
        <div id="comments-container">
        </div>
+=======
+       </div>
+       <div class="comments-container" id="comments-container">
+>>>>>>> 0cbfbfa1eed510dd7b5c7269950d203a8549efe7
        </div>
      </div>`;
       });
@@ -169,7 +174,7 @@ const handleButtonClick = event => {
         const commentsContainer = document.getElementById("comments-container");
         commentsContainer.innerHTML = output;
         commentsContainer.style.display = "block";
-      });  
+      });
   }
 };
 
