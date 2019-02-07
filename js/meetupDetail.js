@@ -14,7 +14,7 @@ const getParamUrl = () => {
   return params;
 };
 const meetupId = getParamUrl();
-const questionsUrl = `https://questioner-app-api.herokuapp.com/api/v1/questions?meetuId=${meetupId}`;
+const questionsUrl = `https://questioner-app-api.herokuapp.com/api/v1/questions?meetupId=${meetupId}`;
 
 window.addEventListener("load", () => {
   if (!token) {
@@ -23,13 +23,11 @@ window.addEventListener("load", () => {
   fetch(meetupUrl + meetupId, {
     method: "GET",
     headers: {
-      "Access-Control-Allow-Origin": "*",
       Authorization: bearer
     }
   })
     .then(res => res.json())
     .then(response => {
-      console.log(response);
       meetupDetail.innerHTML = `<div class="meetup-detail">
           <div>
         <h1><i class="fab fa-meetup"></i> ${response.data[0].topic}</h1>
