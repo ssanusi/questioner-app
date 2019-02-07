@@ -80,7 +80,7 @@ class MeetupController {
   static getRsvpsByUser(req, res) {
     const queryString = "SELECT * FROM rsvps WHERE userid = $1";
     db.query(queryString, [req.user.userId]).then(data =>
-      res.status(200).json({ status: 200, data: data.rows })
+      res.status(200).json({ status: 200, data: data.rows, count: data.rowCount })
     );
   }
 }
