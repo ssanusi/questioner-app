@@ -36,7 +36,7 @@ window.addEventListener("load", () => {
                       <p class="meetup"><i class="fas fa-calendar-alt"></i> ${moment(
                         element.happeningon
                       ).format("MMMM Do YYYY, h:mm:ss a")}</p>
-                      <button onclick="location.href='meetup_detail.html?id=${
+                      <button onclick="location.href='meetup_detail.html?meetupId=${
                         element.id
                       }';" class="btn btn-default">
                          view Questions
