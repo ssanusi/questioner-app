@@ -138,7 +138,12 @@
           "500": {
             "description": "Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "tokens": []
+          }
+        ]
       }
     },
     "/meetups/upcoming": {
@@ -163,12 +168,7 @@
           "500": {
             "description": "Server Error"
           }
-        },
-        "security": [
-          {
-            "tokens": []
-          }
-        ]
+        }
       }
     },
     "/meetups/{meetupId}": {
@@ -444,7 +444,12 @@
           "500": {
             "description": "Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "tokens": []
+          }
+        ]
       }
     },
     "/questions/{questionId}/upvote": {
@@ -608,6 +613,12 @@
         ],
         "parameters": [
           {
+            "name": "tokens",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "questionId",
             "in": "query",
             "description": "",
@@ -631,7 +642,12 @@
           "500": {
             "description": "Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "tokens": []
+          }
+        ]
       }
     },
     "/auth/signup": {
@@ -904,11 +920,11 @@
         "questionId"
       ],
       "properties": {
-        "comment": {
-          "type": "string"
-        },
         "questionId": {
           "type": "integer"
+        },
+        "comment": {
+          "type": "string"
         }
       },
       "xml": {
