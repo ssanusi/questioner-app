@@ -14,12 +14,11 @@ app.use(express.json());
 app.use(logger("dev"));
 
 app.use("/api/v1", restRouter);
-
-app.get("/", (req, res) => {
+app.use("/api-docs", swagger.serve, swagger.setup(questionerDoc));
+app.get("/*", (req, res) => {
   res.status(200).json({ message: "Welcome to REST API for Questioner App" });
 });
 
-app.use("/api-docs", swagger.serve, swagger.setup(questionerDoc));
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
