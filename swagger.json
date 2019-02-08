@@ -777,7 +777,7 @@
           {
             "name": "password",
             "in": "formData",
-            "description": "User Name",
+            "description": "Password",
             "required": true,
             "type": "string",
             "format": "password"
