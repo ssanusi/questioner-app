@@ -810,7 +810,7 @@
         "tags": [
           "Admin"
         ],
-        "summary": "Admin sign signup",
+        "summary": "Admin signup",
         "description": "",
         "operationId": "AdminSignup",
         "consumes": [
@@ -821,20 +821,13 @@
         ],
         "parameters": [
           {
-            "name": "email",
-            "in": "formData",
-            "description": "User Name",
+            "in": "body",
+            "name": "body",
+            "description": "Create user object",
             "required": true,
-            "type": "string",
-            "format": "email"
-          },
-          {
-            "name": "password",
-            "in": "formData",
-            "description": "User Name",
-            "required": true,
-            "type": "string",
-            "format": "password"
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
           }
         ],
         "responses": {
