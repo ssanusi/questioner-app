@@ -79,11 +79,6 @@ API is deployed at [here](https://questioner-app-api.herokuapp.com) on heroku.
 	</tr>
 	<tr>
 		<td>POST</td>
-		<td>/api/v1/auth/signup</td>
-		<td>Create user account</td>
-	</tr>
-	<tr>
-		<td>POST</td>
 		<td>/api/v1/admin/auth/signup</td>
 		<td>Create Admin account</td>
 	</tr>
@@ -108,53 +103,48 @@ API is deployed at [here](https://questioner-app-api.herokuapp.com) on heroku.
 		<td>Add new meetup</td>
 	</tr>
 	<tr>
-		<td>PUT</td>
-		<td>/api/v1/meals/:mealId</td>
-		<td>Update or modify meal</td>
-	</tr>
-	<tr>
 		<td>DELETE</td>
-		<td>/api/v1/meals/:mealId</td>
-		<td>Delete meal</td>
+		<td>/api/v1/meetup/:Id</td>
+		<td>Delete meetup</td>
 	</tr>
 	<tr>
 		<td>POST</td>
-		<td>/api/v1/menu</td>
-		<td>Setup menu</td>
-	</tr>
-	<tr>
-		<td>GET</td>
-		<td>/api/v1/menu</td>
-		<td>Get menu</td>
-	</tr>
-	<tr>
-		<td>GET</td>
-		<td>/api/v1/orders</td>
-		<td>Get all orders</td>
+		<td>/api/v1/meetup/:Id/rsvps</td>
+		<td>rsvp a meetup</td>
 	</tr>
 	<tr>
 		<td>POST</td>
-		<td>/api/v1/orders</td>
-		<td>Make an order</td>
-	</tr>
-	<tr>
-		<td>PUT</td>
-		<td>/api/v1/orders/:orderId</td>
-		<td>Modify an order</td>
+		<td>/api/v1/questions</td>
+		<td>Post question</td>
 	</tr>
 	<tr>
 		<td>GET</td>
-		<td>/api/v1/orders/total</td>
-		<td>Get total amount from orders of current day</td>
+		<td>/api/v1/questions?meetupId=<:id></td>
+		<td>Get questions by meetupId</td>
 	</tr>
 	<tr>
 		<td>GET</td>
-		<td>/api/v1/orders/users</td>
-		<td>Get order for current logged in user</td>
+		<td>/api/v1/questions?userId=<:id></td>
+		<td>Get questions by userId</td>
 	</tr>
-		<tr>
+	<tr>
+		<td>PATCH</td>
+		<td>/api/v1/questions/:id/upvote</td>
+		<td>upvote a question</td>
+	</tr>
+	<tr>
+		<td>PATCH</td>
+		<td>/api/v1/questions/:id/downvote</td>
+		<td>downvote a question</td>
+	</tr>
+	<tr>
+		<td>POST</td>
+		<td>/api/v1/comments</td>
+		<td>Post a comment</td>
+	</tr>
+	<tr>
 		<td>GET</td>
-		<td>/api/v1/orders/users/:userId</td>
-		<td>Get order for the user with userId</td>
+		<td>/api/v1/comments?questionId=:id</td>
+		<td>get comments by questionId</td>
 	</tr>
 </table>
