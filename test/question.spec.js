@@ -23,7 +23,7 @@ describe("/Question Resources", () => {
     it("should get all questions", done => {
       chai
         .request(app)
-        .get("/api/v1/questions?id=1")
+        .get("/api/v1/questions?meetupId=1")
         .set("Authorization", userToken)
         .end((err, res) => {
           expect(res).to.have.status(200);

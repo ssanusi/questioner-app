@@ -14,7 +14,7 @@ const getParamUrl = () => {
   return params;
 };
 const meetupId = getParamUrl();
-const questionsUrl = `https://questioner-app-api.herokuapp.com/api/v1/questions?id=${meetupId}`;
+const questionsUrl = `https://questioner-app-api.herokuapp.com/api/v1/questions?meetupId=${meetupId}`;
 
 window.addEventListener("load", () => {
   if (!token) {
@@ -176,7 +176,7 @@ const handleButtonClick = event => {
         commentToggle.style.display = "block";
       });
   }
-// Post RSVP handler
+  // Post RSVP handler
   if (event.target.matches("[data-rsvpin]")) {
     const data = JSON.stringify({ meetupId, status: event.target.getAttribute("data-rsvpin") });
     fetch(`${meetupUrl}${meetupId}/rsvps`, {
@@ -191,7 +191,7 @@ const handleButtonClick = event => {
         }
       });
   }
-// handler for upvote
+  // handler for upvote
   if (event.target.matches("[data-upvote]")) {
     const id = event.target.getAttribute("data-upvote");
     fetch(`${questionUrl}${id}/upvote`, {
@@ -205,7 +205,7 @@ const handleButtonClick = event => {
         window.location.reload(true);
       });
   }
-// handler for downvote
+  // handler for downvote
   if (event.target.matches("[data-downvote]")) {
     const id = event.target.getAttribute("data-downvote");
     fetch(`${questionUrl}${id}/downvote`, {
