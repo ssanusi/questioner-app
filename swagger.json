@@ -3,7 +3,7 @@
   "info": {
     "description": "Crowd-source questions for a meetup. Questioner helps the meetup organizer prioritize questions to be answered. Other users can vote on asked questions and they bubble to the top or bottom of the log",
     "version": "1.0.0",
-    "title": "Questioner",
+    "title": "Questioner API",
     "termsOfService": "http://swagger.io/terms/",
     "contact": {
       "email": "sulaiman.sanusi@icloud.com"
@@ -59,7 +59,7 @@
           {
             "name": "tokens",
             "in": "header",
-            "required": false,
+            "required": true,
             "type": "string"
           },
           {
@@ -117,7 +117,14 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "tokens",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "successful operation Or No Meetups Exist",
@@ -148,26 +155,10 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [
-          {
-            "name": "tokens",
-            "in": "header",
-            "required": true,
-            "type": "string"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "successful operation"
-          },
-          "400": {
-            "description": "Invalid input"
-          },
-          "401": {
-            "description": "Authentication Errors"
-          },
-          "403": {
-            "description": "Token Forbidden"
           },
           "500": {
             "description": "Server Error"
@@ -195,6 +186,12 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "tokens",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "meetupId",
             "in": "path",
@@ -312,7 +309,7 @@
             "description": "Gets meetup by id",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RSVP"
+              "$ref": "#/definitions/Rsvp"
             }
           }
         ],
@@ -407,7 +404,7 @@
         "tags": [
           "Questions"
         ],
-        "summary": "Get all questions by MeetupId or userID",
+        "summary": "Get all questions by MeetupId or userId",
         "description": "",
         "operationId": "getQuestions",
         "consumes": [
@@ -418,15 +415,19 @@
         ],
         "parameters": [
           {
+            "name": "tokens",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "meetupId",
             "in": "query",
-            "required": true,
             "type": "string"
           },
           {
             "name": "userId",
             "in": "query",
-            "required": true,
             "type": "string"
           }
         ],
@@ -594,9 +595,7 @@
             "tokens": []
           }
         ]
-      }
-    },
-    "/comments/{questionId}": {
+      },
       "get": {
         "tags": [
           "Comments"
@@ -610,7 +609,7 @@
         "parameters": [
           {
             "name": "questionId",
-            "in": "path",
+            "in": "query",
             "description": "",
             "required": true,
             "type": "integer"
@@ -879,14 +878,18 @@
     "Question": {
       "type": "object",
       "required": [
-        "meetup",
-        "title"
+        "meetupId",
+        "title",
+        "body"
       ],
       "properties": {
-        "meetup": {
+        "meetupId": {
           "type": "integer"
         },
         "title": {
+          "type": "string"
+        },
+        "body": {
           "type": "string"
         }
       },
@@ -898,21 +901,21 @@
       "type": "object",
       "required": [
         "comment",
-        "question"
+        "questionId"
       ],
       "properties": {
         "comment": {
-          "type": "integer"
-        },
-        "question": {
           "type": "string"
+        },
+        "questionId": {
+          "type": "integer"
         }
       },
       "xml": {
         "name": "Comment"
       }
     },
-    "RSVP": {
+    "Rsvp": {
       "type": "object",
       "required": [
         "response"
