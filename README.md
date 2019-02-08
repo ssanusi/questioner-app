@@ -58,6 +58,7 @@ npm run test:dev
 ## API
 
 API is deployed at [here](https://questioner-app-api.herokuapp.com) on heroku.
+API Documentation at [here](https://questioner-app-api.herokuapp.com/api-docs) on heroku.
 
 ### API Routes
 
