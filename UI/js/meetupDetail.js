@@ -1,6 +1,7 @@
 const meetupUrl = "https://questioner-app-api.herokuapp.com/api/v1/meetups/";
 const token = JSON.parse(localStorage.getItem("token"));
 const userId = localStorage.getItem("userId");
+const user = JSON.parse(localStorage.getItem("username"));
 const bearer = `Bearer ${token}`;
 const meetupDetail = document.getElementById("meetup-detail");
 const questionContainer = document.getElementById("question-container");
@@ -20,6 +21,8 @@ window.addEventListener("load", () => {
   if (!token) {
     window.location.href = "signin.html";
   }
+  const userLi = document.getElementById("user");
+  userLi.textContent = user;
   fetch(meetupUrl + meetupId, {
     method: "GET",
     headers: {
