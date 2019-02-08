@@ -119,12 +119,12 @@ API is deployed at [here](https://questioner-app-api.herokuapp.com) on heroku.
 	</tr>
 	<tr>
 		<td>GET</td>
-		<td>/api/v1/questions?meetupId=<:id></td>
+		<td>/api/v1/questions?meetupId=:id</td>
 		<td>Get questions by meetupId</td>
 	</tr>
 	<tr>
 		<td>GET</td>
-		<td>/api/v1/questions?userId=<:id></td>
+		<td>/api/v1/questions?userId=:id</td>
 		<td>Get questions by userId</td>
 	</tr>
 	<tr>
