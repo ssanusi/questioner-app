@@ -840,7 +840,7 @@
         "lastName",
         "email",
         "phoneNumber",
-        "userName",
+        "username",
         "password",
         "confirmPassword"
       ],
@@ -858,7 +858,7 @@
         "phoneNumber": {
           "type": "string"
         },
-        "userName": {
+        "username": {
           "type": "string"
         },
         "password": {
