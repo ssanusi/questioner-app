@@ -37,27 +37,19 @@
       "description": "Admin Signup and Authentication"
     }
   ],
-  "schemes": [
-    "https"
-  ],
+  "schemes": ["https"],
   "paths": {
     "/meetups": {
       "post": {
-        "tags": [
-          "Meetups"
-        ],
+        "tags": ["Meetups"],
         "summary": "Add a new meetup",
         "description": "",
         "operationId": "addMeetups",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
-            "name": "tokens",
+            "name": "token",
             "in": "header",
             "required": true,
             "type": "string"
@@ -100,26 +92,20 @@
         },
         "security": [
           {
-            "tokens": []
+            "token": []
           }
         ]
       },
       "get": {
-        "tags": [
-          "Meetups"
-        ],
+        "tags": ["Meetups"],
         "summary": "Gets All Meetups",
         "description": "",
         "operationId": "getMeetups",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
-            "name": "tokens",
+            "name": "token",
             "in": "header",
             "required": true,
             "type": "string"
@@ -141,25 +127,19 @@
         },
         "security": [
           {
-            "tokens": []
+            "token": []
           }
         ]
       }
     },
     "/meetups/upcoming": {
       "get": {
-        "tags": [
-          "Meetups"
-        ],
+        "tags": ["Meetups"],
         "summary": "Get upcoming meeetup",
         "description": "",
         "operationId": "getUpcomingMeetup",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [],
         "responses": {
           "200": {
@@ -173,21 +153,15 @@
     },
     "/meetups/{meetupId}": {
       "get": {
-        "tags": [
-          "Meetups"
-        ],
+        "tags": ["Meetups"],
         "summary": "Gets Meetup by Id",
         "description": "",
         "operationId": "getMeetupById",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
-            "name": "tokens",
+            "name": "token",
             "in": "header",
             "required": true,
             "type": "string"
@@ -219,23 +193,17 @@
         },
         "security": [
           {
-            "tokens": []
+            "token": []
           }
         ]
       },
       "delete": {
-        "tags": [
-          "Meetups"
-        ],
+        "tags": ["Meetups"],
         "summary": "Deletes a Meetup",
         "description": "",
         "operationId": "deleteMeetup",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "token",
@@ -270,28 +238,22 @@
         },
         "security": [
           {
-            "tokens": []
+            "token": []
           }
         ]
       }
     },
     "/meetups/{meetupId}/rsvps": {
       "post": {
-        "tags": [
-          "Meetups"
-        ],
+        "tags": ["Meetups"],
         "summary": "Add new Rsvp to Meetup",
         "description": "",
         "operationId": "rsvp",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
-            "name": "tokens",
+            "name": "token",
             "in": "header",
             "required": true,
             "type": "string"
@@ -341,28 +303,22 @@
         },
         "security": [
           {
-            "tokens": []
+            "token": []
           }
         ]
       }
     },
     "/questions": {
       "post": {
-        "tags": [
-          "Questions"
-        ],
+        "tags": ["Questions"],
         "summary": "Add new question",
         "description": "",
         "operationId": "addQuestions",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
-            "name": "tokens",
+            "name": "token",
             "in": "header",
             "required": true,
             "type": "string"
@@ -396,26 +352,20 @@
         },
         "security": [
           {
-            "tokens": []
+            "token": []
           }
         ]
       },
       "get": {
-        "tags": [
-          "Questions"
-        ],
+        "tags": ["Questions"],
         "summary": "Get all questions by MeetupId or userId",
         "description": "",
         "operationId": "getQuestions",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
-            "name": "tokens",
+            "name": "token",
             "in": "header",
             "required": true,
             "type": "string"
@@ -447,25 +397,19 @@
         },
         "security": [
           {
-            "tokens": []
+            "token": []
           }
         ]
       }
     },
     "/questions/{questionId}/upvote": {
       "patch": {
-        "tags": [
-          "Questions"
-        ],
+        "tags": ["Questions"],
         "summary": "Upvote a Question by ID",
         "description": "",
         "operationId": "upVote",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "questionId",
@@ -493,25 +437,19 @@
         },
         "security": [
           {
-            "tokens": []
+            "token": []
           }
         ]
       }
     },
     "/questions/{questionId}/downvote": {
       "patch": {
-        "tags": [
-          "Questions"
-        ],
+        "tags": ["Questions"],
         "summary": "Downvote a Question by ID",
         "description": "",
         "operationId": "downVote",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "questionId",
@@ -539,25 +477,21 @@
         },
         "security": [
           {
-            "tokens": []
+            "token": []
           }
         ]
       }
     },
     "/comments": {
       "post": {
-        "tags": [
-          "Comments"
-        ],
+        "tags": ["Comments"],
         "summary": "Posting of Comment on a Question",
         "description": "",
         "operationId": "addComments",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
-            "name": "tokens",
+            "name": "token",
             "in": "header",
             "required": true,
             "type": "string"
@@ -597,23 +531,19 @@
         },
         "security": [
           {
-            "tokens": []
+            "token": []
           }
         ]
       },
       "get": {
-        "tags": [
-          "Comments"
-        ],
+        "tags": ["Comments"],
         "summary": "Gets a Comments by Question Id",
         "description": "",
         "operationId": "getComments",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
-            "name": "tokens",
+            "name": "token",
             "in": "header",
             "required": true,
             "type": "string"
@@ -645,22 +575,18 @@
         },
         "security": [
           {
-            "tokens": []
+            "token": []
           }
         ]
       }
     },
     "/auth/signup": {
       "post": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Create a new user",
         "description": "",
         "operationId": "userSignUp",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "in": "body",
@@ -699,18 +625,12 @@
     },
     "/auth/login": {
       "post": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "User Login",
         "description": "",
         "operationId": "userLogin",
-        "consumes": [
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json", "application/x-www-form-urlencoded"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "email",
@@ -753,18 +673,12 @@
     },
     "/admin/auth/login": {
       "post": {
-        "tags": [
-          "Admin"
-        ],
+        "tags": ["Admin"],
         "summary": "Admin sign in",
         "description": "",
         "operationId": "AdminLogin",
-        "consumes": [
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json", "application/x-www-form-urlencoded"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "email",
@@ -807,18 +721,12 @@
     },
     "/admin/auth/signup": {
       "post": {
-        "tags": [
-          "Admin"
-        ],
+        "tags": ["Admin"],
         "summary": "Admin signup",
         "description": "",
         "operationId": "AdminSignup",
-        "consumes": [
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json", "application/x-www-form-urlencoded"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "in": "body",
@@ -854,7 +762,7 @@
     }
   },
   "securityDefinitions": {
-    "tokens": {
+    "token": {
       "type": "apiKey",
       "name": "token",
       "in": "header"
@@ -863,11 +771,7 @@
   "definitions": {
     "Meetup": {
       "type": "object",
-      "required": [
-        "topic",
-        "location",
-        "happeningOn"
-      ],
+      "required": ["topic", "location", "happeningOn"],
       "properties": {
         "topic": {
           "type": "string"
@@ -886,11 +790,7 @@
     },
     "Question": {
       "type": "object",
-      "required": [
-        "meetupId",
-        "title",
-        "body"
-      ],
+      "required": ["meetupId", "title", "body"],
       "properties": {
         "meetupId": {
           "type": "integer"
@@ -908,10 +808,7 @@
     },
     "Comment": {
       "type": "object",
-      "required": [
-        "comment",
-        "questionId"
-      ],
+      "required": ["comment", "questionId"],
       "properties": {
         "questionId": {
           "type": "integer"
@@ -926,9 +823,7 @@
     },
     "Rsvp": {
       "type": "object",
-      "required": [
-        "response"
-      ],
+      "required": ["response"],
       "properties": {
         "response": {
           "type": "string"
@@ -961,7 +856,7 @@
           "format": "email"
         },
         "phoneNumber": {
-          "type": "integer"
+          "type": "string"
         },
         "userName": {
           "type": "string"
