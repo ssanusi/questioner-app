@@ -19,13 +19,13 @@ const checkForm = (
   // check form input values
   //
 
-  form.myButton.disabled = true;
-  form.myButton.value = "Please wait...";
+  form.submit.disabled = true;
+  form.submit.value = "Please wait...";
   return true;
 };
 
-function resetForm(form) {
-  // Reset button clicked
-  form.myButton.disabled = false;
-  form.myButton.value = "Submit";
-}
+// function resetForm(form) {
+//   // Reset button clicked
+//   form.myButton.disabled = false;
+//   form.myButton.value = "Submit";
+// }

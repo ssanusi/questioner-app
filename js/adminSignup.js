@@ -3,6 +3,11 @@ const statusDiv = document.getElementById("status");
 
 const handleFormSubmit = event => {
   event.preventDefault();
+  if (event.target.matches("form")){
+    const submitBtn = event.target.children[6];
+    submitBtn.disable = true;
+    submitBtn.innerText = "Signing up.....";
+  }
 
   const data = toJSONString(form);
   const url = "https://questioner-app-api.herokuapp.com/api/v1/admin/auth/signup";
@@ -30,6 +35,9 @@ const handleFormSubmit = event => {
           }, 2000);
         }
         statusDiv.innerHTML = `<div class="error"><h4>${Object.values(response.error)}</h4></div>`;
+        setTimeout(() => {
+          window.location.reload(true);
+        }, 1000);
       }
     });
 };
