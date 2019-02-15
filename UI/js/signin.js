@@ -1,10 +1,13 @@
 const form = document.getElementById("login");
 const statusDiv = document.getElementById("status");
 
-
-
 const handleFormSubmit = event => {
   event.preventDefault();
+  if (event.target.matches("form")){
+    const submitBtn = event.target.children[5];
+    submitBtn.disable = true;
+    submitBtn.innerText = "Signing In.....";
+  }
 
   const data = toJSONString(form);
   const url = "https://questioner-app-api.herokuapp.com/api/v1/auth/login";
@@ -27,9 +30,15 @@ const handleFormSubmit = event => {
       if (response.error) {
         if (response.error === "User not Found") {
           statusDiv.innerHTML = `<div class="error"><h4> account not found please register </h4></div>`;
+          const submitBtn = event.target.children[5];
+          submitBtn.enable = true;
+          submitBtn.innerText = "SIGN IN";
         }
         if (response.error === "invalid credentials") {
           statusDiv.innerHTML = `<div class="error"><h4>Invalid Credentials</h4></div>`;
+          const submitBtn = event.target.children[5];
+          submitBtn.enable = true;
+          submitBtn.innerText = "SIGN IN";
         }
       }
     });
