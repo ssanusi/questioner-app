@@ -4,7 +4,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import swagger from "swagger-ui-express";
 import restRouter from "./api/restRouter";
-import questionerDoc from "../swagger.json";
+import questionerDoc from "../../swagger.json";
 
 const app = express();
 app.use(cors());
