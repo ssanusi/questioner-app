@@ -30,8 +30,7 @@ class MeetupController {
   static getAllupcoming(req, res) {
     const today = moment();
     const queryString = 'SELECT * FROM meetups WHERE happeningon > $1';
-    db.query(queryString, [today])
-      .then(data => res.status(200).json({ status: 200, data: data.rows }));
+    db.query(queryString, [today]).then(data => res.status(200).json({ status: 200, data: data.rows }));
   }
 
   static getMeetupsById(req, res) {
@@ -56,8 +55,7 @@ class MeetupController {
     const { validatedMeetup } = req.body;
     const values = [parseInt(req.params.id, 10), req.user.userId, validatedMeetup.status];
 
-    db.query(queryString, values)
-      .then(data => res.status(201).json({ status: 201, data: data.rows }))
+    db.query(queryString, values).then(data => res.status(201).json({ status: 201, data: data.rows }))
       .catch(err => res.status(400).json({ err }));
   }
 
@@ -77,8 +75,7 @@ class MeetupController {
 
   static getRsvpsByUser(req, res) {
     const queryString = 'SELECT * FROM rsvps WHERE userid = $1';
-    db.query(queryString, [req.user.userId])
-      .then(data => res.status(200).json({ status: 200, data: data.rows, count: data.rowCount }));
+    db.query(queryString, [req.user.userId]).then(data => res.status(200).json({ status: 200, data: data.rows, count: data.rowCount }));
   }
 }
 
