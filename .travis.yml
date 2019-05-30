@@ -7,7 +7,7 @@ before_script:
    - psql -c 'create database questionerdb_test;' -U postgres
 
 script:
-- npm run test:server
+- npm run test
 after_success: npm run coverage
 deploy:
   app : questioner
