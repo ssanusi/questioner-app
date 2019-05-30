@@ -15,3 +15,4 @@ client/src/static/
 # build directories
 server/dist/
 client/dist/
+webpack.config.js
