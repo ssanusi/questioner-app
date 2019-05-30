@@ -1,26 +1,28 @@
-import validator from "validator";
-import isEmpty from "lodash.isempty";
+import validator from 'validator';
+import isEmpty from 'lodash.isempty';
 
 export const validateAddMeetup = (req, res, next) => {
   const error = {};
-  const { topic, location, happeningOn, tags } = req.body;
+  const {
+    topic, location, happeningOn, tags,
+  } = req.body;
   if (!topic) {
-    error.topic = "Topic field is Required";
+    error.topic = 'Topic field is Required';
   }
 
   if (!location) {
-    error.location = "Location field is Required";
+    error.location = 'Location field is Required';
   }
 
   if (!happeningOn) {
-    error.happeningOn = "happeningOn field is Required";
+    error.happeningOn = 'happeningOn field is Required';
   }
 
   if (!tags) {
-    error.tags = "tags field is Required";
+    error.tags = 'tags field is Required';
   }
   if (tags && tags.length === 0) {
-    error.tags = "tags field is Required";
+    error.tags = 'tags field is Required';
   }
   if (isEmpty(error)) {
     return next();
@@ -38,11 +40,11 @@ export const validateAddRsvp = (req, res, next) => {
   }
 
   if (!status) {
-    error.status = "Status field is Required";
+    error.status = 'Status field is Required';
   }
 
   if (id && !validator.isNumeric(id)) {
-    error.id = "Meetup id must be numeric";
+    error.id = 'Meetup id must be numeric';
   }
   if (isEmpty(error)) {
     req.body.validatedMeetup = validatedMeetup;

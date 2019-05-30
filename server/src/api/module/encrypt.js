@@ -1,4 +1,4 @@
-import bcrypt from "bcryptjs";
+import bcrypt from 'bcryptjs';
 
 export const hashPassword = password => bcrypt.hashSync(password, 14);
 

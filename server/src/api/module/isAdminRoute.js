@@ -1,6 +1,6 @@
-const checkAdminRoute = path => {
+const checkAdminRoute = (path) => {
   const match = path.slice(8, 13);
-  if (match === "admin") {
+  if (match === 'admin') {
     return true;
   }
   return false;

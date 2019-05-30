@@ -1,19 +1,19 @@
-import validator from "validator";
-import isEmpty from "lodash.isempty";
+import validator from 'validator';
+import isEmpty from 'lodash.isempty';
 
 const validateComment = (req, res, next) => {
-  const { questionId, userId, comment } = req.body;
+  const { questionId, comment } = req.body;
   const error = {};
 
   if (!questionId) {
-    error.questionId = "quetionId is Required";
+    error.questionId = 'quetionId is Required';
   }
   if (!comment) {
-    error.comment = "comment field is required";
+    error.comment = 'comment field is required';
   }
 
   if (questionId && !validator.isNumeric(questionId)) {
-    error.questionId = "questionId should be numeric";
+    error.questionId = 'questionId should be numeric';
   }
 
   if (isEmpty(error)) {

@@ -1,12 +1,12 @@
-import { Pool } from "pg";
-import dotenv from "dotenv";
+import { Pool } from 'pg';
+import dotenv from 'dotenv';
 
 dotenv.config();
 
 const connectionString = process.env.DATABASE_URL;
 
 const pool = new Pool({
-  connectionString
+  connectionString,
 });
 
 class Db {
@@ -14,10 +14,10 @@ class Db {
     return new Promise((resolve, reject) => {
       pool
         .query(queryString, params)
-        .then(res => {
+        .then((res) => {
           resolve(res);
         })
-        .catch(err => {
+        .catch((err) => {
           reject(err);
         });
     });

@@ -16,3 +16,5 @@ client/src/static/
 server/dist/
 client/dist/
 webpack.config.js
+webpack-client.config.js
+webpack-server.config.js
