@@ -12,14 +12,14 @@ const rootReducer = combineReducers({
   [meetup.stateKey]: meetup.reducer,
 });
 
-// const reduxDevTools = process.env.NODE_ENV === 'production'
-//   ? p => p
-//   : window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
+const reduxDevTools = process.env.NODE_ENV === 'production'
+  ? p => p
+  : window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
 
 const store = createStore(
   rootReducer,
   {},
-  compose(applyMiddleware(...middleware)),
+  compose(applyMiddleware(...middleware), reduxDevTools),
 );
 
 export default store;
