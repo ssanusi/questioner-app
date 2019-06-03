@@ -5,11 +5,13 @@ import {
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import { meetup } from './meetup';
+import { url } from './url';
 
 // eslint-disable-next-line max-len
 const middleware = process.env.NODE_ENV !== 'production' ? [logger, thunk] : thunk;
 const rootReducer = combineReducers({
   [meetup.stateKey]: meetup.reducer,
+  [url.stateKey]: url.reducer,
 });
 
 const reduxDevTools = process.env.NODE_ENV === 'production'
@@ -19,7 +21,10 @@ const reduxDevTools = process.env.NODE_ENV === 'production'
 const store = createStore(
   rootReducer,
   {},
-  compose(applyMiddleware(...middleware), reduxDevTools),
+  compose(
+    applyMiddleware(...middleware),
+    reduxDevTools,
+  ),
 );
 
 export default store;
