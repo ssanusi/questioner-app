@@ -37,3 +37,5 @@ export const saveState = (state) => {
     throw Error('localStorage not available');
   }
 };
+
+export const USER_TOKEN = localStorage.getItem('ah-token');
