@@ -14,7 +14,7 @@ const handleFormSubmit = event => {
   const formObj = JSON.parse(data);
   formObj.images = [formObj.images];
   formObj.tags = [formObj.tags];
-  const url = "https://questioner-app-api.herokuapp.com/api/v1/meetups";
+  const url = "https://questioner-app-fullstack.herokuapp.com/api/v1/meetups";
   const bearer = `Bearer ${token}`;
   const userLi = document.getElementById("user");
   userLi.textContent = user;

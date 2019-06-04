@@ -1,4 +1,4 @@
-const meetupUrl = "https://questioner-app-api.herokuapp.com/api/v1/meetups/";
+const meetupUrl = "https://questioner-app-fullstack.herokuapp.com/api/v1/meetups/";
 const token = JSON.parse(localStorage.getItem("token"));
 const userId = localStorage.getItem("userId");
 const user = JSON.parse(localStorage.getItem("username"));
@@ -7,7 +7,7 @@ const meetupDetail = document.getElementById("meetup-detail");
 const questionContainer = document.getElementById("question-container");
 const modal = document.getElementById("questionModal");
 const form = document.getElementById("questionForm");
-const questionUrl = "https://questioner-app-api.herokuapp.com/api/v1/questions/";
+const questionUrl = "https://questioner-app-fullstack.herokuapp.com/api/v1/questions/";
 
 const getParamUrl = () => {
   const urlString = window.location.search.substring(1);
@@ -15,7 +15,7 @@ const getParamUrl = () => {
   return params;
 };
 const meetupId = getParamUrl();
-const questionsUrl = `https://questioner-app-api.herokuapp.com/api/v1/questions?meetupId=${meetupId}`;
+const questionsUrl = `https://questioner-app-fullstack.herokuapp.com/api/v1/questions?meetupId=${meetupId}`;
 
 window.addEventListener("load", () => {
   if (!token) {
@@ -139,7 +139,7 @@ const handleButtonClick = event => {
     let data = toJSONString(form);
     data = JSON.parse(data);
     data = Object.assign(data, { userId, meetupId });
-    const url = "https://questioner-app-api.herokuapp.com/api/v1/questions/";
+    const url = "https://questioner-app-fullstack.herokuapp.com/api/v1/questions/";
     fetch(url, {
       method: "POST",
       body: JSON.stringify(data),
@@ -155,7 +155,7 @@ const handleButtonClick = event => {
   // Get Comment handler
   if (event.target.matches("[data-comments]")) {
     const questionId = event.target.getAttribute("data-comments");
-    const commentsUrl = `https://questioner-app-api.herokuapp.com/api/v1/comments?questionId=${questionId}`;
+    const commentsUrl = `https://questioner-app-fullstack.herokuapp.com/api/v1/comments?questionId=${questionId}`;
     fetch(commentsUrl, {
       method: "GET",
       headers: {
@@ -226,7 +226,7 @@ const handleButtonClick = event => {
   if (event.target.matches("[data-addComment]")) {
     const commentInput = event.target;
     const questionId = event.target.getAttribute("data-addComment");
-    const commentUrl = "https://questioner-app-api.herokuapp.com/api/v1/comments";
+    const commentUrl = "https://questioner-app-fullstack.herokuapp.com/api/v1/comments";
 
     commentInput.addEventListener("change", () => {
       const comment = event.target.value;

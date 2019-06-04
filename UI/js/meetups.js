@@ -11,7 +11,7 @@ window.addEventListener("load", () => {
   if (!token) {
     window.location.href = "signin.html";
   }
-  const url = "https://questioner-app-api.herokuapp.com/api/v1/meetups";
+  const url = "https://questioner-app-fullstack.herokuapp.com/api/v1/meetups";
   const bearer = `Bearer ${token}`;
   const userLi = document.getElementById("user");
   userLi.textContent = user;
