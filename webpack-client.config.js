@@ -5,7 +5,7 @@ module.exports = function() {
   return {
     entry: './client/src/index.js',
     output: {
-      path: path.join(__dirname, '/client/dist'),
+      path: path.join(__dirname, '/server/build'),
       filename: 'bundle.js',
       publicPath: '/',
     },
