@@ -3,9 +3,9 @@ import { USER_TOKEN } from '../libs/localStorage';
 
 const Axios = axios.create({
   baseURL: 'https://questioner-app-api.herokuapp.com/api/v1',
-  headers: {
-    'Content-Type': 'application/json',
-  },
+  // headers: {
+  //   'Content-Type': 'application/json',
+  // },
 });
 
 export const setAxiosHeader = (token) => {
