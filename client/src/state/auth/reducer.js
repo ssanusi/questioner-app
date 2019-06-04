@@ -3,7 +3,9 @@ import {
   REGISTER_REQUEST,
   REGISTER_SUCCESS,
   REGISTER_FAILURE,
-
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE,
 } from './actionTypes';
 
 export default (state = initialState, action) => {
@@ -22,6 +24,26 @@ export default (state = initialState, action) => {
         registering: false,
         registered: false,
         error: action.error,
+      };
+    case LOGIN_REQUEST:
+      return {
+        ...state,
+        isSubmitting: true,
+      };
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        isSubmitting: true,
+        loggedIn: true,
+        current_user: action.payload,
+        error: null,
+      };
+    case LOGIN_FAILURE:
+      return {
+        ...state,
+        isSubmitting: false,
+        loggedIn: false,
+        error: action.payload,
       };
     default:
       return state;

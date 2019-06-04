@@ -1,5 +1,6 @@
 import React from 'react';
 import SignUpForm from './SignUpForm';
+import pic from '../../static/img/highres_477352647.jpeg';
 
 const SignUp = () => (
   <main className="flex-container">
@@ -15,7 +16,7 @@ const SignUp = () => (
         </h4>
       </div>
       <div>
-        <img src="./img/highres_477352647.jpeg" alt="" />
+        <img src={pic} alt="" />
       </div>
     </section>
     <section className="col-1-4 aside">

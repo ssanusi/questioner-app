@@ -5,9 +5,8 @@ import PropTypes from 'prop-types';
 import { validateSignupInput, validateProperty } from '../../utils/userValidator';
 import { register } from '../../state/auth/action';
 
-
 const SignUpForm = (props) => {
-//   const { alert } = props;
+  // const { alert } = props;
   const [formData, setFormData] = useState({
     userData: {
       firstName: '',
@@ -18,10 +17,10 @@ const SignUpForm = (props) => {
       password: '',
       confirmPassword: '',
     },
-    error: {},
+    errors: {},
     isValid: false,
   });
-
+  console.log(formData);
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { errors, isValid } = await validateSignupInput(formData.userData);
@@ -31,9 +30,10 @@ const SignUpForm = (props) => {
       const { confirmPassword, ...user } = formData.userData;
       props.register(user);
     }
+    console.log('submit', formData);
   };
 
-  const handleChange = ({ currentTarget: input }, e) => {
+  const handleChange = ({ currentTarget: input }) => {
     const errors = { ...formData.errors };
     const errorMessage = validateProperty(input);
     if (errorMessage) {
@@ -42,11 +42,9 @@ const SignUpForm = (props) => {
       delete errors[input.name];
     }
     const userData = { ...formData.userData };
-    if (e.type === 'checkbox') {
-      userData.notification = e.checked;
-    } else {
-      userData[input.name] = input.value;
-    }
+
+    userData[input.name] = input.value;
+
     setFormData({
       ...formData,
       userData,
@@ -64,9 +62,8 @@ const SignUpForm = (props) => {
   } = formData.userData;
   // const { errors } = formData;
   // const { message } = alert;
-
   return (
-    <form className="form card" onSubmit={handleSubmit}>
+    <form className="form card" onSubmit={handleSubmit} style={{ width: '75%' }}>
       <h2 className="text-center">Sign Up</h2>
       <div id="status" className="text-center" />
       <div className="form-group">
@@ -76,7 +73,13 @@ const SignUpForm = (props) => {
             First Name
             {' '}
           </label>
-          <input name="firstName" value={firstName} type="text" placeholder="John" />
+          <input
+            name="firstName"
+            value={firstName}
+            type="text"
+            placeholder="John"
+            onChange={handleChange}
+          />
         </div>
         <div>
           <label className="label label-block" htmlFor="name">
@@ -84,7 +87,13 @@ const SignUpForm = (props) => {
             Last Name
             {' '}
           </label>
-          <input name="lastName" value={lastName} type="text" placeholder="Doe" />
+          <input
+            name="lastName"
+            value={lastName}
+            type="text"
+            placeholder="Doe"
+            onChange={handleChange}
+          />
         </div>
       </div>
       <div className="form-group">
@@ -94,7 +103,13 @@ const SignUpForm = (props) => {
             Phone:
             {' '}
           </label>
-          <input name="phoneNumber" value={phoneNumber} type="text" placeholder="08055555555" />
+          <input
+            name="phoneNumber"
+            value={phoneNumber}
+            type="text"
+            placeholder="08055555555"
+            onChange={handleChange}
+          />
         </div>
         <div>
           <label className="label label-block" htmlFor="username">
@@ -102,7 +117,13 @@ const SignUpForm = (props) => {
             username:
             {' '}
           </label>
-          <input name="username" value={username} type="text" placeholder="user1234" />
+          <input
+            name="username"
+            value={username}
+            type="text"
+            placeholder="user1234"
+            onChange={handleChange}
+          />
         </div>
       </div>
       <div>
@@ -111,7 +132,13 @@ const SignUpForm = (props) => {
           Email address:
           {' '}
         </label>
-        <input name="email" type="email" value={email} placeholder="username@domain.com" />
+        <input
+          name="email"
+          type="email"
+          value={email}
+          placeholder="username@domain.com"
+          onChange={handleChange}
+        />
       </div>
       <div className="form-group">
         <div>
@@ -162,7 +189,7 @@ const SignUpForm = (props) => {
 
 SignUpForm.propTypes = {
   register: PropTypes.func.isRequired,
-//   alert: PropTypes.objectOf(PropTypes.bool).isRequired,
+  //   alert: PropTypes.objectOf(PropTypes.bool).isRequired,
 };
 const mapStateToProps = state => ({
   auth: state.auth,

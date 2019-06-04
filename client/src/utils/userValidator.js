@@ -2,63 +2,63 @@ import validator from 'validator';
 import isEmpty from 'lodash/isEmpty';
 
 export const validateSignupInput = (data) => {
-  const error = {};
+  const errors = {};
   const {
     firstName, lastName, email, phoneNumber, username, password, confirmPassword,
   } = data;
   if (!firstName) {
-    error.firstName = 'FirstName is Required';
+    errors.firstName = 'FirstName is Required';
   }
 
   if (firstName && !/^[a-zA-Z]+$/.test(firstName)) {
-    error.firstName = 'FirstName can only be letters';
+    errors.firstName = 'FirstName can only be letters';
   }
 
   if (!lastName) {
-    error.lastName = 'LastName is Required';
+    errors.lastName = 'LastName is Required';
   }
 
   if (lastName && !/^[a-zA-Z]+$/.test(lastName)) {
-    error.lastName = 'LastName can only be letters';
+    errors.lastName = 'LastName can only be letters';
   }
 
   //   email validation
   if (!email) {
-    error.email = 'Email is Required';
+    errors.email = 'Email is Required';
   }
 
   if (email && !validator.isEmail(email.trim())) {
-    error.email = 'Valid email is Required';
+    errors.email = 'Valid email is Required';
   }
 
   //   Phone no validation
   if (!phoneNumber) {
-    error.phoneNumber = 'Phone No is Required';
+    errors.phoneNumber = 'Phone No is Required';
   }
   if (phoneNumber && !/^[0-9]+$/.test(phoneNumber)) {
-    error.phoneNumber = 'Phone No can only be number';
+    errors.phoneNumber = 'Phone No can only be number';
   }
 
   //   username Validation
   if (!username) {
-    error.username = 'username is Required';
+    errors.username = 'username is Required';
   }
   if (username && !/^[a-zA-Z0-9]+$/.test(username)) {
-    error.username = 'username can only be Alphanumeric';
+    errors.username = 'username can only be Alphanumeric';
   }
 
   //   password Validation
 
   if (!password && !confirmPassword) {
-    error.password = 'Password is Required';
+    errors.password = 'Password is Required';
   }
 
   if (password !== confirmPassword) {
-    error.password = 'Password must be identical';
+    errors.password = 'Password must be identical';
   }
-  return Object.keys(error).length === 0
-    ? { error, isValid: true }
-    : { error, isValid: isEmpty(error) };
+  return Object.keys(errors).length === 0
+    ? { errors, isValid: true }
+    : { errors, isValid: isEmpty(errors) };
 };
 
 export const validateProperty = ({ name, value }) => {
