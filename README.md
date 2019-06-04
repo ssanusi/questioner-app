@@ -57,8 +57,11 @@ npm run test:dev
 
 ## API
 
-API is deployed at [here](https://questioner-app-api.herokuapp.com) on heroku.
-API Documentation at [here](https://questioner-app-api.herokuapp.com/api-docs) on heroku.
+Questioner is deployed at [here](https://questioner-app-fullstack.herokuapp.com) on heroku using React and Redux in the frontend.
+
+Questioner is deployed at [here](http://ssanusi.github.io/questioner-app/) on Github pages using Vanilla Javascript
+
+API Documentation at [here](https://questioner-app-fullstack.herokuapp.com/api-docs) on heroku.
 
 ### API Routes
 
