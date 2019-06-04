@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { validateSignupInput, validateProperty } from '../../utils/userValidator';
 import { login } from '../../state/auth/action';
@@ -11,7 +12,7 @@ const SignInForm = (props) => {
       email: '',
       password: '',
     },
-    error: {},
+    errors: {},
     isValid: false,
   });
   const { email, password } = formData.userData;
@@ -83,11 +84,11 @@ const SignInForm = (props) => {
         Sign In
       </button>
       <p className="form-footer text-right">
-        {/* Don't have an account? */}
+        Don&apos;t have an account?
         <span>
-          <a href="signup.html" className="btn btn-alt font-weight-bold">
-            Sign Up
-          </a>
+          <Link to="/signup">
+            <div className="btn btn-alt font-weight-bold">Sign Up</div>
+          </Link>
         </span>
       </p>
     </form>

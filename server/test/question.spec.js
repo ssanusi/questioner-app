@@ -233,9 +233,6 @@ describe("/Question Resources", () => {
         });
     });
   });
-  // describe("GET /questions/<id>", () => {
-
-  // });
   describe("PATCH /questions/<id>/upvote", () => {
     it("should upvote a question", done => {
       chai

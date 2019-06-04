@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { validateSignupInput, validateProperty } from '../../utils/userValidator';
 import { register } from '../../state/auth/action';
@@ -20,17 +21,14 @@ const SignUpForm = (props) => {
     errors: {},
     isValid: false,
   });
-  console.log(formData);
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { errors, isValid } = await validateSignupInput(formData.userData);
     setFormData({ ...formData, errors, isValid });
     if (Object.keys(errors).length === 0) {
-      // eslint-disable-next-line no-unused-vars
-      const { confirmPassword, ...user } = formData.userData;
-      props.register(user);
+      const { userData } = formData;
+      props.register(userData);
     }
-    console.log('submit', formData);
   };
 
   const handleChange = ({ currentTarget: input }) => {
@@ -52,18 +50,101 @@ const SignUpForm = (props) => {
     });
   };
   const {
-    firstName,
-    lastName,
-    phoneNumber,
-    username,
-    email,
-    password,
-    confirmPassword,
+    fullName, email, password, confirmPassword,
   } = formData.userData;
-  // const { errors } = formData;
-  // const { message } = alert;
   return (
-    <form className="form card" onSubmit={handleSubmit} style={{ width: '75%' }}>
+    <form className="form card" onSubmit={handleSubmit}>
+      <h2 className="text-center">Sign Up</h2>
+      <div id="status" className="text-center" />
+
+      <div>
+        <label className="label label-block" htmlFor="firstName">
+          {' '}
+          Full Name
+          {' '}
+        </label>
+        <input
+          name="fullName"
+          value={fullName}
+          type="text"
+          placeholder="John"
+          onChange={handleChange}
+        />
+      </div>
+      <div>
+        <label className="label label-block" htmlFor="email">
+          {' '}
+          Email address:
+          {' '}
+        </label>
+        <input
+          name="email"
+          type="email"
+          value={email}
+          placeholder="username@domain.com"
+          onChange={handleChange}
+        />
+      </div>
+      <div>
+        <label className="label label-block" htmlFor="password">
+          {' '}
+          Password:
+          {' '}
+        </label>
+        <input
+          name="password"
+          type="password"
+          value={password}
+          onChange={handleChange}
+          placeholder="password"
+        />
+      </div>
+      <div>
+        <label className="label label-block" htmlFor="confirmPassword">
+          {' '}
+          Confirm Password:
+          {' '}
+        </label>
+        <input
+          name="confirmPassword"
+          value={confirmPassword}
+          onChange={handleChange}
+          type="password"
+          placeholder="password"
+        />
+      </div>
+      <button type="submit" className="btn btn-default btn-default-lg font-weight-bold">
+        Sign Up
+      </button>
+      <p className="form-footer text-right">
+        Already have an account?
+        <span>
+          <Link to="/signin">
+            <div className="btn btn-alt font-weight-bold"> Log In </div>
+          </Link>
+        </span>
+      </p>
+    </form>
+  );
+};
+
+SignUpForm.propTypes = {
+  register: PropTypes.func.isRequired,
+  //   alert: PropTypes.objectOf(PropTypes.bool).isRequired,
+};
+const mapStateToProps = state => ({
+  auth: state.auth,
+  alert: state.alert,
+});
+
+export default connect(
+  mapStateToProps,
+  { register },
+)(SignUpForm);
+
+// eslint-disable-next-line no-lone-blocks
+{
+  /* <form className="form card" onSubmit={handleSubmit} style={{ width: '75%' }}>
       <h2 className="text-center">Sign Up</h2>
       <div id="status" className="text-center" />
       <div className="form-group">
@@ -176,27 +257,10 @@ const SignUpForm = (props) => {
       <p className="form-footer text-right">
         Already have an account?
         <span>
-          <a href="signin.html" className="btn btn-alt font-weight-bold">
-            {' '}
-            Login
-            {' '}
-          </a>
+          <Link to="/signin">
+            <div className="btn btn-alt font-weight-bold"> Log In </div>
+          </Link>
         </span>
       </p>
-    </form>
-  );
-};
-
-SignUpForm.propTypes = {
-  register: PropTypes.func.isRequired,
-  //   alert: PropTypes.objectOf(PropTypes.bool).isRequired,
-};
-const mapStateToProps = state => ({
-  auth: state.auth,
-  alert: state.alert,
-});
-
-export default connect(
-  mapStateToProps,
-  { register },
-)(SignUpForm);
+    </form> */
+}

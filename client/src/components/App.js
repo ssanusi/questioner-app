@@ -4,7 +4,6 @@ import HomePage from '../pages/HomePage';
 import Header from './Header';
 import SignUp from '../pages/SignUp';
 import SignIn from '../pages/SignIn';
-import Footer from './Footer';
 
 const App = () => (
   <Router>
@@ -15,7 +14,6 @@ const App = () => (
         <Route path="/signup" component={SignUp} />
         <Route path="/" exact component={HomePage} />
       </Switch>
-      <Footer />
     </div>
   </Router>
 );

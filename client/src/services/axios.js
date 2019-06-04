@@ -2,7 +2,7 @@ import axios from 'axios';
 import { USER_TOKEN } from '../libs/localStorage';
 
 const Axios = axios.create({
-  baseURL: 'https://questioner-app-api.herokuapp.com/api/v1',
+  baseURL: 'https://questioner-app-fullstack.herokuapp.com/api/v1',
   headers: {
     'Content-Type': 'application/json',
   },

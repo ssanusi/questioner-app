@@ -37,6 +37,7 @@
     "cors": "^2.8.5",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
+    "formik": "^1.5.7",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.11",
@@ -46,7 +47,8 @@
     "pg": "^7.11.0",
     "pg-promise": "^8.7.2",
     "swagger-ui-express": "^4.0.5",
-    "validator": "^11.0.0"
+    "validator": "^11.0.0",
+    "yup": "^0.27.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",

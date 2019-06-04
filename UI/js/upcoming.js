@@ -1,5 +1,5 @@
 window.addEventListener("load", () => {
-  fetch("https://questioner-app-api.herokuapp.com/api/v1/meetups/upcoming")
+  fetch("https://questioner-app-fullstack.herokuapp.com/api/v1/meetups/upcoming")
     .then(res => res.json())
     .then(response => {
       let output = "";

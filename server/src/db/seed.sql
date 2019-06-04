@@ -34,57 +34,39 @@ VALUES
     );
 INSERT INTO
     "users" (
-        "firstname",
-        "lastname",
+        "fullname",
         "email",
-        "phonenumber",
-        "username",
         "password",
         "isadmin"
     )
 VALUES
     (
-        'bashir',
-        'abdullahi',
+        'bashir abdullahi',
         'bashir@yahoo.com',
-        '08055577733',
-        'bbashir',
         '$2a$14$DXD4SkCV6pS9TdJMfmpE9uptaILU.AgJBB56q1ILCjaHZ56eyPGse',
         'true'
     ),
     (
-        'fatima',
-        'ahmed',
+        'fatima ahmed',
         'fatima@hotmail.com',
-        '08033372043',
-        'ffatima',
         '$2a$14$pIeSuIsm0D3SP6savC0ecOyVdPWj5IITyvh22K4yn3OvgLRlufPRi',
         'false'
     ),
     (
-        'test',
-        'test',
+        'test test',
         'test@yahoo.com',
-        '08073372043',
-        'test',
         '$2a$14$RsWbJjLeV3NAJ9xp2ga94.ylki/D5qPu7EwbhJ0hKRTJRKl34vVUi',
         'true'
     ),
     (
-        'testuser',
-        'testuser',
+        'testuser  testuser',
         'testuser@yahoo.com',
-        '08073372043',
-        'testuser',
         '$2a$14$RsWbJjLeV3NAJ9xp2ga94.ylki/D5qPu7EwbhJ0hKRTJRKl34vVUi',
         'false'
     ),
     (
-        'admin',
-        'admin',
+        'admin admin',
         'admin@yahoo.com',
-        '08073372043',
-        'admin',
         '$2a$14$bps1wCKkpcUccv0Cd8gnFONcT6dBjQjYwyplEMMr/LJcDpSiw.oZu',
         'true'
     );

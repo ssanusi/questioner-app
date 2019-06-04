@@ -1,7 +1,7 @@
 const tbref = document.getElementById("table").getElementsByTagName("tbody")[0];
 const token = JSON.parse(localStorage.getItem("token"));
 const user = JSON.parse(localStorage.getItem("username"));
-const url = "https://questioner-app-api.herokuapp.com/api/v1/meetups/";
+const url = "https://questioner-app-fullstack.herokuapp.com/api/v1/meetups/";
 const bearer = `Bearer ${token}`;
 const userLi = document.getElementById("user");
 

@@ -16,15 +16,12 @@ CREATE TABLE IF NOT EXISTS meetups (
 
 CREATE TABLE IF NOT EXISTS users(
         id SERIAL PRIMARY KEY ,
-        firstName VARCHAR(128) NOT NULL,
-        lastName VARCHAR(128) NOT NULL,
+        fullName VARCHAR(128) NOT NULL,
         email VARCHAR(128) UNIQUE NOT NULL,
-        phoneNumber VARCHAR(128) NOT NULL,
-        username VARCHAR(128) UNIQUE NOT NULL,
         password VARCHAR(128) NOT NULL,
         registered TIMESTAMPTZ DEFAULT NOW(),
         isAdmin BOOL NOT NULL,
-        UNIQUE(email,userName)
+        UNIQUE(email)
 );
 
 CREATE TABLE IF NOT EXISTS questions(

@@ -10,7 +10,7 @@ const handleFormSubmit = event => {
   }
 
   const data = toJSONString(form);
-  const url = "https://questioner-app-api.herokuapp.com/api/v1/auth/signup";
+  const url = "https://questioner-app-fullstack.herokuapp.com/api/v1/auth/signup";
   fetch(url, {
     method: "POST",
     body: data,

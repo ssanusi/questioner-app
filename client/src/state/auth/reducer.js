@@ -17,6 +17,7 @@ export default (state = initialState, action) => {
         ...state,
         registering: false,
         registered: true,
+        current_user: action.user,
       };
     case REGISTER_FAILURE:
       return {
@@ -33,10 +34,9 @@ export default (state = initialState, action) => {
     case LOGIN_SUCCESS:
       return {
         ...state,
-        isSubmitting: true,
+        isSubmitting: false,
         loggedIn: true,
         current_user: action.payload,
-        error: null,
       };
     case LOGIN_FAILURE:
       return {

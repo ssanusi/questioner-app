@@ -6,10 +6,10 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
 } from './actionTypes';
-import { userServices } from '../../services/user.services';
 import { setLocalStorage, decodeToken } from '../../libs/auth';
-import { setAxiosHeader } from '../../services/axios';
-import { error } from '../alert/action';
+import Axios, { setAxiosHeader } from '../../services/axios';
+
+// import { error } from '../alert/action';
 
 export const RegisterRequest = () => ({
   type: REGISTER_REQUEST,
@@ -20,9 +20,9 @@ export const RegisterSuccess = user => ({
   user,
 });
 
-export const RegisterFailure = errorMessage => ({
+export const RegisterFailure = error => ({
   type: REGISTER_FAILURE,
-  error: errorMessage,
+  error,
 });
 
 export const LoginRequest = () => ({
@@ -34,38 +34,34 @@ export const LoginSuccess = user => ({
   user,
 });
 
-export const LoginFailure = errorMessage => ({
+export const LoginFailure = error => ({
   type: LOGIN_FAILURE,
-  error: errorMessage,
+  error,
 });
 export const register = user => async (dispatch) => {
   try {
     dispatch(RegisterRequest());
-    const registeredUser = await userServices.register(user);
-    console.log('thunk', registeredUser);
-    const { token } = registeredUser.data.data;
+    const registeredUser = await Axios.post('/auth/signup', user);
+    const { token } = registeredUser.data.data[0];
     const decodedToken = decodeToken(token);
     dispatch(RegisterSuccess(decodedToken));
     setLocalStorage('Qs-token', token);
     setAxiosHeader(token);
-  } catch (err) {
-    dispatch(RegisterFailure(err));
-    dispatch(error(err));
+  } catch (error) {
+    dispatch(RegisterFailure(error.response.data));
   }
 };
 
 export const login = user => async (dispatch) => {
   try {
     dispatch(LoginRequest());
-    const userLoggedIn = await userServices.signin(user);
-    const { token } = userLoggedIn.data.data;
+    const userLoggedIn = await Axios.post('/auth/login', user);
+    const { token } = userLoggedIn.data.data[0];
     const decodedToken = decodeToken(token);
     dispatch(LoginSuccess(decodedToken));
     setLocalStorage('Qs-token', token);
     setAxiosHeader(token);
-  } catch (err) {
-    dispatch(LoginFailure(err));
-    const { message } = error.response.data;
-    dispatch(error(message));
+  } catch (error) {
+    dispatch(LoginFailure(error.response.data));
   }
 };
