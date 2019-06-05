@@ -3,10 +3,11 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { validateSignupInput, validateProperty } from '../../utils/userValidator';
+import { validateProperty, validateSigninInput } from '../../utils/userValidator';
 import { login } from '../../state/auth/action';
 
 const SignInForm = (props) => {
+  const { alert } = props;
   const [formData, setFormData] = useState({
     userData: {
       email: '',
@@ -15,11 +16,9 @@ const SignInForm = (props) => {
     errors: {},
     isValid: false,
   });
-  const { email, password } = formData.userData;
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { errors, isValid } = await validateSignupInput(formData.userData);
+    const { errors, isValid } = await validateSigninInput(formData.userData);
     setFormData({ ...formData, errors, isValid });
     if (Object.keys(errors).length === 0) {
       const { userData } = formData;
@@ -45,11 +44,13 @@ const SignInForm = (props) => {
       errors,
     });
   };
+  const { email, password } = formData.userData;
+  const { errors } = formData;
   return (
     <form className="form card" onSubmit={handleSubmit}>
       <h2 className="text-center">Sign In</h2>
-      <div id="status" />
       <p className="text-center font-weight-bold">Sign in to view meetups</p>
+      {alert.error && <div className="alert alert-danger">{alert.message}</div>}
       <div>
         <label className="label label-block" htmlFor="email">
           Email address:
@@ -62,6 +63,7 @@ const SignInForm = (props) => {
           value={email}
           onChange={handleChange}
         />
+        {errors.email && <div className="alert alert-danger">{errors.email}</div>}
       </div>
       <div>
         <label className="label label-block" htmlFor="password">
@@ -74,23 +76,23 @@ const SignInForm = (props) => {
           value={password}
           onChange={handleChange}
         />
+        {errors.password && <div className="alert alert-danger">{errors.password}</div>}
       </div>
       <button
         name="submit"
         type="submit"
-        onClick="this.style.textcontent = 'Please Wait!'"
         className="btn btn-default btn-default-lg font-weight-bold"
       >
         Sign In
       </button>
-      <p className="form-footer text-right">
+      <div className="form-footer text-right">
         Don&apos;t have an account?
         <span>
           <Link to="/signup">
             <div className="btn btn-alt font-weight-bold">Sign Up</div>
           </Link>
         </span>
-      </p>
+      </div>
     </form>
   );
 };
@@ -101,6 +103,14 @@ const mapStateToProps = state => ({
 
 SignInForm.propTypes = {
   login: PropTypes.func.isRequired,
+  auth: PropTypes.shape({
+    registering: PropTypes.bool.isRequired,
+  }).isRequired,
+  alert: PropTypes.shape({
+    error: PropTypes.bool.isRequired,
+    success: PropTypes.bool.isRequired,
+    message: PropTypes.string,
+  }).isRequired,
 };
 
 export default connect(

@@ -1,15 +1,15 @@
 import { SUCCESS, ERROR, CLEAR } from './actionTypes';
 
-export const success = message => ({
+export const successAction = message => ({
   type: SUCCESS,
   message,
 });
 
-export const error = message => ({
+export const errorAction = message => ({
   type: ERROR,
   message,
 });
 
-export const clear = () => ({
+export const clearClear = () => ({
   type: CLEAR,
 });

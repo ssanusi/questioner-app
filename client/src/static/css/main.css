@@ -153,11 +153,25 @@ footer a:hover {
 .col-1-4 {
   flex: 100%;
 }
-
 .aside {
   padding-bottom: 30px;
   order: 2;
   background: #fff;
+}
+
+.alert {
+  position: relative;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+
+}
+
+.alert-danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
 }
 
 .form {
@@ -183,12 +197,15 @@ footer a:hover {
   padding-bottom: 5px;
 }
 
-.form input,
+.form
 .form .btn,
 .form textarea {
   margin: 0.3125rem auto 1.6875rem auto; /* 5px 0 27px 0; */
 }
 
+input {
+  margin: 5px 0 10px 0;
+}
 .form input,
 .form textarea {
   border: 0.0625rem solid #333; /* 1px */
@@ -835,6 +852,7 @@ hr {
     flex-direction: row;
   }
 
+
   .nav-container {
     display: flex;
     padding: 1.6875rem 0; /* 27px 0 */
@@ -853,6 +871,21 @@ hr {
 
   .toggle-show {
     display: none;
+  }
+
+  .alert {
+    position: relative;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+
+  }
+
+  .alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
   }
 
   .logo {

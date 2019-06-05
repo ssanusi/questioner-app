@@ -7,13 +7,10 @@ import { validateSignupInput, validateProperty } from '../../utils/userValidator
 import { register } from '../../state/auth/action';
 
 const SignUpForm = (props) => {
-  // const { alert } = props;
+  const { auth, alert } = props;
   const [formData, setFormData] = useState({
     userData: {
-      firstName: '',
-      lastName: '',
-      phoneNumber: '',
-      username: '',
+      fullName: '',
       email: '',
       password: '',
       confirmPassword: '',
@@ -30,7 +27,6 @@ const SignUpForm = (props) => {
       props.register(userData);
     }
   };
-
   const handleChange = ({ currentTarget: input }) => {
     const errors = { ...formData.errors };
     const errorMessage = validateProperty(input);
@@ -52,13 +48,14 @@ const SignUpForm = (props) => {
   const {
     fullName, email, password, confirmPassword,
   } = formData.userData;
+  const { errors } = formData;
   return (
     <form className="form card" onSubmit={handleSubmit}>
       <h2 className="text-center">Sign Up</h2>
       <div id="status" className="text-center" />
-
+      {alert.error && <div className="alert alert-danger">{Object.values(auth.error.error)}</div>}
       <div>
-        <label className="label label-block" htmlFor="firstName">
+        <label className="label label-block" htmlFor="fullName">
           {' '}
           Full Name
           {' '}
@@ -69,7 +66,9 @@ const SignUpForm = (props) => {
           type="text"
           placeholder="John"
           onChange={handleChange}
+          error={errors.fullName}
         />
+        {errors.fullName && <div className="alert alert-danger">{errors.fullName}</div>}
       </div>
       <div>
         <label className="label label-block" htmlFor="email">
@@ -83,7 +82,9 @@ const SignUpForm = (props) => {
           value={email}
           placeholder="username@domain.com"
           onChange={handleChange}
+          error={errors.email}
         />
+        {errors.email && <div className="alert alert-danger">{errors.email}</div>}
       </div>
       <div>
         <label className="label label-block" htmlFor="password">
@@ -97,7 +98,9 @@ const SignUpForm = (props) => {
           value={password}
           onChange={handleChange}
           placeholder="password"
+          error={errors.password}
         />
+        {errors.password && <div className="alert alert-danger">{errors.password}</div>}
       </div>
       <div>
         <label className="label label-block" htmlFor="confirmPassword">
@@ -111,26 +114,37 @@ const SignUpForm = (props) => {
           onChange={handleChange}
           type="password"
           placeholder="password"
+          error={errors.confirmPassword}
         />
+        {errors.confirmPassword && (
+          <div className="alert alert-danger">{errors.confirmPassword}</div>
+        )}
       </div>
       <button type="submit" className="btn btn-default btn-default-lg font-weight-bold">
         Sign Up
       </button>
-      <p className="form-footer text-right">
+      <div className="form-footer text-right">
         Already have an account?
         <span>
           <Link to="/signin">
             <div className="btn btn-alt font-weight-bold"> Log In </div>
           </Link>
         </span>
-      </p>
+      </div>
     </form>
   );
 };
 
 SignUpForm.propTypes = {
   register: PropTypes.func.isRequired,
-  //   alert: PropTypes.objectOf(PropTypes.bool).isRequired,
+  auth: PropTypes.shape({
+    registering: PropTypes.bool.isRequired,
+  }).isRequired,
+  alert: PropTypes.shape({
+    error: PropTypes.bool.isRequired,
+    success: PropTypes.bool.isRequired,
+    message: PropTypes.string,
+  }).isRequired,
 };
 const mapStateToProps = state => ({
   auth: state.auth,
@@ -141,126 +155,3 @@ export default connect(
   mapStateToProps,
   { register },
 )(SignUpForm);
-
-// eslint-disable-next-line no-lone-blocks
-{
-  /* <form className="form card" onSubmit={handleSubmit} style={{ width: '75%' }}>
-      <h2 className="text-center">Sign Up</h2>
-      <div id="status" className="text-center" />
-      <div className="form-group">
-        <div>
-          <label className="label label-block" htmlFor="firstName">
-            {' '}
-            First Name
-            {' '}
-          </label>
-          <input
-            name="firstName"
-            value={firstName}
-            type="text"
-            placeholder="John"
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label className="label label-block" htmlFor="name">
-            {' '}
-            Last Name
-            {' '}
-          </label>
-          <input
-            name="lastName"
-            value={lastName}
-            type="text"
-            placeholder="Doe"
-            onChange={handleChange}
-          />
-        </div>
-      </div>
-      <div className="form-group">
-        <div>
-          <label className="label label-block" htmlFor="phone">
-            {' '}
-            Phone:
-            {' '}
-          </label>
-          <input
-            name="phoneNumber"
-            value={phoneNumber}
-            type="text"
-            placeholder="08055555555"
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label className="label label-block" htmlFor="username">
-            {' '}
-            username:
-            {' '}
-          </label>
-          <input
-            name="username"
-            value={username}
-            type="text"
-            placeholder="user1234"
-            onChange={handleChange}
-          />
-        </div>
-      </div>
-      <div>
-        <label className="label label-block" htmlFor="email">
-          {' '}
-          Email address:
-          {' '}
-        </label>
-        <input
-          name="email"
-          type="email"
-          value={email}
-          placeholder="username@domain.com"
-          onChange={handleChange}
-        />
-      </div>
-      <div className="form-group">
-        <div>
-          <label className="label label-block" htmlFor="password">
-            {' '}
-            Password:
-            {' '}
-          </label>
-          <input
-            name="password"
-            type="password"
-            value={password}
-            onChange={handleChange}
-            placeholder="password"
-          />
-        </div>
-        <div>
-          <label className="label label-block" htmlFor="confirmPassword">
-            {' '}
-            Confirm Password:
-            {' '}
-          </label>
-          <input
-            name="confirmPassword"
-            value={confirmPassword}
-            onChange={handleChange}
-            type="password"
-            placeholder="password"
-          />
-        </div>
-      </div>
-      <button type="submit" className="btn btn-default btn-default-lg font-weight-bold">
-        Sign Up
-      </button>
-      <p className="form-footer text-right">
-        Already have an account?
-        <span>
-          <Link to="/signin">
-            <div className="btn btn-alt font-weight-bold"> Log In </div>
-          </Link>
-        </span>
-      </p>
-    </form> */
-}
