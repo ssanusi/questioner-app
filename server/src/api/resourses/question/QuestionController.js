@@ -3,7 +3,7 @@ import db from '../../../db';
 
 class QuestionController {
   static getAllQuestions(req, res) {
-    const queryString = `SELECT questions.id, questions.title, questions.body, questions.upvotes, questions.downvotes, questions.meetupid, questions.userid , users.firstname, users.lastname FROM questions JOIN users ON questions.userid = users.id WHERE ${
+    const queryString = `SELECT questions.id, questions.title, questions.body, questions.upvotes, questions.downvotes, questions.meetupid, questions.userid , users.fullname FROM questions JOIN users ON questions.userid = users.id WHERE ${
       Object.keys(req.query)[0]
     } = $1`;
     db.query(queryString, Object.values(req.query))

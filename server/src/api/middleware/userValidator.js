@@ -5,22 +5,14 @@ export const SignupValidator = (req, res, next) => {
   const error = {};
 
   const {
-    firstName, lastName, email, phoneNumber, username, password, confirmPassword,
+    fullName, email, password, confirmPassword,
   } = req.body;
-  if (!firstName) {
-    error.firstName = 'FirstName is Required';
+  if (!fullName) {
+    error.fullName = 'FullName is Required';
   }
 
-  if (firstName && !/^[a-zA-Z]+$/.test(firstName)) {
-    error.firstName = 'FirstName can only be letters';
-  }
-
-  if (!lastName) {
-    error.lastName = 'LastName is Required';
-  }
-
-  if (lastName && !/^[a-zA-Z]+$/.test(lastName)) {
-    error.lastName = 'LastName can only be letters';
+  if (fullName && !/^[a-zA-Z ]+$/.test(fullName)) {
+    error.fullName = 'FullName can only be letters';
   }
 
   //   email validation
@@ -31,23 +23,6 @@ export const SignupValidator = (req, res, next) => {
   if (email && !validator.isEmail(email.trim())) {
     error.email = 'Valid email is Required';
   }
-
-  //   Phone no validation
-  if (!phoneNumber) {
-    error.phoneNumber = 'Phone No is Required';
-  }
-  if (phoneNumber && !/^[0-9]+$/.test(phoneNumber)) {
-    error.phoneNumber = 'Phone No can only be number';
-  }
-
-  //   username Validation
-  if (!username) {
-    error.username = 'username is Required';
-  }
-  if (username && !/^[a-zA-Z0-9]+$/.test(username)) {
-    error.username = 'username can only be Alphanumeric';
-  }
-
   //   password Validation
 
   if (!password && !confirmPassword) {

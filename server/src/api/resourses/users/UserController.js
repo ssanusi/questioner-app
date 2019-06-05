@@ -8,16 +8,8 @@ class UserController {
     req.body.password = hashPassword(req.body.password);
     const isAdmin = checkAdminRoute(req.originalUrl);
     req.body.isAdmin = isAdmin;
-    const queryString = 'INSERT INTO users(firstname,lastname,phonenumber,email,username,password,isadmin) VALUES($1,$2,$3,$4,$5,$6,$7) returning id, firstname, lastname, email, phonenumber, username';
-    const values = [
-      req.body.firstName,
-      req.body.lastName,
-      req.body.phoneNumber,
-      req.body.email,
-      req.body.username,
-      req.body.password,
-      req.body.isAdmin,
-    ];
+    const queryString = 'INSERT INTO users(fullName,email,password,isadmin) VALUES($1,$2,$3,$4) returning id, fullname, email';
+    const values = [req.body.fullName, req.body.email, req.body.password, req.body.isAdmin];
     db.query(queryString, values)
       .then((data) => {
         const user = data.rows[0];
@@ -30,15 +22,18 @@ class UserController {
             data: [{ token, user: data.rows[0] }],
           });
       })
-      .catch(e => res.status(409).json({ error: { user: 'username or email exist' } }));
+      .catch((error) => {
+        if (error.constraint === 'users_email_key') return res.status(409).json({ error: 'Account Already exit' });
+        return error;
+      });
   }
 
   static login(req, res) {
-    const queryString = 'SELECT id,email,username,password,isadmin FROM users WHERE email = $1';
+    const queryString = 'SELECT id,email,password,isadmin FROM users WHERE email = $1';
     db.query(queryString, [req.body.email]).then((data) => {
       const user = data.rows[0];
       if (!user) {
-        return res.status(404).json({ status: 404, error: 'User not Found' });
+        return res.status(404).json({ status: 404, error: 'Account not Registered' });
       }
       if (!checkPassword(req.body.password, user.password)) {
         return res.status(404).json({ status: 404, error: 'invalid credentials' });
