@@ -8,6 +8,7 @@ import {
 } from './actionTypes';
 import { setLocalStorage, decodeToken } from '../../libs/auth';
 import Axios, { setAxiosHeader } from '../../services/axios';
+import { errorAction } from '../alert/action';
 
 // import { error } from '../alert/action';
 
@@ -49,6 +50,8 @@ export const register = user => async (dispatch) => {
     setAxiosHeader(token);
   } catch (error) {
     dispatch(RegisterFailure(error.response.data));
+    const { error: errorMessage } = error.response.data.error;
+    dispatch(errorAction(errorMessage));
   }
 };
 
@@ -62,6 +65,8 @@ export const login = user => async (dispatch) => {
     setLocalStorage('Qs-token', token);
     setAxiosHeader(token);
   } catch (error) {
-    dispatch(LoginFailure(error.response.data));
+    dispatch(LoginFailure(error.response));
+    const { error: errorMessage } = error.response.data;
+    dispatch(errorAction(errorMessage));
   }
 };
